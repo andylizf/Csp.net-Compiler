@@ -22,19 +22,9 @@ static class More{
         return true;
     }
 }
-class Namespace{}
-class CCSFile : StreamReader, IDisposable
-{
-    private Namespace[] namespaces;
-    private CCSFile[] translateInfoFiles;
-    public void Dispose(){
-        base.Dispose();
-        foreach(var i in translateInfoFiles){
-            File.Delete()
-        }
-    }
-    
-    private static void getClassInNamespace(Namespace aNamespace){// By Reflecting
+class Namespace{
+    void GetType(){
+        var assem = new Assembly.LoadFrom()
         try{
             var newFileWithNamespace = translateInfoFiles();
             newFileWithNamespace.Add(
@@ -60,7 +50,24 @@ class CCSFile : StreamReader, IDisposable
 
         }
         if(namespaces.Contains(System))
-            extern(varible("args", "Array<String>"))
+            extern(varible("args", "Array<String>"));
+    }
+}
+class ComplierSettings
+{}
+class Complier
+{
+    public ComplierSettings settings;
+}
+class CCSFile : StreamReader, IDisposable
+{
+    private Namespace[] namespaces;
+    private CCSFile[] translateInfoFiles;
+    public void Dispose(){
+        base.Dispose();
+        foreach(var i in translateInfoFiles){
+            File.Delete()
+        }
     }
 
     public override String ReadLine(){
@@ -78,16 +85,4 @@ class CCSFile : StreamReader, IDisposable
 
         throw unTranslatedError(base.lineNum, line);
     }
-}
-
-using (resource)
-{
-    
-}
-
-var resource
-try(){
-    fun()
-} finally {
-    ~resource()
 }
