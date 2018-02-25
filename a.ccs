@@ -1,3 +1,0 @@
-using System
-
-Console.WriteLine(int.Parse(args[0]) + int.Parse(args[1]))

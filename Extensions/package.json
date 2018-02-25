@@ -1,0 +1,31 @@
+{
+    "name": "ccs-snippets",
+    "displayName": "ccs_snippets",
+    "description": "",
+    "version": "0.0.1",
+    "publisher": "Anti-Li",
+    "engines": {
+        "vscode": "^1.19.0"
+    },
+    "categories": [
+        "Snippets",
+        "Languages"
+    ],
+    "contributes": {
+        "snippets": [{
+            "language": "ccs",
+            "path": "./snippets/snippets.json"
+        }],
+        "languages": [{
+            "id": "ccs",
+            "aliases": ["CC#", "ccs"],
+            "extensions": [".ccs", ".cc#", ".CCS"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "ccs",
+            "scopeName": "source.ccs",
+            "path": "./syntaxes/csharp.tmLanguage.json"
+        }]
+    }
+}
