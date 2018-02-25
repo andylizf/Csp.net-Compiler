@@ -23,71 +23,73 @@ namespace RegexGrammar.Element
                 return this;
         }
     }
-    class ParametersCall : Element
-    {
-        public static Regex Is = new Regex($"({GetRegexLikeABA(",", Value.Is.ToString())})?");
-        public static Regex GetIs(String Parameters = "Parameters")
-        {
-            return new Regex($"({GetRegexLikeABA(",", $"(?<{Parameters}>{Value.Is})")})?");
-        }
-        public ParametersCall(String name)
-        {
-            if (Is.IsMatch(name))
-                Name = name;
-            else
-                Name = null;
-        }
-        IValue[] parasValue;//TODO
-    }
     namespace Literal
     {
         abstract class Literal : Element, IValue
         {
             ///- TODO: 0.0F······
+            public string ValueToCS()
+            {
+                return Name;
+            }
         }
         class IntLiteral: Literal
         {
-            public static Regex baseIs = new Regex("[0-9]*");
+            public static Regex Is = new Regex("[0-9]*");
             public IntLiteral(String name)
             {
-                if (baseIs.IsMatch(name))
+                if (Is.IsMatch(name))
                     Name = name;
                 else
                     Name = null;
+            }
+            public static IValue Find(String str)
+            {
+                if (!Is.IsMatch(str))
+                    return null;
+                else return new IntLiteral(str);
             }
         }
         class DoubleLiteral: Literal
         {
-            public static Regex baseIs = new Regex($"{IntLiteral.baseIs}.{IntLiteral.baseIs}");
+            public static Regex Is = new Regex($"{IntLiteral.Is}.{IntLiteral.Is}");
             public DoubleLiteral(String name)
             {
-                if (baseIs.IsMatch(name))
+                if (Is.IsMatch(name))
                     Name = name;
                 else
                     Name = null;
+            }
+            public static IValue Find(String str)
+            {
+                if (!Is.IsMatch(str))
+                    return null;
+                else return new IntLiteral(str);
             }
         }
         class StringLiteral: Literal
         {
-            public static Regex GetIs(String StringLiteral = "StringLiteral")
-            {
-                return new Regex($"\"(?<{StringLiteral}>[ \\S]*)\"");
-            }
+            public static Regex Is = new Regex(@"""([ \S]*)""");
             public StringLiteral(String name)
             {
-                var baseIs = new Regex(@"""([ \S]*)""");
-                if (baseIs.IsMatch(name))
+                if (Is.IsMatch(name))
                     Name = name;
                 else
                     Name = null;
             }
+            public static IValue Find(String str)
+            {
+                if (!Is.IsMatch(str))
+                    return null;
+                else return new IntLiteral(str);
+            }
         }
-        }
+    }
     namespace RegexGrammar.Name
     {
         abstract class AllName : Element
         {
-            public static Regex Is = GetRegexLikeABA(".", LocalVaribleName.Is.ToString());
+            public static Regex Is = GetRegexLikeABA("\\.", LocalVaribleName.Is.ToString());
             public AllName(String name)
             {
                 if (Is.IsMatch(name))
@@ -104,21 +106,22 @@ namespace RegexGrammar.Element
         {
             public MemberName(String name): base(name) { }
         }
-        class NotFuncTypeName : AllName, IClassType
-        {
-            public NotFuncTypeName(String name): base(name) { }
-        }
-        class FuncTypeName : AllName, IClassType
-        {
-            public static Regex Is = GetRegexLikeABA(".", LocalVaribleName.Is.ToString());
-            public FuncTypeName(String name): 
-        }
         class VaribleName : AllName, IValue
         {
             public VaribleName(String name): base(name) { }
             protected VaribleName()
             {
                 Name = null;
+            }
+            public static IValue Find(String str)
+            {
+                if (!Is.IsMatch(str))
+                    return null;
+                else return new VaribleName(str);
+            }
+            public string ValueToCS()
+            {
+                return Name;
             }
         }
         class LocalVaribleName : VaribleName
@@ -130,6 +133,12 @@ namespace RegexGrammar.Element
                     Name = name;
                 else
                     Name = null;
+            }
+            public new static IValue Find(String str)
+            {
+                if (!Is.IsMatch(str))
+                    return null;
+                else return new VaribleName(str);
             }
         }
     }
