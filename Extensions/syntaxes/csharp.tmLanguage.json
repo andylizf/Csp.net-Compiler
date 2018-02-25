@@ -215,6 +215,9 @@
 					"include": "#switch-statement"
 				},
 				{
+					"include": "#main-statement"
+				},
+				{
 					"include": "#goto-statement"
 				},
 				{
@@ -376,7 +379,7 @@
 							"name": "keyword.other.static.ccs"
 						}
 					},
-					"end": "(?=;)",
+					"end": "(?=)",
 					"patterns": [
 						{
 							"include": "#type"
@@ -393,7 +396,7 @@
 							"name": "entity.name.type.alias.ccs"
 						}
 					},
-					"end": "(?=;)",
+					"end": "(?=)",
 					"patterns": [
 						{
 							"include": "#comment"
@@ -413,7 +416,7 @@
 							"name": "keyword.other.using.ccs"
 						}
 					},
-					"end": "(?=;)",
+					"end": "(?=)",
 					"patterns": [
 						{
 							"include": "#comment"
@@ -1492,6 +1495,44 @@
 				}
 			]
 		},
+
+		"main-statement": {
+			"begin": "(?<!\\.)\\b(main)\\b\\s*(?=\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other.using.ccs"
+				}
+			},
+			"end": "(?=\\;|})",
+			"patterns": [
+				{
+					"begin": "\\(",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.parenthesis.open.ccs"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.parenthesis.close.ccs"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#local-variable-declaration"
+						},
+						{
+							"include": "#expression"
+						}
+					]
+				},
+				{
+					"include": "#statement"
+				}
+			]
+		},
+
 		"goto-statement": {
 			"begin": "(?<!\\.)\\b(goto)\\b",
 			"beginCaptures": {

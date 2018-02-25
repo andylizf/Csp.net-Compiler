@@ -449,6 +449,16 @@
         ],
         "description": "While loop"
     },
+    "Main proc": {
+        "prefix": "main",
+        "body": [
+            "main(${1:String}) =",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Main proc"
+    },
     "constructor": {
         "prefix": "ctor",
         "body": [
