@@ -15,6 +15,13 @@ namespace RegexGrammar.Element
         {
             return Name;
         }
+        public Element NameEmpty()
+        {
+            if (Name == null)
+                return null;
+            else
+                return this;
+        }
     }
     class ParametersCall : Element
     {
@@ -80,7 +87,7 @@ namespace RegexGrammar.Element
     {
         abstract class AllName : Element
         {
-            public static Regex Is = GetRegexLikeABA(".", VaribleName.Is.ToString());
+            public static Regex Is = GetRegexLikeABA(".", LocalVaribleName.Is.ToString());
             public AllName(String name)
             {
                 if (Is.IsMatch(name))
@@ -96,6 +103,15 @@ namespace RegexGrammar.Element
         class MemberName : AllName
         {
             public MemberName(String name): base(name) { }
+        }
+        class NotFuncTypeName : AllName, IClassType
+        {
+            public NotFuncTypeName(String name): base(name) { }
+        }
+        class FuncTypeName : AllName, IClassType
+        {
+            public static Regex Is = GetRegexLikeABA(".", LocalVaribleName.Is.ToString());
+            public FuncTypeName(String name): 
         }
         class VaribleName : AllName, IValue
         {
