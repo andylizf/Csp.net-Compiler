@@ -419,10 +419,40 @@
         ],
         "description": "While loop"
     },
-    "Main proc": {
+    "Main proc0": {
         "prefix": "main",
         "body": [
-            "main(${1:String}) =",
+            "main = ()",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Main proc"
+    },
+    "Main proc1": {
+        "prefix": "main",
+        "body": [
+            "main = (string[] args)",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Main proc"
+    },
+    "Main proc2": {
+        "prefix": "main",
+        "body": [
+            "main = (): int",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Main proc"
+    },
+    "Main proc3": {
+        "prefix": "main",
+        "body": [
+            "main = (string[] args): int",
             "{",
             "    $0",
             "}"
