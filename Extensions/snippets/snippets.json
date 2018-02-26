@@ -39,16 +39,6 @@
         ],
         "description": "Checked block"
     },
-    "Class": {
-        "prefix": "class",
-        "body": [
-            "class ${1:Name}",
-            "{",
-            "    $0",
-            "}"
-        ],
-        "description": "Class"
-    },
     "Console.WriteLine": {
         "prefix": "cw",
         "body": [
@@ -185,16 +175,6 @@
             "}"
         ],
         "description": "Indexer"
-    },
-    "Interface": {
-        "prefix": "interface",
-        "body": [
-            "interface I${1:Name}",
-            "{",
-            "    $0",
-            "}"
-        ],
-        "description": "Interface"
     },
     "Safely invoking an event": {
         "prefix": "invoke",
@@ -348,16 +328,6 @@
             "}"
         ],
         "description": "int Main()"
-    },
-    "Struct": {
-        "prefix": "struct",
-        "body": [
-            "struct ${1:Name}",
-            "{",
-            "    $0",
-            "}"
-        ],
-        "description": "Struct"
     },
     "svm": {
         "prefix": "svm",
