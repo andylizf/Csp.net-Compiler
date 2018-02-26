@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿#define DEBUG
+using System.Text.RegularExpressions;
 using System;
 using System.Collections.Generic;
 using System.Reflection;

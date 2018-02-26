@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<!-- saved from url=(0144)file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#application-startup -->
+<html class="js hasSidebar hasPageActions hasBreadcrumb noTouch translated-ltr" lang="zh-cn" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta property="og:title" content="Basic concepts">
+	<meta property="og:image" content="https://docs.microsoft.com/_themes/docs.theme/master/en-us/_themes/images/microsoft-header.png">
+
+
+		<meta name="author" content="dotnet-bot">
+<meta name="ms.author" content="wiwagn">
+<meta name="manager" content="wpickett">
+<meta name="breadcrumb_path" content="/dotnet/breadcrumb/toc.json">
+<meta name="apiPlatform" content="dotnet">
+<meta name="ms.topic" content="language-reference">
+<meta name="bilingual_type" content="hover over">
+<meta name="ms.date" content="07/01/2017">
+<meta name="ms.technology" content="devlang-csharp">
+<meta name="ms.prod" content=".net">
+<meta name="uhfHeaderId" content="MSDocsHeader-DotNet">
+<meta name="search.ms_sitename" content="Docs">
+<meta name="search.ms_docsetname" content="core-docs">
+<meta name="locale" content="zh-cn">
+<meta name="site_name" content="Docs">
+<meta name="search.ms_product" content="VS">
+<meta name="depot_name" content="VS.core-docs">
+<meta name="updated_at" content="2018-01-26 02:11 AM">
+<meta name="gitcommit" content="https://github.com/dotnet/csharplang/blob/41f25e80dc150c3c10efa41bae5e7c45c5c66dc5/spec/basic-concepts.md">
+<meta name="original_content_git_url" content="https://github.com/dotnet/csharplang/blob/master/spec/basic-concepts.md">
+<meta name="document_id" content="aff7dc35-2735-bf53-70c7-c35cd32a9c13">
+<meta name="document_version_independent_id" content="f068067f-afec-ad12-deb5-6df96838423c">
+<meta name="pagetype" content="Conceptual">
+<meta name="toc_rel" content="toc.json">
+<meta name="word_count" content="9757">
+
+	<meta name="scope" content=".NET">
+<link href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts" rel="canonical">
+	<title>基本概念| Microsoft Docs</title>
+
+	<link rel="stylesheet" href="./基本概念_ Microsoft Docs_files/159dea8f3c367edcb408.site.css">
+	<link rel="stylesheet" href="./基本概念_ Microsoft Docs_files/159dea8f3c367edcb408.conceptual.css">
+
+	<script async="" src="./基本概念_ Microsoft Docs_files/analytics.js.下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/analytics.js(1).下载"></script><script>
+	var msDocs = {
+		data:{
+			contentLocale: 'zh-cn',
+			contentDir: 'ltr',
+			userLocale: 'zh-cn',
+			userDir: 'ltr',
+			pathToTheme: '/_themes/docs.theme/master/zh-cn/_themes/',
+			pageTemplate: 'Conceptual',
+			brand: '',
+			context: {
+			},
+			hasComments: true,
+			feedbackSystem: 'LiveFyre',
+			feedbackGitHubRepo: '',
+			feedbackProductUrl: '',
+			contentGitUrl: '',
+			forceVersionPicker:false		},
+		functions:{},
+		settings:{
+			extendBreadcrumb: false
+		}
+	};
+	if (!('Promise' in window && 'resolve' in window.Promise && 'reject' in window.Promise && 'all' in window.Promise && 'race' in window.Promise)) {
+		document.write('<script src="/_themes/docs.theme/master/zh-cn/_themes/global/js/bluebird.min.js"><\/script>');
+	}
+	if (typeof fetch !== 'function') {
+		document.write('<script src="/_themes/docs.theme/master/zh-cn/_themes/global/js/fetch.min.js"><\/script>');
+	}
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+		<script src="/_themes/docs.theme/master/zh-cn/_themes/global/js/polyfills/all.js"></script>
+	<![endif]-->
+	<!--[if gte IE 9]><!-->
+		<script src="./基本概念_ Microsoft Docs_files/jquery-2.2.4.min.js.下载"></script>
+	<!--<![endif]-->
+	<script>window.jQuery || document.write('<script src="/_themes/docs.theme/master/zh-cn/_themes/global/js/jquery/jquery-1.12.4.min.js"><\/script>')</script>
+	<script async="" src="./基本概念_ Microsoft Docs_files/setQrCode.js.下载"></script>
+	<script src="./基本概念_ Microsoft Docs_files/global.min.js.下载"></script><style></style><script src="./基本概念_ Microsoft Docs_files/jsll-4.js.下载" async="" defer=""></script><style></style><script src="./基本概念_ Microsoft Docs_files/jsll-4.js(1).下载" async="" defer=""></script>
+<link rel="stylesheet" href="./基本概念_ Microsoft Docs_files/e5-a7e0c6"><script src="./基本概念_ Microsoft Docs_files/6b-c5d0b1" defer=""></script><script src="./基本概念_ Microsoft Docs_files/meversion" defer=""></script><meta name="rating.locale" content="zh-cn"><script async="" src="./基本概念_ Microsoft Docs_files/t.js.下载"></script><style type="text/css">.or-o, .or-so {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: auto;
+    position: relative;
+    float: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    background: none;
+    box-sizing: border-box;
+    font: 13px 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: normal;
+    text-transform: none;
+    border-spacing: 0;
+    border-collapse: collapse;
+    transform: none;
+    transition: none;
+    animation: none;
+}
+.or-o:before, .or-o:after, .or-so:before, .or-so:after {
+    content: none;
+}
+.or-e-0 {
+    transition: none !important;
+}
+.or-f {
+    padding: 1px;
+}
+.or-f::-moz-focus-inner {
+    border: none;
+    padding: 0;
+}
+.or-lw {
+    clear: both;
+}
+h1, h2 {}
+h1.or-t, h2.or-t {
+    font-weight: lighter;
+}
+h1.or-t {
+    font-size: 40px;
+}
+h2.or-t {
+    font-size: 30px;
+}
+h3.or-t {
+    font-size: 20px;
+}
+h4.or-t {
+    font-size: 17px;
+}
+.or-b {
+    cursor: pointer;
+}
+.or-b>.or-c {
+    display: inline-block;
+    padding: 4px 25px;
+    width: 100%;
+    height: 100%;
+}
+.or-b:active {
+    transform: scale(0.98, 0.95);
+}
+.or-b[disabled] {
+    cursor: default;
+}
+.or-b[disabled]:active {
+    transform: none;
+}
+.or-g {
+    display: inline-block;
+    line-height: 0;
+}
+.or-l {
+    cursor: pointer;
+    padding: 5px 1px;
+    vertical-align: baseline;
+}
+.or-l>.or-c {
+    text-decoration: underline;
+}
+.or-a {
+    cursor: pointer;
+}
+.or-a>.or-c {
+    display: inline-block;
+    padding: 8px;
+    width: 100%;
+    height: 100%;
+}
+.or-v {
+    cursor: pointer;
+    padding-bottom: 2px;
+    /* For IE :active propagation BUG Fix */
+}
+.or-v>span {
+    display: inline-block;
+}
+.or-v>input[type=checkbox] {
+    -moz-appearance: checkbox-container;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+.or-v>input[type=checkbox]+span, .or-v>input[type=checkbox]+span+span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+}
+.or-v>input[type=checkbox]+span+span {
+    opacity: 0;
+}
+.or-v>input[type=checkbox]:checked+span+span {
+    opacity: 1;
+}
+.or-v>span:last-child {
+    margin: 0 0 0 25px;
+    line-height: 19px;
+}
+.or-v:after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+}
+.or-pc[dir=rtl] .or-v>span:last-child {
+    margin: 0 25px 0 0;
+}
+.or-x {
+    resize: none;
+    padding: 5px;
+}
+.or-c-mf {
+    padding: 10px;
+}
+.or-c-mf.or-e-fi {
+    transition: opacity 0.1s linear;
+}
+.or-c-mf.or-e-fo {
+    transition: opacity 0.75s linear;
+}
+.or-c-pf {
+    padding: 7px;
+    max-height: 100%;
+    overflow: auto;
+}
+.or-c-pf>.or-a {
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 0;
+    width: 20px;
+    height: 20px;
+}
+.or-c-pf>.or-a.or-f.or-k {
+    outline: none;
+}
+.or-c-pf>.or-a>.or-c.or-g {
+    padding: 0;
+}
+.or-c-pf>.or-a>.or-c.or-g>svg {
+    stroke-width: 1px;
+}
+.or-c-pf.or-e-fi, .or-c-pf.or-e-fo {
+    transition: opacity 0.1s linear;
+}
+.or-c-pf>.or-lw {
+    overflow: hidden;
+    padding: 3px;
+}
+.or-c-pf>.or-lw.or-e-h.or-e-w.or-e-fi {
+    transition: height 0.167s cubic-bezier(0.1, 0.9, 0.2, 1.0),
+                    width 0.167s cubic-bezier(0.1, 0.9, 0.2, 1.0),
+                    opacity 0.1s linear 0.167s;
+}
+.or-pc[dir=rtl] .or-c-pf>.or-a {
+    left: 0;
+    right: initial;
+}
+.or-c-md {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+}
+.or-c-md>.or-c {
+    overflow: auto;
+}
+.or-c-md>.or-c.or-e-fi.or-e-t {
+    transition: opacity 0.167s linear, transform 0.367s cubic-bezier(0.1, 0.9, 0.2, 1.0);
+}
+.or-c-md>.or-c.or-e-fo.or-e-t {
+    transition: opacity 0.1s linear, transform 0.1s linear;
+}
+.or-c-v h3.or-t {
+    font-size: 13px;
+    margin: 0 18px 5px 1px;
+}
+.or-c-v>table.or-lw {
+    table-layout: fixed;
+}
+.or-c-v>table.or-lw td {
+    width: 50%;
+}
+.or-c-v>table.or-lw td>.or-b {
+    width: 100%;
+}
+.or-c-v>table.or-lw td:first-child {
+    padding-right: 1px;
+}
+.or-c-v>table.or-lw td:last-child {
+    padding-left: 1px;
+}
+.or-pc[dir=rtl] .or-c-v h3.or-t {
+    margin: 0 1px 5px 18px;
+}
+.or-pc[dir=rtl] .or-c-v>table.or-lw td:first-child {
+    border: none;
+    border-left: 2px transparent solid;
+}
+.or-c-f {
+    width: 235px;
+    max-width: 100%;
+}
+.or-c-f h3.or-t {
+    font-size: 13px;
+    font-weight: bold;
+}
+.or-c-f .or-v, .or-c-f .or-x, .or-c-f>.or-b {
+    display: block;
+}
+.or-c-f .or-v {
+    margin: 3px 0 0 0;
+}
+.or-c-f .or-x {
+    width: 100%;
+    height: 75px;
+}
+.or-c-f>.or-lw {
+    margin: 3px 0 0 0;
+}
+.or-c-f>.or-lw>.or-t {
+    margin: 0 18px 0 0;
+}
+.or-c-f>.or-lw.or-e-h.or-e-w.or-e-fi {
+    transition: height 0.167s cubic-bezier(0.1, 0.9, 0.2, 1.0),
+                    width 0.167s cubic-bezier(0.1, 0.9, 0.2, 1.0),
+                    opacity 0.167s linear;
+}
+.or-c-f>h3.or-t {
+    margin: 7px 0 5px 1px;
+}
+.or-c-f>.or-b {
+    float: right;
+    margin: 4px -1px 0 0;
+}
+.or-pc[dir=rtl] .or-c-f {}
+.or-pc[dir=rtl] .or-c-f>h3.or-t {
+    margin: 7px 1px 5px 0;
+}
+.or-pc[dir=rtl] .or-c-f>.or-lw>.or-t {
+    margin: 0 0 0 18px;
+}
+.or-pc[dir=rtl] .or-c-f>.or-b {
+    float: left;
+    margin: 4px 0 0 -1px;
+}
+.or-c-t h3.or-t {
+    font-size: 13px;
+}
+.or-c-pf .or-c-t h3.or-t {
+    margin: 3px 18px 0 0;
+}
+.or-pc[dir=rtl] .or-c-pf .or-c-t h3.or-t {
+    margin: 3px 0 0 18px;
+}
+.or-c-mv svg {
+    width: 12px;
+    height: 12px;
+    stroke-width: 1px;
+}
+.or-c-mv>.or-c {
+    padding: 3px 20px 5px 17px;
+}
+.or-c-mv>.or-c>span {
+    vertical-align: middle;
+}
+.or-c-mv>.or-c>.or-t {
+    color: inherit;
+    margin-left: 2px;
+}
+.or-c-mv.or-e-fi {
+    transition: opacity 0.1s linear;
+}
+.or-pc[dir=rtl] .or-c-mv>.or-c {
+    padding: 3px 17px 5px 20px;
+}
+.or-pc[dir=rtl] .or-c-mv>.or-c>.or-t {
+    margin: 0 2px 0 0;
+}
+.or-t-ml .or-f {}
+.or-t-ml .or-f.or-k {
+    outline: 2px black solid;
+}
+.or-t-ml .or-t {
+    color: black;
+}
+.or-t-ml .or-b {}
+.or-t-ml .or-b, .or-t-ml .or-b:hover, .or-t-ml .or-b:active {
+    background: none;
+}
+.or-t-ml .or-b>.or-c {
+    color: white;
+    stroke: white;
+    fill: white;
+    background: #0078d7;
+    border: 2px transparent solid;
+}
+.or-t-ml .or-b:hover>.or-c {
+    border-color: rgba(0, 0, 0, 0.4);
+}
+.or-t-ml .or-b:active>.or-c {
+    color: black;
+    stroke: black;
+    fill: black;
+    background: #999999;
+    border-color: transparent;
+}
+.or-t-ml .or-b[disabled]>.or-c, .or-t-ml .or-b[disabled]:hover>.or-c {
+    color: rgba(0, 0, 0, 0.4);
+    stroke: rgba(0, 0, 0, 0.4);
+    fill: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.2);
+    border-color: transparent;
+}
+.or-t-ml .or-l {}
+.or-t-ml .or-l, .or-t-ml .or-l:hover, .or-t-ml .or-l:active {
+    background: none;
+}
+.or-t-ml .or-l>.or-c {
+    color: #0078d7;
+}
+.or-t-ml .or-l:hover>.or-c {
+    color: rgba(0, 0, 0, 0.6);
+}
+.or-t-ml .or-l:active>.or-c {
+    color: rgba(0, 0, 0, 0.4);
+}
+.or-t-ml .or-a {}
+.or-t-ml .or-a, .or-t-ml .or-a:hover, .or-t-ml .or-a:active {
+    background: none;
+}
+.or-t-ml .or-a>.or-c {
+    color: black;
+    background: transparent;
+}
+.or-t-ml .or-a:hover>.or-c {
+    background: rgba(0, 0, 0, 0.1);
+}
+.or-t-ml .or-a:active>.or-c {
+    background: rgba(0, 0, 0, 0.2);
+}
+.or-t-ml .or-v {}
+.or-t-ml .or-v>input[type=checkbox] {}
+.or-t-ml .or-v>input[type=checkbox]+span {
+    border: 2px solid rgba(0, 0, 0, 0.4);
+    background: none;
+}
+.or-t-ml .or-v>input[type=checkbox]+span+span>svg {
+    stroke: white;
+    stroke-width: 1.5px;
+    fill: transparent;
+}
+.or-t-ml .or-v:hover>input[type=checkbox]+span, .or-t-ml .or-v:hover>input[type=checkbox]:checked+span {
+    border-color: black;
+}
+.or-t-ml .or-v:active>input[type=checkbox]+span, .or-t-ml .or-v>input[type=checkbox]:checked+span, .or-t-ml .or-v:active>input[type=checkbox]:checked+span {
+    border-color: transparent;
+}
+.or-t-ml .or-v:active>input[type=checkbox]+span, .or-t-ml .or-v:active>input[type=checkbox]:checked+span {
+    background: rgba(0, 0, 0, 0.6);
+}
+.or-t-ml .or-v>input[type=checkbox]:checked+span {
+    background: #0078d7;
+}
+.or-t-ml .or-x {
+    color: black;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px rgba(0, 0, 0, 0.4) solid;
+}
+.or-t-ml .or-x:hover {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: #171717;
+}
+.or-t-ml .or-x:active, .or-t-ml .or-x:focus {
+    color: black;
+    background: white;
+    border-color: #0078d7;
+}
+.or-t-ml .or-x:active::-webkit-input-placeholder, .or-t-ml .or-x:focus::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+.or-t-ml .or-x:active:-ms-input-placeholder, .or-t-ml .or-x:focus:-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+.or-t-ml .or-x:active::placeholder, .or-t-ml .or-x:focus::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+.or-t-ml .or-x::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+.or-t-ml .or-x:-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+.or-t-ml .or-x::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+.or-t-ml .or-c-pf, .or-t-ml .or-c-mf {
+    border: 1px rgba(133, 133, 133, 0.4) solid;
+    background: white;
+}
+.or-t-ml .or-c-pf {}
+.or-t-ml .or-c-pf>.or-a {}
+.or-t-ml .or-c-pf>.or-a.or-f.or-k:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px black solid;
+}
+.or-t-ml .or-c-pf>.or-a>.or-c.or-g>svg {
+    stroke: rgba(0, 0, 0, 0.6);
+}
+.or-t-ml .or-c-pf>.or-a:hover>.or-c.or-g>svg {
+    stroke: #c80000;
+}
+.or-t-ml .or-c-pf>.or-a:active>.or-c.or-g>svg {
+    stroke: #8c0000;
+}
+.or-t-ml .or-c-md {
+    background: rgba(255, 255, 255, 0.6);
+}
+.or-t-ml .or-c-md>.or-c {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+}
+
+@media screen and (-ms-high-contrast: active) {
+    .or-t-ml .or-b, .or-t-md .or-b {}
+    .or-t-ml .or-b>.or-c, .or-t-ml .or-b:active>.or-c, .or-t-md .or-b>.or-c, .or-t-md .or-b:active>.or-c {
+        stroke: white;
+        fill: white;
+    }
+    .or-t-ml .or-c-pf>.or-a>.or-c.or-g>svg, .or-t-md .or-c-pf>.or-a>.or-c.or-g>svg {
+        stroke: white;
+    }
+}
+
+@media screen and (-ms-high-contrast: black-on-white) {
+    .or-t-ml .or-b, .or-t-md .or-b {}
+    .or-t-ml .or-b>.or-c, .or-t-ml .or-b:active>.or-c, .or-t-md .or-b>.or-c, .or-t-md .or-b:active>.or-c {
+        stroke: black;
+        fill: black;
+    }
+    .or-t-ml .or-v>input[type=checkbox]+span+span>svg, .or-t-md .or-v>input[type=checkbox]+span+span>svg {
+        stroke: black;
+    }
+    .or-t-ml .or-c-pf>.or-a>.or-c.or-g>svg, .or-t-md .or-c-pf>.or-a>.or-c.or-g>svg {
+        stroke: black;
+    }
+}
+</style><style type="text/css">[id='openFeedbackContainer']{ position: fixed; right: 10px; bottom: 10px; }
+[id='openFeedbackContainer'][dir='rtl']{ left: 10px; right: initial; }</style><link type="text/css" rel="stylesheet" charset="UTF-8" href="./基本概念_ Microsoft Docs_files/translateelement.css"><link rel="stylesheet" href="./基本概念_ Microsoft Docs_files/e5-a7e0c6(1)"><style type="text/css">.or-o, .or-so {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: auto;
+    position: relative;
+    float: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    background: none;
+    box-sizing: border-box;
+    font: 13px 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: normal;
+    text-transform: none;
+    border-spacing: 0;
+    border-collapse: collapse;
+    transform: none;
+    transition: none;
+    animation: none;
+}
+.or-o:before, .or-o:after, .or-so:before, .or-so:after {
+    content: none;
+}
+.or-e-0 {
+    transition: none !important;
+}
+.or-f {
+    padding: 1px;
+}
+.or-f::-moz-focus-inner {
+    border: none;
+    padding: 0;
+}
+.or-lw {
+    clear: both;
+}
+h1, h2 {}
+h1.or-t, h2.or-t {
+    font-weight: lighter;
+}
+h1.or-t {
+    font-size: 40px;
+}
+h2.or-t {
+    font-size: 30px;
+}
+h3.or-t {
+    font-size: 20px;
+}
+h4.or-t {
+    font-size: 17px;
+}
+.or-b {
+    cursor: pointer;
+}
+.or-b>.or-c {
+    display: inline-block;
+    padding: 4px 25px;
+    width: 100%;
+    height: 100%;
+}
+.or-b:active {
+    transform: scale(0.98, 0.95);
+}
+.or-b[disabled] {
+    cursor: default;
+}
+.or-b[disabled]:active {
+    transform: none;
+}
+.or-g {
+    display: inline-block;
+    line-height: 0;
+}
+.or-l {
+    cursor: pointer;
+    padding: 5px 1px;
+    vertical-align: baseline;
+}
+.or-l>.or-c {
+    text-decoration: underline;
+}
+.or-a {
+    cursor: pointer;
+}
+.or-a>.or-c {
+    display: inline-block;
+    padding: 8px;
+    width: 100%;
+    height: 100%;
+}
+.or-v {
+    cursor: pointer;
+    padding-bottom: 2px;
+    /* For IE :active propagation BUG Fix */
+}
+.or-v>span {
+    display: inline-block;
+}
+.or-v>input[type=checkbox] {
+    -moz-appearance: checkbox-container;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+.or-v>input[type=checkbox]+span, .or-v>input[type=checkbox]+span+span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+}
+.or-v>input[type=checkbox]+span+span {
+    opacity: 0;
+}
+.or-v>input[type=checkbox]:checked+span+span {
+    opacity: 1;
+}
+.or-v>span:last-child {
+    margin: 0 0 0 25px;
+    line-height: 19px;
+}
+.or-v:after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+}
+.or-pc[dir=rtl] .or-v>span:last-child {
+    margin: 0 25px 0 0;
+}
+.or-x {
+    resize: none;
+    padding: 5px;
+}
+.or-c-mf {
+    padding: 10px;
+}
+.or-c-mf.or-e-fi {
+    transition: opacity 0.1s linear;
+}
+.or-c-mf.or-e-fo {
+    transition: opacity 0.75s linear;
+}
+.or-c-pf {
+    padding: 7px;
+    max-height: 100%;
+    overflow: auto;
+}
+.or-c-pf>.or-a {
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 0;
+    width: 20px;
+    height: 20px;
+}
+.or-c-pf>.or-a.or-f.or-k {
+    outline: none;
+}
+.or-c-pf>.or-a>.or-c.or-g {
+    padding: 0;
+}
+.or-c-pf>.or-a>.or-c.or-g>svg {
+    stroke-width: 1px;
+}
+.or-c-pf.or-e-fi, .or-c-pf.or-e-fo {
+    transition: opacity 0.1s linear;
+}
+.or-c-pf>.or-lw {
+    overflow: hidden;
+    padding: 3px;
+}
+.or-c-pf>.or-lw.or-e-h.or-e-w.or-e-fi {
+    transition: height 0.167s cubic-bezier(0.1, 0.9, 0.2, 1.0),
+                    width 0.167s cubic-bezier(0.1, 0.9, 0.2, 1.0),
+                    opacity 0.1s linear 0.167s;
+}
+.or-pc[dir=rtl] .or-c-pf>.or-a {
+    left: 0;
+    right: initial;
+}
+.or-c-md {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+}
+.or-c-md>.or-c {
+    overflow: auto;
+}
+.or-c-md>.or-c.or-e-fi.or-e-t {
+    transition: opacity 0.167s linear, transform 0.367s cubic-bezier(0.1, 0.9, 0.2, 1.0);
+}
+.or-c-md>.or-c.or-e-fo.or-e-t {
+    transition: opacity 0.1s linear, transform 0.1s linear;
+}
+.or-c-v h3.or-t {
+    font-size: 13px;
+    margin: 0 18px 5px 1px;
+}
+.or-c-v>table.or-lw {
+    table-layout: fixed;
+}
+.or-c-v>table.or-lw td {
+    width: 50%;
+}
+.or-c-v>table.or-lw td>.or-b {
+    width: 100%;
+}
+.or-c-v>table.or-lw td:first-child {
+    padding-right: 1px;
+}
+.or-c-v>table.or-lw td:last-child {
+    padding-left: 1px;
+}
+.or-pc[dir=rtl] .or-c-v h3.or-t {
+    margin: 0 1px 5px 18px;
+}
+.or-pc[dir=rtl] .or-c-v>table.or-lw td:first-child {
+    border: none;
+    border-left: 2px transparent solid;
+}
+.or-c-f {
+    width: 235px;
+    max-width: 100%;
+}
+.or-c-f h3.or-t {
+    font-size: 13px;
+    font-weight: bold;
+}
+.or-c-f .or-v, .or-c-f .or-x, .or-c-f>.or-b {
+    display: block;
+}
+.or-c-f .or-v {
+    margin: 3px 0 0 0;
+}
+.or-c-f .or-x {
+    width: 100%;
+    height: 75px;
+}
+.or-c-f>.or-lw {
+    margin: 3px 0 0 0;
+}
+.or-c-f>.or-lw>.or-t {
+    margin: 0 18px 0 0;
+}
+.or-c-f>.or-lw.or-e-h.or-e-w.or-e-fi {
+    transition: height 0.167s cubic-bezier(0.1, 0.9, 0.2, 1.0),
+                    width 0.167s cubic-bezier(0.1, 0.9, 0.2, 1.0),
+                    opacity 0.167s linear;
+}
+.or-c-f>h3.or-t {
+    margin: 7px 0 5px 1px;
+}
+.or-c-f>.or-b {
+    float: right;
+    margin: 4px -1px 0 0;
+}
+.or-pc[dir=rtl] .or-c-f {}
+.or-pc[dir=rtl] .or-c-f>h3.or-t {
+    margin: 7px 1px 5px 0;
+}
+.or-pc[dir=rtl] .or-c-f>.or-lw>.or-t {
+    margin: 0 0 0 18px;
+}
+.or-pc[dir=rtl] .or-c-f>.or-b {
+    float: left;
+    margin: 4px 0 0 -1px;
+}
+.or-c-t h3.or-t {
+    font-size: 13px;
+}
+.or-c-pf .or-c-t h3.or-t {
+    margin: 3px 18px 0 0;
+}
+.or-pc[dir=rtl] .or-c-pf .or-c-t h3.or-t {
+    margin: 3px 0 0 18px;
+}
+.or-c-mv svg {
+    width: 12px;
+    height: 12px;
+    stroke-width: 1px;
+}
+.or-c-mv>.or-c {
+    padding: 3px 20px 5px 17px;
+}
+.or-c-mv>.or-c>span {
+    vertical-align: middle;
+}
+.or-c-mv>.or-c>.or-t {
+    color: inherit;
+    margin-left: 2px;
+}
+.or-c-mv.or-e-fi {
+    transition: opacity 0.1s linear;
+}
+.or-pc[dir=rtl] .or-c-mv>.or-c {
+    padding: 3px 17px 5px 20px;
+}
+.or-pc[dir=rtl] .or-c-mv>.or-c>.or-t {
+    margin: 0 2px 0 0;
+}
+.or-t-ml .or-f {}
+.or-t-ml .or-f.or-k {
+    outline: 2px black solid;
+}
+.or-t-ml .or-t {
+    color: black;
+}
+.or-t-ml .or-b {}
+.or-t-ml .or-b, .or-t-ml .or-b:hover, .or-t-ml .or-b:active {
+    background: none;
+}
+.or-t-ml .or-b>.or-c {
+    color: white;
+    stroke: white;
+    fill: white;
+    background: #0078d7;
+    border: 2px transparent solid;
+}
+.or-t-ml .or-b:hover>.or-c {
+    border-color: rgba(0, 0, 0, 0.4);
+}
+.or-t-ml .or-b:active>.or-c {
+    color: black;
+    stroke: black;
+    fill: black;
+    background: #999999;
+    border-color: transparent;
+}
+.or-t-ml .or-b[disabled]>.or-c, .or-t-ml .or-b[disabled]:hover>.or-c {
+    color: rgba(0, 0, 0, 0.4);
+    stroke: rgba(0, 0, 0, 0.4);
+    fill: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.2);
+    border-color: transparent;
+}
+.or-t-ml .or-l {}
+.or-t-ml .or-l, .or-t-ml .or-l:hover, .or-t-ml .or-l:active {
+    background: none;
+}
+.or-t-ml .or-l>.or-c {
+    color: #0078d7;
+}
+.or-t-ml .or-l:hover>.or-c {
+    color: rgba(0, 0, 0, 0.6);
+}
+.or-t-ml .or-l:active>.or-c {
+    color: rgba(0, 0, 0, 0.4);
+}
+.or-t-ml .or-a {}
+.or-t-ml .or-a, .or-t-ml .or-a:hover, .or-t-ml .or-a:active {
+    background: none;
+}
+.or-t-ml .or-a>.or-c {
+    color: black;
+    background: transparent;
+}
+.or-t-ml .or-a:hover>.or-c {
+    background: rgba(0, 0, 0, 0.1);
+}
+.or-t-ml .or-a:active>.or-c {
+    background: rgba(0, 0, 0, 0.2);
+}
+.or-t-ml .or-v {}
+.or-t-ml .or-v>input[type=checkbox] {}
+.or-t-ml .or-v>input[type=checkbox]+span {
+    border: 2px solid rgba(0, 0, 0, 0.4);
+    background: none;
+}
+.or-t-ml .or-v>input[type=checkbox]+span+span>svg {
+    stroke: white;
+    stroke-width: 1.5px;
+    fill: transparent;
+}
+.or-t-ml .or-v:hover>input[type=checkbox]+span, .or-t-ml .or-v:hover>input[type=checkbox]:checked+span {
+    border-color: black;
+}
+.or-t-ml .or-v:active>input[type=checkbox]+span, .or-t-ml .or-v>input[type=checkbox]:checked+span, .or-t-ml .or-v:active>input[type=checkbox]:checked+span {
+    border-color: transparent;
+}
+.or-t-ml .or-v:active>input[type=checkbox]+span, .or-t-ml .or-v:active>input[type=checkbox]:checked+span {
+    background: rgba(0, 0, 0, 0.6);
+}
+.or-t-ml .or-v>input[type=checkbox]:checked+span {
+    background: #0078d7;
+}
+.or-t-ml .or-x {
+    color: black;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px rgba(0, 0, 0, 0.4) solid;
+}
+.or-t-ml .or-x:hover {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: #171717;
+}
+.or-t-ml .or-x:active, .or-t-ml .or-x:focus {
+    color: black;
+    background: white;
+    border-color: #0078d7;
+}
+.or-t-ml .or-x:active::-webkit-input-placeholder, .or-t-ml .or-x:focus::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+.or-t-ml .or-x:active:-ms-input-placeholder, .or-t-ml .or-x:focus:-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+.or-t-ml .or-x:active::placeholder, .or-t-ml .or-x:focus::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+.or-t-ml .or-x::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+.or-t-ml .or-x:-ms-input-placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+.or-t-ml .or-x::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+.or-t-ml .or-c-pf, .or-t-ml .or-c-mf {
+    border: 1px rgba(133, 133, 133, 0.4) solid;
+    background: white;
+}
+.or-t-ml .or-c-pf {}
+.or-t-ml .or-c-pf>.or-a {}
+.or-t-ml .or-c-pf>.or-a.or-f.or-k:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px black solid;
+}
+.or-t-ml .or-c-pf>.or-a>.or-c.or-g>svg {
+    stroke: rgba(0, 0, 0, 0.6);
+}
+.or-t-ml .or-c-pf>.or-a:hover>.or-c.or-g>svg {
+    stroke: #c80000;
+}
+.or-t-ml .or-c-pf>.or-a:active>.or-c.or-g>svg {
+    stroke: #8c0000;
+}
+.or-t-ml .or-c-md {
+    background: rgba(255, 255, 255, 0.6);
+}
+.or-t-ml .or-c-md>.or-c {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+}
+
+@media screen and (-ms-high-contrast: active) {
+    .or-t-ml .or-b, .or-t-md .or-b {}
+    .or-t-ml .or-b>.or-c, .or-t-ml .or-b:active>.or-c, .or-t-md .or-b>.or-c, .or-t-md .or-b:active>.or-c {
+        stroke: white;
+        fill: white;
+    }
+    .or-t-ml .or-c-pf>.or-a>.or-c.or-g>svg, .or-t-md .or-c-pf>.or-a>.or-c.or-g>svg {
+        stroke: white;
+    }
+}
+
+@media screen and (-ms-high-contrast: black-on-white) {
+    .or-t-ml .or-b, .or-t-md .or-b {}
+    .or-t-ml .or-b>.or-c, .or-t-ml .or-b:active>.or-c, .or-t-md .or-b>.or-c, .or-t-md .or-b:active>.or-c {
+        stroke: black;
+        fill: black;
+    }
+    .or-t-ml .or-v>input[type=checkbox]+span+span>svg, .or-t-md .or-v>input[type=checkbox]+span+span>svg {
+        stroke: black;
+    }
+    .or-t-ml .or-c-pf>.or-a>.or-c.or-g>svg, .or-t-md .or-c-pf>.or-a>.or-c.or-g>svg {
+        stroke: black;
+    }
+}
+</style><script src="./基本概念_ Microsoft Docs_files/6b-c5d0b1(1)" defer=""></script><script src="./基本概念_ Microsoft Docs_files/meversion(1)" defer=""></script><meta name="rating.locale" content="zh-cn"><script async="" src="./基本概念_ Microsoft Docs_files/t.js(1).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(2).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(3).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(4).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(5).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(6).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(7).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(8).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(9).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(10).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(11).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(12).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(13).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(14).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(15).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(16).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(17).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(18).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(19).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(20).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(21).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(22).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(23).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(24).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(25).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(26).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(27).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(28).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(29).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(30).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(31).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(32).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(33).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(34).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(35).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(36).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(37).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(38).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(39).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(40).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(41).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(42).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(43).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(44).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(45).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(46).下载"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./基本概念_ Microsoft Docs_files/translateelement(1).css"><script async="" src="./基本概念_ Microsoft Docs_files/t.js(47).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(48).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(49).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(50).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(51).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(52).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(53).下载"></script><script async="" src="./基本概念_ Microsoft Docs_files/t.js(54).下载"></script></head>
+
+<body lang="zh-cn" dir="ltr">
+<div class="header-holder">
+		<div id="headerAreaHolder" ms.pgarea="header" data-bi-name="header">    <section id="headerArea" data-m="{&quot;cN&quot;:&quot;headerArea&quot;,&quot;cT&quot;:&quot;Area_coreuiArea&quot;,&quot;id&quot;:&quot;a1Body&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;Body&quot;}">
+                    <div id="headerRegion" data-region-key="headerregion" data-m="{&quot;cN&quot;:&quot;headerRegion&quot;,&quot;cT&quot;:&quot;Region_coreui-region&quot;,&quot;id&quot;:&quot;r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;a1&quot;}">
+
+    <div id="headerUniversalHeader" data-m="{&quot;cN&quot;:&quot;headerUniversalHeader&quot;,&quot;cT&quot;:&quot;Module_coreui-universalheader&quot;,&quot;id&quot;:&quot;m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;r1a1&quot;}" data-module-id="Category|headerRegion|headerRegion|headerUniversalHeader|coreui-universalheader">
+        
+
+
+
+
+
+
+        <a class="m-skip-to-main" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#main" tabindex="0" style="z-index:3000002" data-m="{&quot;cN&quot;:&quot;Skip to content_nonnav&quot;,&quot;id&quot;:&quot;nn1m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;m1r1a1&quot;}">跳转至主内容</a>
+
+<header role="banner" class="c-uhfh context-uhf" itemscope="itemscope" data-header-footprint="zh-cn/MSDocs/MSDocsHeader-DotNet" data-ckrate="0.1" itemtype="http://schema.org/Organization">
+    <div class="" data-m="">
+        
+        
+        
+    </div>
+            <div class="theme-dark brand-purple js-cat-head" itemprop="brand" itemscope="itemscope" itemtype="http://schema.org/Brand" data-m="{&quot;cN&quot;:&quot;UHF category nav_cont&quot;,&quot;cT&quot;:&quot;Container&quot;,&quot;id&quot;:&quot;c3m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;m1r1a1&quot;}">
+
+<div>
+        <a id="uhfCatLogo" class="c-logo" aria-label=".NET" itemprop="url" data-m="{&quot;cN&quot;:&quot;.NET_nav&quot;,&quot;id&quot;:&quot;n1c3m1r1a1&quot;,&quot;sN&quot;:1,&quot;aN&quot;:&quot;c3m1r1a1&quot;}" href="https://docs.microsoft.com/dotnet">
+                <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。净</font></font></span>
+        </a>
+    
+    <button class="c-action-trigger c-glyph glyph-chevron-left js-primary-paddle" aria-label="向左滚动" title="向左滚动" data-m="{&quot;cN&quot;:&quot;Previous_nonnav&quot;,&quot;id&quot;:&quot;nn2c3m1r1a1&quot;,&quot;sN&quot;:2,&quot;aN&quot;:&quot;c3m1r1a1&quot;}" tabindex="-1" style="display: none;"></button>
+    
+    <button class="c-action-trigger c-glyph glyph-chevron-right js-secondary-paddle" aria-label="向右滚动" title="向右滚动" data-m="{&quot;cN&quot;:&quot;Next_nonnav&quot;,&quot;id&quot;:&quot;nn3c3m1r1a1&quot;,&quot;sN&quot;:3,&quot;aN&quot;:&quot;c3m1r1a1&quot;}" tabindex="-1" style="display: block;"></button>
+            
+
+</div>
+
+
+            
+        </div>
+
+    
+</header>
+
+
+    </div>
+            </div>
+
+    </section>
+</div>
+	<div id="disclaimer-holder" class="disclaimer-holder">
+		
+	
+		
+	</div>
+</div>
+
+	<div class="container mainContainer" ms.pgarea="body" data-bi-name="body">
+		
+
+		<div class="primary-holder">
+
+			<main id="main" role="main" class="content x-hidden-focus" ms.cmpgrp="content" data-bi-name="content" lang="zh-cn" dir="ltr">
+
+
+				<h1 id="basic-concepts" sourcefile="_csharplang/spec/basic-concepts.md" sourcestartlinenumber="1" sourceendlinenumber="1"><font style="vertical-align: inherit;"><font class="" style="vertical-align: inherit;">基本概念</font></font></h1>
+
+					<ul class="metadata page-metadata" ms.cmpgrp="page info" data-bi-name="page info">
+							<li class="displayDate docon-before docon-calendar inline">
+								<time datetime="2018-02-16T16:00:00.000Z" class="">2018/02/17</time>
+							</li>
+							<li class="contributors-holder inline">
+								<span class="contributors-text">作者 李知非</span>
+								
+							</li>
+
+					</ul>
+						<nav id="center-doc-outline" class="doc-outline" ms.cmpgrp="intopic toc" data-bi-name="intopic toc" role="navigation" aria-label="业内导航">
+							<h3>本文内容</h3>
+						<ol><li><a href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#application-startup" class="">应用程序启动</a></li><li><a href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#application-termination">申请终止</a></li><li><a href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#declarations">声明</a></li><li><a href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#members"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">会员</font></font></a></li><li><a href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#member-access"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">会员访问</font></font></a></li><li><a href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#signatures-and-overloading"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">签名和重载</font></font></a></li><li><a href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#scopes"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">领域</font></font></a></li><li><a href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#namespace-and-type-names"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命名空间和类型名称</font></font></a></li><li><a href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#automatic-memory-management"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">自动内存管理</font></font></a></li><li><a href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#execution-order"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">执行顺序</font></font></a></li></ol></nav>
+
+				<!-- <content> -->
+					
+<h2 id="application-startup" class="heading-with-anchor"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">应用程序启动</font></font><a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#application-startup"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#application-startup"></a></h2>
+<p class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">具有</font></font><strong><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">入口点</font></font></em></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的</font></font><strong><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">程序集</font></font></em></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">称为</font><strong><em><font style="vertical-align: inherit;" class="">应用程序</font></em></strong><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">运行</font></font><strong><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">应用程序时，</font></font></em></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class="">会创建</font><font style="vertical-align: inherit;" class="">一个新的</font><strong><em><font style="vertical-align: inherit;">应用程序域</font></em></strong><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;" class="">应用程序的几个不同实例可以同时存在于同一台机器上，并且每个实例都有其自己的应用程序域。</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">应用程序域通过充当应用程序状态的容器来启用应用程序隔离。</font><font style="vertical-align: inherit;" class="">应用程序域充当应用程序及其使用的类库中定义的类型的容器和边界。</font><font style="vertical-align: inherit;">加载到一个应用程序域中的类型与加载到另一个应用程序域中的相同类型不同，并且不在应用程序域之间直接共享对象实例。</font><font style="vertical-align: inherit;">例如，每个应用程序域都有它们自己的这些类型的静态变量副本，并且每个应用程序域最多运行一次类型的静态构造函数。</font><font style="vertical-align: inherit;">实现可以自由地为创建和销毁应用程序域提供特定于实现的策略或机制。</font></font></p>
+<p><strong><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">应用程序启动</font></font></em></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class="">发生在执行环境调用指定的方法时，该方法被称为应用程序的入口点。</font><font style="vertical-align: inherit;">此入口点方法始终被命名</font></font><code class="">main</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，并且可以具有以下签名之一：</font></font></p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Csp.net</font></font></font></font></span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre class=""><code class="lang-csharp"><span class="hljs-function">
+    <span class="hljs-title">main</span> = ()</span>{...}<font></font>
+<font></font>
+<span class="hljs-function">
+    <span class="hljs-title">main</span> = (<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)</span>{...}<font></font>
+<font></font>
+<span class="hljs-function">
+    <span class="hljs-title">main</span> = ()</span>: <span class="hljs-keyword">int</span>{...}<font></font>
+<font></font>
+<span class="hljs-function">
+    <span class="hljs-title">main</span>= (<span class="hljs-params x-hidden-focus hljs-keyword">string</span>[] args): <span class="hljs-keyword">int</span></span>{...}
+</code></pre><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如图所示，入口点可以选择返回一个</font></font><code>int</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">值。</font><font style="vertical-align: inherit;" class="">该返回值用于应用程序终止。</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">入口点可以有一个形式参数。</font><font style="vertical-align: inherit;">参数可以有任何名称，但参数的类型必须是</font></font><code>string[]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">如果存在形式参数，则执行环境将创建并传递一个</font></font><code>string[]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">参数，该参数包含应用程序启动时指定的命令行参数。</font><font style="vertical-align: inherit;">该</font></font><code>string[]</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">参数永远不能为null，但它可能有一个长度为零，如果没有指定命令行参数。</font></font></p>
+<p class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class=""><code class="x-hidden-focus">main</code>函数的结束也意味着应用程序的结束，这也意味着不能定义类型和除了<code class="x-hidden-focus">main</code>函数额外的函数，即Csp.NET是一个不支持面向对象、不支持函数式编程的语言。</font></font></p>
+
+
+
+
+<h2 id="application-termination" class="heading-with-anchor"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">申请终止</font></font><a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#application-termination"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#application-termination"></a></h2>
+<p><strong><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">应用程序终止</font></font></em></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将控制权交还给执行环境。</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果应用程序</font></font><strong><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">入口点</font></font></em></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">方法</font><font style="vertical-align: inherit;">的返回类型</font><font style="vertical-align: inherit;">是</font></font><code>int</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，则返回的值将用作应用程序的</font></font><strong><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">终止状态代码</font></font></em></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">此代码的目的是允许成功或失败的通信到执行环境。</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果入口点方法的返回类型是</font></font><code>void</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，到达</font></font><code class="">}</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用于终止该方法</font><font style="vertical-align: inherit;">的右括号（</font><font style="vertical-align: inherit;">），或者执行</font></font><code>return</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">没有表达式</font><font style="vertical-align: inherit;">的</font><font style="vertical-align: inherit;">语句，则会生成终止状态码</font></font><code>0</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<p class="x-hidden-focus"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class="x-hidden-focus">在应用程序终止之前，调用尚未被垃圾收集的所有对象的析构函数，除非这种清理已被抑制（例如通过调用库方法</font></font><code class="x-hidden-focus">GC.SuppressFinalize</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;" class="x-hidden-focus">）。</font></font></p>
+<h2 id="declarations" class="heading-with-anchor x-hidden-focus"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">声明</font></font><a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#declarations"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#declarations"></a></h2>
+<p class=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Csp.net程序中的声明定义了程序的组成元素。</font><font style="vertical-align: inherit;" class="x-hidden-focus">C＃程序使用命名空间</font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">进行组织</font><font style="vertical-align: inherit;">，一个main函数仅能有一个对应的命名空间。</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">声明</font><font style="vertical-align: inherit;">在声明所属</font><font style="vertical-align: inherit;">的</font></font><strong><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">声明空间中</font></font></em></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">定义一个名称</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">除了超载成员（</font></font><a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#signatures-and-overloading" data-linktype="relative-path"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">签名和重载</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）外，在声明空间中有两个或更多声明引入成员具有相同名称的编译时错误。</font><font style="vertical-align: inherit;">声明空间永远不可能包含具有相同名称的不同类型的成员。</font><font style="vertical-align: inherit;">例如，声明空间永远不能包含同名的字段和方法。</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">有几种不同类型的声明空间，如下所述。</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在程序的所有源文件，</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">namespace_member_declaration</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> s的无封闭</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">namespace_declaration</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">被称为一个组合声明空间的成员</font></font><strong><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">全局声明空间</font></font></em></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在程序的所有源文件，</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">namespace_member_declaration</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">秒钟内</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">namespace_declaration</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">具有相同的完全限定的命名空间名称■属于一个组合声明空间。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">每个类，结构或接口声明都会创建一个新的声明空间。</font><font style="vertical-align: inherit;">名称通过</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">class_member_declaration</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> s，</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">struct_member_declaration</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> s，</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">interface_member_declaration</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> s或</font><em><font style="vertical-align: inherit;">type_parameter</font></em><font style="vertical-align: inherit;">引入此声明空间</font></font><em><font style="vertical-align: inherit;"></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">秒。</font><font style="vertical-align: inherit;">除了重载实例构造函数声明和静态构造函数声明外，类或结构不能包含与类或结构名称相同的成员声明。</font><font style="vertical-align: inherit;">类，结构或接口允许重载方法和索引器的声明。</font><font style="vertical-align: inherit;">此外，类或结构允许声明重载的实例构造函数和运算符。</font><font style="vertical-align: inherit;">例如，类，结构或接口可能包含多个具有相同名称的方法声明，只要这些方法声明的签名不同（</font></font><a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#signatures-and-overloading" data-linktype="relative-path"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">签名和重载</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）。</font><font style="vertical-align: inherit;">请注意，基类不会贡献类的声明空间，并且基接口不会影响接口的声明空间。</font><font style="vertical-align: inherit;">因此，允许派生类或接口声明与继承成员具有相同名称的成员。</font><font style="vertical-align: inherit;">据说这样的成员</font></font><strong><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">隐藏</font></font></em></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">了遗传成员。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">每个委托声明都会创建一个新的声明空间。</font><font style="vertical-align: inherit;">通过形式参数（</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fixed_pa​​rameter</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">parameter_array</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）和</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">type_parameter</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将名称引入此声明空间</font><font style="vertical-align: inherit;">。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">每个枚举声明都会创建一个新的声明空间。</font><font style="vertical-align: inherit;">通过</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">enum_member_declarations</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">将名称引入此声明空间</font><font style="vertical-align: inherit;">。</font></font></li>
+<li class="x-hidden-focus"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">每个方法声明，索引器声明，运算符声明，实例构造函数声明和匿名函数都会创建一个称为</font></font><strong><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">局部变量声明空间</font></font></em></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的新</font><strong><em><font style="vertical-align: inherit;">声明空间</font></em></strong><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">名称通过形式参数（</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">fixed_pa​​rameter</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">parameter_array</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）和</font><em><font style="vertical-align: inherit;">type_parameter</font></em><font style="vertical-align: inherit;">引入此声明空间</font></font><em><font style="vertical-align: inherit;"></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">秒。</font><font style="vertical-align: inherit;">函数成员或匿名函数的主体（如果有）被认为嵌套在局部变量声明空间中。</font><font style="vertical-align: inherit;">局部变量声明空间和嵌套局部变量声明空间包含具有相同名称的元素是错误的。</font><font style="vertical-align: inherit;">因此，在嵌套声明空间内，不可能在封闭声明空间中声明与本地变量或常量具有相同名称的局部变量或常量。</font><font style="vertical-align: inherit;">只要两个声明空间都不包含另一个声明空间，就有可能让两个声明空间包含具有相同名称的元素。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">每个</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">块</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">或</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">switch_block</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">以及</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">for</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">foreach</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">using</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">语句为局部变量和局部常量创建局部变量声明空间。</font><font style="vertical-align: inherit;">名称通过</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">local_variable_declaration</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">local_constant_declaration</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">引入此声明空间</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">请注意，作为或位于函数成员或匿名函数体内的块嵌套在由这些函数为其参数声明的局部变量声明空间内。</font><font style="vertical-align: inherit;">因此，例如具有局部变量和同名参数的方法是错误的。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">每个</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">块</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">或</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">switch_block</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">为标签创建一个单独的声明空间。</font><font style="vertical-align: inherit;">名称通过</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">labeled_statement</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> s </font><font style="vertical-align: inherit;">引入此声明空间</font><font style="vertical-align: inherit;">，并通过</font></font><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">goto_statement</font></font></em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">引用名称</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">块</font><font style="vertical-align: inherit;">的</font></font><strong><em><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">标签声明空间</font></font></em></strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">包括任何嵌套块。</font><font style="vertical-align: inherit;">因此，在嵌套块中，不可能在封闭块中声明与标签具有相同名称的标签。</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">声明名称的文本顺序通常没有意义。</font><font style="vertical-align: inherit;">特别是，对于声明和使用名称空间，常量，方法，属性，事件，索引器，运算符，实例构造函数，析构函数，静态构造函数和类型，文本顺序并不重要。</font><font style="vertical-align: inherit;">声明顺序在以下方面非常重要：</font></font></p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">字段声明和局部变量声明的声明顺序决定了它们的初始化程序（如果有的话）的执行顺序。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">局部变量必须在使用前定义（</font></font><a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#scopes" data-linktype="relative-path"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">范围</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">当</font><font style="vertical-align: inherit;">省略</font><em><font style="vertical-align: inherit;">constant_expression</font></em><font style="vertical-align: inherit;">值</font><font style="vertical-align: inherit;">时</font><font style="vertical-align: inherit;">，枚举成员声明（</font></font><a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/enums#enum-members" data-linktype="relative-path"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">枚举成员</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）的</font><font style="vertical-align: inherit;">声明顺序</font><font style="vertical-align: inherit;">很重要</font><font style="vertical-align: inherit;">。</font></font><em><font style="vertical-align: inherit;"></font></em><font style="vertical-align: inherit;"></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">名称空间的声明空间是“开放式”的，具有相同完全限定名称的两个名称空间声明对相同的声明空间有贡献。</font><font style="vertical-align: inherit;">例如</font></font></p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C＃</font></font></span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">namespace</span> <span class="hljs-title">Megacorp.Data</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">class</span> <span class="hljs-title">Customer</span><font></font>
+    {<font></font>
+        ...<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">Megacorp.Data</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">class</span> <span class="hljs-title">Order</span><font></font>
+    {<font></font>
+        ...<font></font>
+    }<font></font>
+}<font></font>
+</code></pre><p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上面的两个名称空间声明对同一个声明空间有贡献，在这种情况下，用完全限定名称</font></font><code>Megacorp.Data.Customer</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font><font style="vertical-align: inherit;">声明两个类</font></font><code>Megacorp.Data.Order</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">由于这两个声明对同一个声明空间有贡献，如果每个声明都包含一个具有相同名称的类的声明，则会导致编译时错误。</font></font></p>
+<p>As specified above, the declaration space of a block includes any nested blocks. Thus, in the following example, the <code>F</code> and <code>G</code> methods result in a compile-time error because the name <code>i</code> is declared in the outer block and cannot be redeclared in the inner block. However, the <code>H</code> and <code>I</code> methods are valid since the two <code>i</code>'s are declared in separate non-nested blocks.</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) {
+            <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;            <font></font>
+        }<font></font>
+    }<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">G</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) {
+            <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<font></font>
+        }<font></font>
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;                <font></font>
+    }<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">H</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) {
+            <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<font></font>
+        }<font></font>
+        <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) {
+            <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;<font></font>
+        }<font></font>
+    }<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">I</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++)<font></font>
+            H();<font></font>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++)<font></font>
+            H();<font></font>
+    }<font></font>
+}<font></font>
+</code></pre><h2 id="members" class="heading-with-anchor">Members<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#members"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#members"></a></h2>
+<p>Namespaces and types have <strong><em>members</em></strong>. The members of an entity are generally available through the use of a qualified name that starts with a reference to the entity, followed by a "<code>.</code>" token, followed by the name of the member.</p>
+<p>Members of a type are either declared in the type declaration or <strong><em>inherited</em></strong> from the base class of the type. When a type inherits from a base class, all members of the base class, except instance constructors, destructors and static constructors, become members of the derived type. The declared accessibility of a base class member does not control whether the member is inherited—inheritance extends to any member that isn't an instance constructor, static constructor, or destructor. However, an inherited member may not be accessible in a derived type, either because of its declared accessibility (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#declared-accessibility" data-linktype="relative-path">Declared accessibility</a>) or because it is hidden by a declaration in the type itself (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#hiding-through-inheritance" data-linktype="relative-path">Hiding through inheritance</a>).</p>
+<h3 id="namespace-members" class="heading-with-anchor">Namespace members<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#namespace-members"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#namespace-members"></a></h3>
+<p>Namespaces and types that have no enclosing namespace are members of the <strong><em>global namespace</em></strong>. This corresponds directly to the names declared in the global declaration space.</p>
+<p>Namespaces and types declared within a namespace are members of that namespace. This corresponds directly to the names declared in the declaration space of the namespace.</p>
+<p>Namespaces have no access restrictions. It is not possible to declare private, protected, or internal namespaces, and namespace names are always publicly accessible.</p>
+<h3 id="struct-members" class="heading-with-anchor">Struct members<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#struct-members"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#struct-members"></a></h3>
+<p>The members of a struct are the members declared in the struct and the members inherited from the struct's direct base class <code>System.ValueType</code> and the indirect base class <code>object</code>.</p>
+<p>The members of a simple type correspond directly to the members of the struct type aliased by the simple type:</p>
+<ul>
+<li>The members of <code>sbyte</code> are the members of the <code>System.SByte</code> struct.</li>
+<li>The members of <code>byte</code> are the members of the <code>System.Byte</code> struct.</li>
+<li>The members of <code>short</code> are the members of the <code>System.Int16</code> struct.</li>
+<li>The members of <code>ushort</code> are the members of the <code>System.UInt16</code> struct.</li>
+<li>The members of <code>int</code> are the members of the <code>System.Int32</code> struct.</li>
+<li>The members of <code>uint</code> are the members of the <code>System.UInt32</code> struct.</li>
+<li>The members of <code>long</code> are the members of the <code>System.Int64</code> struct.</li>
+<li>The members of <code>ulong</code> are the members of the <code>System.UInt64</code> struct.</li>
+<li>The members of <code>char</code> are the members of the <code>System.Char</code> struct.</li>
+<li>The members of <code>float</code> are the members of the <code>System.Single</code> struct.</li>
+<li>The members of <code>double</code> are the members of the <code>System.Double</code> struct.</li>
+<li>The members of <code>decimal</code> are the members of the <code>System.Decimal</code> struct.</li>
+<li>The members of <code>bool</code> are the members of the <code>System.Boolean</code> struct.</li>
+</ul>
+<h3 id="enumeration-members" class="heading-with-anchor">Enumeration members<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#enumeration-members"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#enumeration-members"></a></h3>
+<p>The members of an enumeration are the constants declared in the enumeration and the members inherited from the enumeration's direct base class <code>System.Enum</code> and the indirect base classes <code>System.ValueType</code> and <code>object</code>.</p>
+<h3 id="class-members" class="heading-with-anchor">Class members<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#class-members"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#class-members"></a></h3>
+<p>The members of a class are the members declared in the class and the members inherited from the base class (except for class <code>object</code> which has no base class). The members inherited from the base class include the constants, fields, methods, properties, events, indexers, operators, and types of the base class, but not the instance constructors, destructors and static constructors of the base class. Base class members are inherited without regard to their accessibility.</p>
+<p>A class declaration may contain declarations of constants, fields, methods, properties, events, indexers, operators, instance constructors, destructors, static constructors and types.</p>
+<p>The members of <code>object</code> and <code>string</code> correspond directly to the members of the class types they alias:</p>
+<ul>
+<li>The members of <code>object</code> are the members of the <code>System.Object</code> class.</li>
+<li>The members of <code>string</code> are the members of the <code>System.String</code> class.</li>
+</ul>
+<h3 id="interface-members" class="heading-with-anchor">Interface members<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#interface-members"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#interface-members"></a></h3>
+<p>The members of an interface are the members declared in the interface and in all base interfaces of the interface. The members in class <code>object</code> are not, strictly speaking, members of any interface (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/interfaces#interface-members" data-linktype="relative-path">Interface members</a>). However, the members in class <code>object</code> are available via member lookup in any interface type (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/expressions#member-lookup" data-linktype="relative-path">Member lookup</a>).</p>
+<h3 id="array-members" class="heading-with-anchor">Array members<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#array-members"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#array-members"></a></h3>
+<p>The members of an array are the members inherited from class <code>System.Array</code>.</p>
+<h3 id="delegate-members" class="heading-with-anchor">Delegate members<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#delegate-members"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#delegate-members"></a></h3>
+<p>The members of a delegate are the members inherited from class <code>System.Delegate</code>.</p>
+<h2 id="member-access" class="heading-with-anchor">Member access<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#member-access"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#member-access"></a></h2>
+<p>Declarations of members allow control over member access. The accessibility of a member is established by the declared accessibility (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#declared-accessibility" data-linktype="relative-path">Declared accessibility</a>) of the member combined with the accessibility of the immediately containing type, if any.</p>
+<p>When access to a particular member is allowed, the member is said to be <strong><em>accessible</em></strong>. Conversely, when access to a particular member is disallowed, the member is said to be <strong><em>inaccessible</em></strong>. Access to a member is permitted when the textual location in which the access takes place is included in the accessibility domain (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#accessibility-domains" data-linktype="relative-path">Accessibility domains</a>) of the member.</p>
+<h3 id="declared-accessibility" class="heading-with-anchor">Declared accessibility<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#declared-accessibility"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#declared-accessibility"></a></h3>
+<p>The <strong><em>declared accessibility</em></strong> of a member can be one of the following:</p>
+<ul>
+<li>Public, which is selected by including a <code>public</code> modifier in the member declaration. The intuitive meaning of <code>public</code> is "access not limited".</li>
+<li>Protected, which is selected by including a <code>protected</code> modifier in the member declaration. The intuitive meaning of <code>protected</code> is "access limited to the containing class or types derived from the containing class".</li>
+<li>Internal, which is selected by including an <code>internal</code> modifier in the member declaration. The intuitive meaning of <code>internal</code> is "access limited to this program".</li>
+<li>Protected internal (meaning protected or internal), which is selected by including both a <code>protected</code> and an <code>internal</code> modifier in the member declaration. The intuitive meaning of <code>protected internal</code> is "access limited to this program or types derived from the containing class".</li>
+<li>Private, which is selected by including a <code>private</code> modifier in the member declaration. The intuitive meaning of <code>private</code> is "access limited to the containing type".</li>
+</ul>
+<p>Depending on the context in which a member declaration takes place, only certain types of declared accessibility are permitted. Furthermore, when a member declaration does not include any access modifiers, the context in which the declaration takes place determines the default declared accessibility.</p>
+<ul>
+<li>Namespaces implicitly have <code>public</code> declared accessibility. No access modifiers are allowed on namespace declarations.</li>
+<li>Types declared in compilation units or namespaces can have <code>public</code> or <code>internal</code> declared accessibility and default to <code>internal</code> declared accessibility.</li>
+<li>Class members can have any of the five kinds of declared accessibility and default to <code>private</code> declared accessibility. (Note that a type declared as a member of a class can have any of the five kinds of declared accessibility, whereas a type declared as a member of a namespace can have only <code>public</code> or <code>internal</code> declared accessibility.)</li>
+<li>Struct members can have <code>public</code>, <code>internal</code>, or <code>private</code> declared accessibility and default to <code>private</code> declared accessibility because structs are implicitly sealed. Struct members introduced in a struct (that is, not inherited by that struct) cannot have <code>protected</code> or <code>protected internal</code> declared accessibility. (Note that a type declared as a member of a struct can have <code>public</code>, <code>internal</code>, or <code>private</code> declared accessibility, whereas a type declared as a member of a namespace can have only <code>public</code> or <code>internal</code> declared accessibility.)</li>
+<li>Interface members implicitly have <code>public</code> declared accessibility. No access modifiers are allowed on interface member declarations.</li>
+<li>Enumeration members implicitly have <code>public</code> declared accessibility. No access modifiers are allowed on enumeration member declarations.</li>
+</ul>
+<h3 id="accessibility-domains" class="heading-with-anchor">Accessibility domains<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#accessibility-domains"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#accessibility-domains"></a></h3>
+<p>The <strong><em>accessibility domain</em></strong> of a member consists of the (possibly disjoint) sections of program text in which access to the member is permitted. For purposes of defining the accessibility domain of a member, a member is said to be <strong><em>top-level</em></strong> if it is not declared within a type, and a member is said to be <strong><em>nested</em></strong> if it is declared within another type. Furthermore, the <strong><em>program text</em></strong> of a program is defined as all program text contained in all source files of the program, and the program text of a type is defined as all program text contained in the <em>type_declaration</em>s of that type (including, possibly, types that are nested within the type).</p>
+<p>The accessibility domain of a predefined type (such as <code>object</code>, <code>int</code>, or <code>double</code>) is unlimited.</p>
+<p>The accessibility domain of a top-level unbound type <code>T</code> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/types#bound-and-unbound-types" data-linktype="relative-path">Bound and unbound types</a>) that is declared in a program <code>P</code> is defined as follows:</p>
+<ul>
+<li>If the declared accessibility of <code>T</code> is <code>public</code>, the accessibility domain of <code>T</code> is the program text of <code>P</code> and any program that references <code>P</code>.</li>
+<li>If the declared accessibility of <code>T</code> is <code>internal</code>, the accessibility domain of <code>T</code> is the program text of <code>P</code>.</li>
+</ul>
+<p>From these definitions it follows that the accessibility domain of a top-level unbound type is always at least the program text of the program in which that type is declared.</p>
+<p>The accessibility domain for a constructed type <code>T&lt;A1, ..., An&gt;</code> is the intersection of the accessibility domain of the unbound generic type <code>T</code> and the accessibility domains of the type arguments <code>A1, ..., An</code>.</p>
+<p>The accessibility domain of a nested member <code>M</code> declared in a type <code>T</code> within a program <code>P</code> is defined as follows (noting that <code>M</code> itself may possibly be a type):</p>
+<ul>
+<li>If the declared accessibility of <code>M</code> is <code>public</code>, the accessibility domain of <code>M</code> is the accessibility domain of <code>T</code>.</li>
+<li>If the declared accessibility of <code>M</code> is <code>protected internal</code>, let <code>D</code> be the union of the program text of <code>P</code> and the program text of any type derived from <code>T</code>, which is declared outside <code>P</code>. The accessibility domain of <code>M</code> is the intersection of the accessibility domain of <code>T</code> with <code>D</code>.</li>
+<li>If the declared accessibility of <code>M</code> is <code>protected</code>, let <code>D</code> be the union of the program text of <code>T</code> and the program text of any type derived from <code>T</code>. The accessibility domain of <code>M</code> is the intersection of the accessibility domain of <code>T</code> with <code>D</code>.</li>
+<li>If the declared accessibility of <code>M</code> is <code>internal</code>, the accessibility domain of <code>M</code> is the intersection of the accessibility domain of <code>T</code> with the program text of <code>P</code>.</li>
+<li>If the declared accessibility of <code>M</code> is <code>private</code>, the accessibility domain of <code>M</code> is the program text of <code>T</code>.</li>
+</ul>
+<p>From these definitions it follows that the accessibility domain of a nested member is always at least the program text of the type in which the member is declared. Furthermore, it follows that the accessibility domain of a member is never more inclusive than the accessibility domain of the type in which the member is declared.</p>
+<p>In intuitive terms, when a type or member <code>M</code> is accessed, the following steps are evaluated to ensure that the access is permitted:</p>
+<ul>
+<li>First, if <code>M</code> is declared within a type (as opposed to a compilation unit or a namespace), a compile-time error occurs if that type is not accessible.</li>
+<li>Then, if <code>M</code> is <code>public</code>, the access is permitted.</li>
+<li>Otherwise, if <code>M</code> is <code>protected internal</code>, the access is permitted if it occurs within the program in which <code>M</code> is declared, or if it occurs within a class derived from the class in which <code>M</code> is declared and takes place through the derived class type (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#protected-access-for-instance-members" data-linktype="relative-path">Protected access for instance members</a>).</li>
+<li>Otherwise, if <code>M</code> is <code>protected</code>, the access is permitted if it occurs within the class in which <code>M</code> is declared, or if it occurs within a class derived from the class in which <code>M</code> is declared and takes place through the derived class type (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#protected-access-for-instance-members" data-linktype="relative-path">Protected access for instance members</a>).</li>
+<li>Otherwise, if <code>M</code> is <code>internal</code>, the access is permitted if it occurs within the program in which <code>M</code> is declared.</li>
+<li>Otherwise, if <code>M</code> is <code>private</code>, the access is permitted if it occurs within the type in which <code>M</code> is declared.</li>
+<li>Otherwise, the type or member is inaccessible, and a compile-time error occurs.</li>
+</ul>
+<p>In the example</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">A</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> X;
+    <span class="hljs-keyword">internal</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> Y;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> Z;<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">internal</span> <span class="hljs-keyword">class</span> <span class="hljs-title">B</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> X;
+    <span class="hljs-keyword">internal</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> Y;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> Z;<font></font>
+<font></font>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">C</span><font></font>
+    {<font></font>
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> X;
+        <span class="hljs-keyword">internal</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> Y;
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> Z;<font></font>
+    }<font></font>
+<font></font>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title">D</span><font></font>
+    {<font></font>
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> X;
+        <span class="hljs-keyword">internal</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> Y;
+        <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> Z;<font></font>
+    }<font></font>
+}<font></font>
+</code></pre><p>the classes and members have the following accessibility domains:</p>
+<ul>
+<li>The accessibility domain of <code>A</code> and <code>A.X</code> is unlimited.</li>
+<li>The accessibility domain of <code>A.Y</code>, <code>B</code>, <code>B.X</code>, <code>B.Y</code>, <code>B.C</code>, <code>B.C.X</code>, and <code>B.C.Y</code> is the program text of the containing program.</li>
+<li>The accessibility domain of <code>A.Z</code> is the program text of <code>A</code>.</li>
+<li>The accessibility domain of <code>B.Z</code> and <code>B.D</code> is the program text of <code>B</code>, including the program text of <code>B.C</code> and <code>B.D</code>.</li>
+<li>The accessibility domain of <code>B.C.Z</code> is the program text of <code>B.C</code>.</li>
+<li>The accessibility domain of <code>B.D.X</code> and <code>B.D.Y</code> is the program text of <code>B</code>, including the program text of <code>B.C</code> and <code>B.D</code>.</li>
+<li>The accessibility domain of <code>B.D.Z</code> is the program text of <code>B.D</code>.</li>
+</ul>
+<p>As the example illustrates, the accessibility domain of a member is never larger than that of a containing type. For example, even though all <code>X</code> members have public declared accessibility, all but <code>A.X</code> have accessibility domains that are constrained by a containing type.</p>
+<p>As described in <a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#members" data-linktype="relative-path">Members</a>, all members of a base class, except for instance constructors, destructors and static constructors, are inherited by derived types. This includes even private members of a base class. However, the accessibility domain of a private member includes only the program text of the type in which the member is declared. In the example</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">int</span> x;<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params">B b</span>) </span>{<font></font>
+        b.x = <span class="hljs-number">1</span>;        <span class="hljs-comment">// Ok</span><font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">B</span>: <span class="hljs-title">A</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params">B b</span>) </span>{<font></font>
+        b.x = <span class="hljs-number">1</span>;        <span class="hljs-comment">// Error, x not accessible</span><font></font>
+    }<font></font>
+}<font></font>
+</code></pre><p>the <code>B</code> class inherits the private member <code>x</code> from the <code>A</code> class. Because the member is private, it is only accessible within the <em>class_body</em> of <code>A</code>. Thus, the access to <code>b.x</code> succeeds in the <code>A.F</code> method, but fails in the <code>B.F</code> method.</p>
+<h3 id="protected-access-for-instance-members" class="heading-with-anchor">Protected access for instance members<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#protected-access-for-instance-members"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#protected-access-for-instance-members"></a></h3>
+<p>When a <code>protected</code> instance member is accessed outside the program text of the class in which it is declared, and when a <code>protected internal</code> instance member is accessed outside the program text of the program in which it is declared, the access must take place within a class declaration that derives from the class in which it is declared. Furthermore, the access is required to take place through an instance of that derived class type or a class type constructed from it. This restriction prevents one derived class from accessing protected members of other derived classes, even when the members are inherited from the same base class.</p>
+<p>Let <code>B</code> be a base class that declares a protected instance member <code>M</code>, and let <code>D</code> be a class that derives from <code>B</code>. Within the <em>class_body</em> of <code>D</code>, access to <code>M</code> can take one of the following forms:</p>
+<ul>
+<li>An unqualified <em>type_name</em> or <em>primary_expression</em> of the form <code>M</code>.</li>
+<li>A <em>primary_expression</em> of the form <code>E.M</code>, provided the type of <code>E</code> is <code>T</code> or a class derived from <code>T</code>, where <code>T</code> is the class type <code>D</code>, or a class type constructed from <code>D</code></li>
+<li>A <em>primary_expression</em> of the form <code>base.M</code>.</li>
+</ul>
+<p>In addition to these forms of access, a derived class can access a protected instance constructor of a base class in a <em>constructor_initializer</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#constructor-initializers" data-linktype="relative-path">Constructor initializers</a>).</p>
+<p>In the example</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">A</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">int</span> x;<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params">A a, B b</span>) </span>{<font></font>
+        a.x = <span class="hljs-number">1</span>;        <span class="hljs-comment">// Ok</span>
+        b.x = <span class="hljs-number">1</span>;        <span class="hljs-comment">// Ok</span><font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">B</span>: <span class="hljs-title">A</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params">A a, B b</span>) </span>{<font></font>
+        a.x = <span class="hljs-number">1</span>;        <span class="hljs-comment">// Error, must access through instance of B</span>
+        b.x = <span class="hljs-number">1</span>;        <span class="hljs-comment">// Ok</span><font></font>
+    }<font></font>
+}<font></font>
+</code></pre><p>within <code>A</code>, it is possible to access <code>x</code> through instances of both <code>A</code> and <code>B</code>, since in either case the access takes place through an instance of <code>A</code> or a class derived from <code>A</code>. However, within <code>B</code>, it is not possible to access <code>x</code> through an instance of <code>A</code>, since <code>A</code> does not derive from <code>B</code>.</p>
+<p>In the example</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span>&lt;<span class="hljs-title">T</span>&gt;<font></font>
+{<font></font>
+    <span class="hljs-keyword">protected</span> T x;<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">D</span>&lt;<span class="hljs-title">T</span>&gt;: <span class="hljs-title">C</span>&lt;<span class="hljs-title">T</span>&gt;<font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{<font></font>
+        D&lt;T&gt; dt = <span class="hljs-keyword">new</span> D&lt;T&gt;();<font></font>
+        D&lt;<span class="hljs-keyword">int</span>&gt; di = <span class="hljs-keyword">new</span> D&lt;<span class="hljs-keyword">int</span>&gt;();<font></font>
+        D&lt;<span class="hljs-keyword">string</span>&gt; ds = <span class="hljs-keyword">new</span> D&lt;<span class="hljs-keyword">string</span>&gt;();<font></font>
+        dt.x = <span class="hljs-keyword">default</span>(T);<font></font>
+        di.x = <span class="hljs-number">123</span>;<font></font>
+        ds.x = <span class="hljs-string">"test"</span>;<font></font>
+    }<font></font>
+}<font></font>
+</code></pre><p>the three assignments to <code>x</code> are permitted because they all take place through instances of class types constructed from the generic type.</p>
+<h3 id="accessibility-constraints" class="heading-with-anchor">Accessibility constraints<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#accessibility-constraints"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#accessibility-constraints"></a></h3>
+<p>Several constructs in the C# language require a type to be <strong><em>at least as accessible as</em></strong> a member or another type. A type <code>T</code> is said to be at least as accessible as a member or type <code>M</code> if the accessibility domain of <code>T</code> is a superset of the accessibility domain of <code>M</code>. In other words, <code>T</code> is at least as accessible as <code>M</code> if <code>T</code> is accessible in all contexts in which <code>M</code> is accessible.</p>
+<p>The following accessibility constraints exist:</p>
+<ul>
+<li>The direct base class of a class type must be at least as accessible as the class type itself.</li>
+<li>The explicit base interfaces of an interface type must be at least as accessible as the interface type itself.</li>
+<li>The return type and parameter types of a delegate type must be at least as accessible as the delegate type itself.</li>
+<li>The type of a constant must be at least as accessible as the constant itself.</li>
+<li>The type of a field must be at least as accessible as the field itself.</li>
+<li>The return type and parameter types of a method must be at least as accessible as the method itself.</li>
+<li>The type of a property must be at least as accessible as the property itself.</li>
+<li>The type of an event must be at least as accessible as the event itself.</li>
+<li>The type and parameter types of an indexer must be at least as accessible as the indexer itself.</li>
+<li>The return type and parameter types of an operator must be at least as accessible as the operator itself.</li>
+<li>The parameter types of an instance constructor must be at least as accessible as the instance constructor itself.</li>
+</ul>
+<p>In the example</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> {...}<font></font>
+<font></font>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">B</span>: <span class="hljs-title">A</span> {...}
+</code></pre><p>the <code>B</code> class results in a compile-time error because <code>A</code> is not at least as accessible as <code>B</code>.</p>
+<p>Likewise, in the example</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> {...}<font></font>
+<font></font>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">B</span><font></font>
+{<font></font>
+    <span class="hljs-function">A <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{...}<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">internal</span> A <span class="hljs-title">G</span>(<span class="hljs-params"></span>) </span>{...}<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> A <span class="hljs-title">H</span>(<span class="hljs-params"></span>) </span>{...}<font></font>
+}<font></font>
+</code></pre><p>the <code>H</code> method in <code>B</code> results in a compile-time error because the return type <code>A</code> is not at least as accessible as the method.</p>
+<h2 id="signatures-and-overloading" class="heading-with-anchor">Signatures and overloading<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#signatures-and-overloading"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#signatures-and-overloading"></a></h2>
+<p>Methods, instance constructors, indexers, and operators are characterized by their <strong><em>signatures</em></strong>:</p>
+<ul>
+<li>The signature of a method consists of the name of the method, the number of type parameters and the type and kind (value, reference, or output) of each of its formal parameters, considered in the order left to right. For these purposes, any type parameter of the method that occurs in the type of a formal parameter is identified not by its name, but by its ordinal position in the type argument list of the method. The signature of a method specifically does not include the return type, the <code>params</code> modifier that may be specified for the right-most parameter, nor the optional type parameter constraints.</li>
+<li>The signature of an instance constructor consists of the type and kind (value, reference, or output) of each of its formal parameters, considered in the order left to right. The signature of an instance constructor specifically does not include the <code>params</code> modifier that may be specified for the right-most parameter.</li>
+<li>The signature of an indexer consists of the type of each of its formal parameters, considered in the order left to right. The signature of an indexer specifically does not include the element type, nor does it include the <code>params</code> modifier that may be specified for the right-most parameter.</li>
+<li>The signature of an operator consists of the name of the operator and the type of each of its formal parameters, considered in the order left to right. The signature of an operator specifically does not include the result type.</li>
+</ul>
+<p>Signatures are the enabling mechanism for <strong><em>overloading</em></strong> of members in classes, structs, and interfaces:</p>
+<ul>
+<li>Overloading of methods permits a class, struct, or interface to declare multiple methods with the same name, provided their signatures are unique within that class, struct, or interface.</li>
+<li>Overloading of instance constructors permits a class or struct to declare multiple instance constructors, provided their signatures are unique within that class or struct.</li>
+<li>Overloading of indexers permits a class, struct, or interface to declare multiple indexers, provided their signatures are unique within that class, struct, or interface.</li>
+<li>Overloading of operators permits a class or struct to declare multiple operators with the same name, provided their signatures are unique within that class or struct.</li>
+</ul>
+<p>Although <code>out</code> and <code>ref</code> parameter modifiers are considered part of a signature, members declared in a single type cannot differ in signature solely by <code>ref</code> and <code>out</code>. A compile-time error occurs if two members are declared in the same type with signatures that would be the same if all parameters in both methods with <code>out</code> modifiers were changed to <code>ref</code> modifiers. For other purposes of signature matching (e.g., hiding or overriding), <code>ref</code> and <code>out</code> are considered part of the signature and do not match each other. (This restriction is to allow C#  programs to be easily translated to run on the Common Language Infrastructure (CLI), which does not provide a way to define methods that differ solely in <code>ref</code> and <code>out</code>.)</p>
+<p>For the purposes of signatures, the types <code>object</code> and <code>dynamic</code> are considered the same. Members declared in a single type can therefore not differ in signature solely by <code>object</code> and <code>dynamic</code>.</p>
+<p>The following example shows a set of overloaded method declarations along with their signatures.</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">interface</span> <span class="hljs-title">ITest</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>)</span>;                        <span class="hljs-comment">// F()</span><font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> x</span>)</span>;                   <span class="hljs-comment">// F(int)</span><font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"><span class="hljs-keyword">ref</span> <span class="hljs-keyword">int</span> x</span>)</span>;               <span class="hljs-comment">// F(ref int)</span><font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"><span class="hljs-keyword">out</span> <span class="hljs-keyword">int</span> x</span>)</span>;               <span class="hljs-comment">// F(out int)      error</span><font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y</span>)</span>;            <span class="hljs-comment">// F(int, int)</span><font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">F</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> s</span>)</span>;                 <span class="hljs-comment">// F(string)</span><font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">F</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> x</span>)</span>;                    <span class="hljs-comment">// F(int)          error</span><font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] a</span>)</span>;              <span class="hljs-comment">// F(string[])</span><font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"><span class="hljs-keyword">params</span> <span class="hljs-keyword">string</span>[] a</span>)</span>;       <span class="hljs-comment">// F(string[])     error</span><font></font>
+}<font></font>
+</code></pre><p>Note that any <code>ref</code> and <code>out</code> parameter modifiers (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#method-parameters" data-linktype="relative-path">Method parameters</a>) are part of a signature. Thus, <code>F(int)</code> and <code>F(ref int)</code> are unique signatures. However, <code>F(ref int)</code> and <code>F(out int)</code> cannot be declared within the same interface because their signatures differ solely by <code>ref</code> and <code>out</code>. Also, note that the return type and the <code>params</code> modifier are not part of a signature, so it is not possible to overload solely based on return type or on the inclusion or exclusion of the <code>params</code> modifier. As such, the declarations of the methods <code>F(int)</code> and <code>F(params string[])</code> identified above result in a compile-time error.</p>
+<h2 id="scopes" class="heading-with-anchor">Scopes<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#scopes"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#scopes"></a></h2>
+<p>The <strong><em>scope</em></strong> of a name is the region of program text within which it is possible to refer to the entity declared by the name without qualification of the name. Scopes can be <strong><em>nested</em></strong>, and an inner scope may redeclare the meaning of a name from an outer scope (this does not, however, remove the restriction imposed by <a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#declarations" data-linktype="relative-path">Declarations</a> that within a nested block it is not possible to declare a local variable with the same name as a local variable in an enclosing block). The name from the outer scope is then said to be <strong><em>hidden</em></strong> in the region of program text covered by the inner scope, and access to the outer name is only possible by qualifying the name.</p>
+<ul>
+<li>The scope of a namespace member declared by a <em>namespace_member_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/namespaces#namespace-members" data-linktype="relative-path">Namespace members</a>) with no enclosing <em>namespace_declaration</em> is the entire program text.</li>
+<li>The scope of a namespace member declared by a <em>namespace_member_declaration</em> within a <em>namespace_declaration</em> whose fully qualified name is <code>N</code> is the <em>namespace_body</em> of every <em>namespace_declaration</em> whose fully qualified name is <code>N</code> or starts with <code>N</code>, followed by a period.</li>
+<li>The scope of name defined by an <em>extern_alias_directive</em> extends over the <em>using_directive</em>s, <em>global_attributes</em> and <em>namespace_member_declaration</em>s of its immediately containing compilation unit or namespace body. An <em>extern_alias_directive</em> does not contribute any new members to the underlying declaration space. In other words, an <em>extern_alias_directive</em> is not transitive, but, rather, affects only the compilation unit or namespace body in which it occurs.</li>
+<li>The scope of a name defined or imported by a <em>using_directive</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/namespaces#using-directives" data-linktype="relative-path">Using directives</a>) extends over the <em>namespace_member_declaration</em>s of the <em>compilation_unit</em> or <em>namespace_body</em> in which the <em>using_directive</em> occurs. A <em>using_directive</em> may make zero or more namespace, type or member names available within a particular <em>compilation_unit</em> or <em>namespace_body</em>, but does not contribute any new members to the underlying declaration space. In other words, a <em>using_directive</em> is not transitive but rather affects only the <em>compilation_unit</em> or <em>namespace_body</em> in which it occurs.</li>
+<li>The scope of a type parameter declared by a <em>type_parameter_list</em> on a <em>class_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#class-declarations" data-linktype="relative-path">Class declarations</a>) is the <em>class_base</em>, <em>type_parameter_constraints_clause</em>s, and <em>class_body</em> of that <em>class_declaration</em>.</li>
+<li>The scope of a type parameter declared by a <em>type_parameter_list</em> on a <em>struct_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/structs#struct-declarations" data-linktype="relative-path">Struct declarations</a>) is the <em>struct_interfaces</em>, <em>type_parameter_constraints_clause</em>s, and <em>struct_body</em> of that <em>struct_declaration</em>.</li>
+<li>The scope of a type parameter declared by a <em>type_parameter_list</em> on an <em>interface_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/interfaces#interface-declarations" data-linktype="relative-path">Interface declarations</a>) is the <em>interface_base</em>, <em>type_parameter_constraints_clause</em>s, and <em>interface_body</em> of that <em>interface_declaration</em>.</li>
+<li>The scope of a type parameter declared by a <em>type_parameter_list</em> on a <em>delegate_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/delegates#delegate-declarations" data-linktype="relative-path">Delegate declarations</a>) is the <em>return_type</em>, <em>formal_parameter_list</em>, and <em>type_parameter_constraints_clause</em>s of that <em>delegate_declaration</em>.</li>
+<li>The scope of a member declared by a <em>class_member_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#class-body" data-linktype="relative-path">Class body</a>) is the <em>class_body</em> in which the declaration occurs. In addition, the scope of a class member extends to the <em>class_body</em> of those derived classes that are included in the accessibility domain (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#accessibility-domains" data-linktype="relative-path">Accessibility domains</a>) of the member.</li>
+<li>The scope of a member declared by a <em>struct_member_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/structs#struct-members" data-linktype="relative-path">Struct members</a>) is the <em>struct_body</em> in which the declaration occurs.</li>
+<li>The scope of a member declared by an <em>enum_member_declaration</em>  (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/enums#enum-members" data-linktype="relative-path">Enum members</a>) is the <em>enum_body</em> in which the declaration occurs.</li>
+<li>The scope of a parameter declared in a <em>method_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#methods" data-linktype="relative-path">Methods</a>) is the <em>method_body</em> of that <em>method_declaration</em>.</li>
+<li>The scope of a parameter declared in an <em>indexer_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#indexers" data-linktype="relative-path">Indexers</a>) is the <em>accessor_declarations</em> of that <em>indexer_declaration</em>.</li>
+<li>The scope of a parameter declared in an <em>operator_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#operators" data-linktype="relative-path">Operators</a>) is the <em>block</em> of that <em>operator_declaration</em>.</li>
+<li>The scope of a parameter declared in a <em>constructor_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#instance-constructors" data-linktype="relative-path">Instance constructors</a>) is the <em>constructor_initializer</em> and <em>block</em> of that <em>constructor_declaration</em>.</li>
+<li>The scope of a parameter declared in a <em>lambda_expression</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/expressions#anonymous-function-expressions" data-linktype="relative-path">Anonymous function expressions</a>) is the <em>anonymous_function_body</em> of that <em>lambda_expression</em></li>
+<li>The scope of a parameter declared in an <em>anonymous_method_expression</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/expressions#anonymous-function-expressions" data-linktype="relative-path">Anonymous function expressions</a>) is the <em>block</em> of that <em>anonymous_method_expression</em>.</li>
+<li>The scope of a label declared in a <em>labeled_statement</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/statements#labeled-statements" data-linktype="relative-path">Labeled statements</a>) is the <em>block</em> in which the declaration occurs.</li>
+<li>The scope of a local variable declared in a <em>local_variable_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/statements#local-variable-declarations" data-linktype="relative-path">Local variable declarations</a>) is the block in which the declaration occurs.</li>
+<li>The scope of a local variable declared in a <em>switch_block</em> of a <code>switch</code> statement (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/statements#the-switch-statement" data-linktype="relative-path">The switch statement</a>) is the <em>switch_block</em>.</li>
+<li>The scope of a local variable declared in a <em>for_initializer</em> of a <code>for</code> statement (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/statements#the-for-statement" data-linktype="relative-path">The for statement</a>) is the <em>for_initializer</em>, the <em>for_condition</em>, the <em>for_iterator</em>, and the contained <em>statement</em> of the <code>for</code> statement.</li>
+<li>The scope of a local constant declared in a <em>local_constant_declaration</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/statements#local-constant-declarations" data-linktype="relative-path">Local constant declarations</a>) is the block in which the declaration occurs. It is a compile-time error to refer to a local constant in a textual position that precedes its <em>constant_declarator</em>.</li>
+<li>The scope of a variable declared as part of a <em>foreach_statement</em>, <em>using_statement</em>, <em>lock_statement</em> or <em>query_expression</em> is determined by the expansion of the given construct.</li>
+</ul>
+<p>Within the scope of a namespace, class, struct, or enumeration member it is possible to refer to the member in a textual position that precedes the declaration of the member. For example</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{<font></font>
+        i = <span class="hljs-number">1</span>;<font></font>
+    }<font></font>
+<font></font>
+    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<font></font>
+}<font></font>
+</code></pre><p>Here, it is valid for <code>F</code> to refer to <code>i</code> before it is declared.</p>
+<p>Within the scope of a local variable, it is a compile-time error to refer to the local variable in a textual position that precedes the <em>local_variable_declarator</em> of the local variable. For example</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{<font></font>
+        i = <span class="hljs-number">1</span>;                  <span class="hljs-comment">// Error, use precedes declaration</span>
+        <span class="hljs-keyword">int</span> i;<font></font>
+        i = <span class="hljs-number">2</span>;<font></font>
+    }<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">G</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">int</span> j = (j = <span class="hljs-number">1</span>);        <span class="hljs-comment">// Valid</span><font></font>
+    }<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">H</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>, b = ++a;    <span class="hljs-comment">// Valid</span><font></font>
+    }<font></font>
+}<font></font>
+</code></pre><p>In the <code>F</code> method above, the first assignment to <code>i</code> specifically does not refer to the field declared in the outer scope. Rather, it refers to the local variable and it results in a compile-time error because it textually precedes the declaration of the variable. In the <code>G</code> method, the use of <code>j</code> in the initializer for the declaration of <code>j</code> is valid because the use does not precede the <em>local_variable_declarator</em>. In the <code>H</code> method, a subsequent <em>local_variable_declarator</em> correctly refers to a local variable declared in an earlier <em>local_variable_declarator</em> within the same <em>local_variable_declaration</em>.</p>
+<p>The scoping rules for local variables are designed to guarantee that the meaning of a name used in an expression context is always the same within a block. If the scope of a local variable were to extend only from its declaration to the end of the block, then in the example above, the first assignment would assign to the instance variable and the second assignment would assign to the local variable, possibly leading to compile-time errors if the statements of the block were later to be rearranged.</p>
+<p>The meaning of a name within a block may differ based on the context in which the name is used. In the example</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">using</span> System;<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">A</span> {}<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">Test</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">string</span> A = <span class="hljs-string">"hello, world"</span>;
+        <span class="hljs-keyword">string</span> s = A;                            <span class="hljs-comment">// expression context</span><font></font>
+<font></font>
+        Type t = <span class="hljs-keyword">typeof</span>(A);                      <span class="hljs-comment">// type context</span><font></font>
+<font></font>
+        Console.WriteLine(s);                    <span class="hljs-comment">// writes "hello, world"</span>
+        Console.WriteLine(t);                    <span class="hljs-comment">// writes "A"</span><font></font>
+    }<font></font>
+}<font></font>
+</code></pre><p>the name <code>A</code> is used in an expression context to refer to the local variable <code>A</code> and in a type context to refer to the class <code>A</code>.</p>
+<h3 id="name-hiding" class="heading-with-anchor">Name hiding<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#name-hiding"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#name-hiding"></a></h3>
+<p>The scope of an entity typically encompasses more program text than the declaration space of the entity. In particular, the scope of an entity may include declarations that introduce new declaration spaces containing entities of the same name. Such declarations cause the original entity to become <strong><em>hidden</em></strong>. Conversely, an entity is said to be <strong><em>visible</em></strong> when it is not hidden.</p>
+<p>Name hiding occurs when scopes overlap through nesting and when scopes overlap through inheritance. The characteristics of the two types of hiding are described in the following sections.</p>
+<h4 id="hiding-through-nesting" class="heading-with-anchor">Hiding through nesting<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#hiding-through-nesting"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#hiding-through-nesting"></a></h4>
+<p>Name hiding through nesting can occur as a result of nesting namespaces or types within namespaces, as a result of nesting types within classes or structs, and as a result of parameter and local variable declarations.</p>
+<p>In the example</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;<font></font>
+    }<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">G</span>(<span class="hljs-params"></span>) </span>{<font></font>
+        i = <span class="hljs-number">1</span>;<font></font>
+    }<font></font>
+}<font></font>
+</code></pre><p>within the <code>F</code> method, the instance variable <code>i</code> is hidden by the local variable <code>i</code>, but within the <code>G</code> method, <code>i</code> still refers to the instance variable.</p>
+<p>When a name in an inner scope hides a name in an outer scope, it hides all overloaded occurrences of that name. In the example</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">Outer</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> i</span>) </span>{}<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> s</span>) </span>{}<font></font>
+<font></font>
+    <span class="hljs-keyword">class</span> <span class="hljs-title">Inner</span><font></font>
+    {<font></font>
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">G</span>(<span class="hljs-params"></span>) </span>{<font></font>
+            F(<span class="hljs-number">1</span>);              <span class="hljs-comment">// Invokes Outer.Inner.F</span>
+            F(<span class="hljs-string">"Hello"</span>);        <span class="hljs-comment">// Error</span><font></font>
+        }<font></font>
+<font></font>
+        <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"><span class="hljs-keyword">long</span> l</span>) </span>{}<font></font>
+    }<font></font>
+}<font></font>
+</code></pre><p>the call <code>F(1)</code> invokes the <code>F</code> declared in <code>Inner</code> because all outer occurrences of <code>F</code> are hidden by the inner declaration. For the same reason, the call <code>F("Hello")</code> results in a compile-time error.</p>
+<h4 id="hiding-through-inheritance" class="heading-with-anchor">Hiding through inheritance<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#hiding-through-inheritance"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#hiding-through-inheritance"></a></h4>
+<p>Name hiding through inheritance occurs when classes or structs redeclare names that were inherited from base classes. This type of name hiding takes one of the following forms:</p>
+<ul>
+<li>A constant, field, property, event, or type introduced in a class or struct hides all base class members with the same name.</li>
+<li>A method introduced in a class or struct hides all non-method base class members with the same name, and all base class methods with the same signature (method name and parameter count, modifiers, and types).</li>
+<li>An indexer introduced in a class or struct hides all base class indexers with the same signature (parameter count and types).</li>
+</ul>
+<p>The rules governing operator declarations (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#operators" data-linktype="relative-path">Operators</a>) make it impossible for a derived class to declare an operator with the same signature as an operator in a base class. Thus, operators never hide one another.</p>
+<p>Contrary to hiding a name from an outer scope, hiding an accessible name from an inherited scope causes a warning to be reported. In the example</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">Base</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{}<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">Derived</span>: <span class="hljs-title">Base</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{}        <span class="hljs-comment">// Warning, hiding an inherited name</span><font></font>
+}<font></font>
+</code></pre><p>the declaration of <code>F</code> in <code>Derived</code> causes a warning to be reported. Hiding an inherited name is specifically not an error, since that would preclude separate evolution of base classes. For example, the above situation might have come about because a later version of <code>Base</code> introduced an <code>F</code> method that wasn't present in an earlier version of the class. Had the above situation been an error, then any change made to a base class in a separately versioned class library could potentially cause derived classes to become invalid.</p>
+<p>The warning caused by hiding an inherited name can be eliminated through use of the <code>new</code> modifier:</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">Base</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{}<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">Derived</span>: <span class="hljs-title">Base</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">new</span> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{}<font></font>
+}<font></font>
+</code></pre><p>The <code>new</code> modifier indicates that the <code>F</code> in <code>Derived</code> is "new", and that it is indeed intended to hide the inherited member.</p>
+<p>A declaration of a new member hides an inherited member only within the scope of the new member.</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">Base</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{}<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">Derived</span>: <span class="hljs-title">Base</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">new</span> <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{}    <span class="hljs-comment">// Hides Base.F in Derived only</span><font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">MoreDerived</span>: <span class="hljs-title">Derived</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">G</span>(<span class="hljs-params"></span>) </span>{ F(); }          <span class="hljs-comment">// Invokes Base.F</span><font></font>
+}<font></font>
+</code></pre><p>In the example above, the declaration of <code>F</code> in <code>Derived</code> hides the <code>F</code> that was inherited from <code>Base</code>, but since the new <code>F</code> in <code>Derived</code> has private access, its scope does not extend to <code>MoreDerived</code>. Thus, the call <code>F()</code> in <code>MoreDerived.G</code> is valid and will invoke <code>Base.F</code>.</p>
+<h2 id="namespace-and-type-names" class="heading-with-anchor">Namespace and type names<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#namespace-and-type-names"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#namespace-and-type-names"></a></h2>
+<p>Several contexts in a C# program require a <em>namespace_name</em> or a <em>type_name</em> to be specified.</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">antlr</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-antlr"><span class="hljs-title">namespace_name</span><font></font>
+    : namespace_or_type_name<font></font>
+    ;<font></font>
+<font></font>
+<span class="hljs-title">type_name</span><font></font>
+    : namespace_or_type_name<font></font>
+    ;<font></font>
+<font></font>
+<span class="hljs-title">namespace_or_type_name</span><font></font>
+    : identifier type_argument_list?<font></font>
+    | namespace_or_type_name <span class="hljs-string">'.'</span> identifier type_argument_list?<font></font>
+    | qualified_alias_member<font></font>
+    ;<font></font>
+</code></pre><p>A <em>namespace_name</em> is a <em>namespace_or_type_name</em> that refers to a namespace. Following resolution as described below, the <em>namespace_or_type_name</em> of a <em>namespace_name</em> must refer to a namespace, or otherwise a compile-time error occurs. No type arguments (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/types#type-arguments" data-linktype="relative-path">Type arguments</a>) can be present in a <em>namespace_name</em> (only types can have type arguments).</p>
+<p>A <em>type_name</em> is a <em>namespace_or_type_name</em> that refers to a type. Following resolution as described below, the <em>namespace_or_type_name</em> of a <em>type_name</em> must refer to a type, or otherwise a compile-time error occurs.</p>
+<p>If the <em>namespace_or_type_name</em> is a qualified-alias-member its meaning is as described in <a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/namespaces#namespace-alias-qualifiers" data-linktype="relative-path">Namespace alias qualifiers</a>. Otherwise, a <em>namespace_or_type_name</em> has one of four forms:</p>
+<ul>
+<li><code>I</code></li>
+<li><code>I&lt;A1, ..., Ak&gt;</code></li>
+<li><code>N.I</code></li>
+<li><code>N.I&lt;A1, ..., Ak&gt;</code></li>
+</ul>
+<p>where <code>I</code> is a single identifier, <code>N</code> is a <em>namespace_or_type_name</em> and <code>&lt;A1, ..., Ak&gt;</code> is an optional <em>type_argument_list</em>. When no <em>type_argument_list</em> is specified, consider <code>k</code> to be zero.</p>
+<p>The meaning of a <em>namespace_or_type_name</em> is determined as follows:</p>
+<ul>
+<li>If the <em>namespace_or_type_name</em> is of the form <code>I</code> or of the form <code>I&lt;A1, ..., Ak&gt;</code>:<ul>
+<li>If <code>K</code> is zero and the <em>namespace_or_type_name</em> appears within a generic method declaration (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#methods" data-linktype="relative-path">Methods</a>) and if that declaration includes a type parameter (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#type-parameters" data-linktype="relative-path">Type parameters</a>) with name <code>I</code>, then the <em>namespace_or_type_name</em> refers to that type parameter.</li>
+<li>Otherwise, if the <em>namespace_or_type_name</em> appears within a type declaration, then for each instance type <code>T</code> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#the-instance-type" data-linktype="relative-path">The instance type</a>), starting with the instance type of that type declaration and continuing with the instance type of each enclosing class or struct declaration (if any):<ul>
+<li>If <code>K</code> is zero and the declaration of <code>T</code> includes a type parameter with name <code>I</code>, then the <em>namespace_or_type_name</em> refers to that type parameter.</li>
+<li>Otherwise, if the <em>namespace_or_type_name</em> appears within the body of the type declaration, and <code>T</code> or any of its base types contain a nested accessible type having name <code>I</code> and <code>K</code> type parameters, then the <em>namespace_or_type_name</em> refers to that type constructed with the given type arguments. If there is more than one such type, the type declared within the more derived type is selected. Note that non-type members (constants, fields, methods, properties, indexers, operators, instance constructors, destructors, and static constructors) and type members with a different number of type parameters are ignored when determining the meaning of the <em>namespace_or_type_name</em>.</li>
+</ul>
+</li>
+<li>If the previous steps were unsuccessful then, for each namespace <code>N</code>, starting with the namespace in which the <em>namespace_or_type_name</em> occurs, continuing with each enclosing namespace (if any), and ending with the global namespace, the following steps are evaluated until an entity is located:<ul>
+<li>If <code>K</code> is zero and <code>I</code> is the name of a namespace in <code>N</code>, then:<ul>
+<li>If the location where the <em>namespace_or_type_name</em> occurs is enclosed by a namespace declaration for <code>N</code> and the namespace declaration contains an <em>extern_alias_directive</em> or <em>using_alias_directive</em> that associates the name <code>I</code> with a namespace or type, then the <em>namespace_or_type_name</em> is ambiguous and a compile-time error occurs.</li>
+<li>Otherwise, the <em>namespace_or_type_name</em> refers to the namespace named <code>I</code> in <code>N</code>.</li>
+</ul>
+</li>
+<li>Otherwise, if <code>N</code> contains an accessible type having name <code>I</code> and <code>K</code> type parameters, then:<ul>
+<li>If <code>K</code> is zero and the location where the <em>namespace_or_type_name</em> occurs is enclosed by a namespace declaration for <code>N</code> and the namespace declaration contains an <em>extern_alias_directive</em> or <em>using_alias_directive</em> that associates the name <code>I</code> with a namespace or type, then the <em>namespace_or_type_name</em> is ambiguous and a compile-time error occurs.</li>
+<li>Otherwise, the <em>namespace_or_type_name</em> refers to the type constructed with the given type arguments.</li>
+</ul>
+</li>
+<li>Otherwise, if the location where the <em>namespace_or_type_name</em> occurs is enclosed by a namespace declaration for <code>N</code>:<ul>
+<li>If <code>K</code> is zero and the namespace declaration contains an <em>extern_alias_directive</em> or <em>using_alias_directive</em> that associates the name <code>I</code> with an imported namespace or type, then the <em>namespace_or_type_name</em> refers to that namespace or type.</li>
+<li>Otherwise, if the namespaces and type declarations imported by the <em>using_namespace_directive</em>s and <em>using_alias_directive</em>s of the namespace declaration contain exactly one accessible type having name <code>I</code> and <code>K</code> type parameters, then the <em>namespace_or_type_name</em> refers to that type constructed with the given type arguments.</li>
+<li>Otherwise, if the namespaces and type declarations imported by the <em>using_namespace_directive</em>s and <em>using_alias_directive</em>s of the namespace declaration contain more than one accessible type having name <code>I</code> and <code>K</code> type parameters, then the <em>namespace_or_type_name</em> is ambiguous and an error occurs.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Otherwise, the <em>namespace_or_type_name</em> is undefined and a compile-time error occurs.</li>
+</ul>
+</li>
+<li>Otherwise, the <em>namespace_or_type_name</em> is of the form <code>N.I</code> or of the form <code>N.I&lt;A1, ..., Ak&gt;</code>. <code>N</code> is first resolved as a <em>namespace_or_type_name</em>. If the resolution of <code>N</code> is not successful, a compile-time error occurs. Otherwise, <code>N.I</code> or <code>N.I&lt;A1, ..., Ak&gt;</code> is resolved as follows:<ul>
+<li>If <code>K</code> is zero and <code>N</code> refers to a namespace and <code>N</code> contains a nested namespace with name <code>I</code>, then the <em>namespace_or_type_name</em> refers to that nested namespace.</li>
+<li>Otherwise, if <code>N</code> refers to a namespace and <code>N</code> contains an accessible type having name <code>I</code> and <code>K</code> type parameters, then the <em>namespace_or_type_name</em> refers to that type constructed with the given type arguments.</li>
+<li>Otherwise, if <code>N</code> refers to a (possibly constructed) class or struct type and <code>N</code> or any of its base classes contain a nested accessible type having name <code>I</code> and <code>K</code> type parameters, then the <em>namespace_or_type_name</em> refers to that type constructed with the given type arguments. If there is more than one such type, the type declared within the more derived type is selected. Note that if the meaning of <code>N.I</code> is being determined as part of resolving the base class specification of <code>N</code> then the direct base class of <code>N</code> is considered to be object (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#base-classes" data-linktype="relative-path">Base classes</a>).</li>
+<li>Otherwise, <code>N.I</code> is an invalid <em>namespace_or_type_name</em>, and a compile-time error occurs.</li>
+</ul>
+</li>
+</ul>
+<p>A <em>namespace_or_type_name</em> is permitted to reference a static class (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#static-classes" data-linktype="relative-path">Static classes</a>) only if</p>
+<ul>
+<li>The <em>namespace_or_type_name</em> is the <code>T</code> in a <em>namespace_or_type_name</em> of the form <code>T.I</code>, or</li>
+<li>The <em>namespace_or_type_name</em> is the <code>T</code> in a <em>typeof_expression</em> (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/expressions#argument-lists" data-linktype="relative-path">Argument lists</a>1) of the form <code>typeof(T)</code>.</li>
+</ul>
+<h3 id="fully-qualified-names" class="heading-with-anchor">Fully qualified names<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#fully-qualified-names"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#fully-qualified-names"></a></h3>
+<p>Every namespace and type has a <strong><em>fully qualified name</em></strong>, which uniquely identifies the namespace or type amongst all others. The fully qualified name of a namespace or type <code>N</code> is determined as follows:</p>
+<ul>
+<li>If <code>N</code> is a member of the global namespace, its fully qualified name is <code>N</code>.</li>
+<li>Otherwise, its fully qualified name is <code>S.N</code>, where <code>S</code> is the fully qualified name of the namespace or type in which <code>N</code> is declared.</li>
+</ul>
+<p>In other words, the fully qualified name of <code>N</code> is the complete hierarchical path of identifiers that lead to <code>N</code>, starting from the global namespace. Because every member of a namespace or type must have a unique name, it follows that the fully qualified name of a namespace or type is always unique.</p>
+<p>The example below shows several namespace and type declarations along with their associated fully qualified names.</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> {}                <span class="hljs-comment">// A</span><font></font>
+<font></font>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">X</span>               <span class="hljs-comment">// X</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">class</span> <span class="hljs-title">B</span>               <span class="hljs-comment">// X.B</span><font></font>
+    {<font></font>
+        <span class="hljs-keyword">class</span> <span class="hljs-title">C</span> {}        <span class="hljs-comment">// X.B.C</span><font></font>
+    }<font></font>
+<font></font>
+    <span class="hljs-keyword">namespace</span> <span class="hljs-title">Y</span>           <span class="hljs-comment">// X.Y</span><font></font>
+    {<font></font>
+        <span class="hljs-keyword">class</span> <span class="hljs-title">D</span> {}        <span class="hljs-comment">// X.Y.D</span><font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">X.Y</span>             <span class="hljs-comment">// X.Y</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">class</span> <span class="hljs-title">E</span> {}            <span class="hljs-comment">// X.Y.E</span><font></font>
+}<font></font>
+</code></pre><h2 id="automatic-memory-management" class="heading-with-anchor">Automatic memory management<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#automatic-memory-management"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#automatic-memory-management"></a></h2>
+<p>C# employs automatic memory management, which frees developers from manually allocating and freeing the memory occupied by objects. Automatic memory management policies are implemented by a <strong><em>garbage collector</em></strong>. The memory management life cycle of an object is as follows:</p>
+<ol>
+<li>When the object is created, memory is allocated for it, the constructor is run, and the object is considered live.</li>
+<li>If the object, or any part of it, cannot be accessed by any possible continuation of execution, other than the running of destructors, the object is considered no longer in use, and it becomes eligible for destruction. The C# compiler and the garbage collector may choose to analyze code to determine which references to an object may be used in the future. For instance, if a local variable that is in scope is the only existing reference to an object, but that local variable is never referred to in any possible continuation of execution from the current execution point in the procedure, the garbage collector may (but is not required to) treat the object as no longer in use.</li>
+<li>Once the object is eligible for destruction, at some unspecified later time the destructor (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#destructors" data-linktype="relative-path">Destructors</a>) (if any) for the object is run. Under normal circumstances the destructor for the object is run once only, though implementation-specific APIs may allow this behavior to be overridden.</li>
+<li>Once the destructor for an object is run, if that object, or any part of it, cannot be accessed by any possible continuation of execution, including the running of destructors, the object is considered inaccessible and the object becomes eligible for collection.</li>
+<li>Finally, at some time after the object becomes eligible for collection, the garbage collector frees the memory associated with that object.</li>
+</ol>
+<p>The garbage collector maintains information about object usage, and uses this information to make memory management decisions, such as where in memory to locate a newly created object, when to relocate an object, and when an object is no longer in use or inaccessible.</p>
+<p>Like other languages that assume the existence of a garbage collector, C# is designed so that the garbage collector may implement a wide range of memory management policies. For instance, C# does not require that destructors be run or that objects be collected as soon as they are eligible, or that destructors be run in any particular order, or on any particular thread.</p>
+<p>The behavior of the garbage collector can be controlled, to some degree, via static methods on the class <code>System.GC</code>. This class can be used to request a collection to occur, destructors to be run (or not run), and so forth.</p>
+<p>Since the garbage collector is allowed wide latitude in deciding when to collect objects and run destructors, a conforming implementation may produce output that differs from that shown by the following code. The program</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">using</span> System;<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">A</span><font></font>
+{<font></font>
+    ~A() {<font></font>
+        Console.WriteLine(<span class="hljs-string">"Destruct instance of A"</span>);<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">B</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">object</span> Ref;<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">B</span>(<span class="hljs-params"><span class="hljs-keyword">object</span> o</span>) </span>{<font></font>
+        Ref = o;<font></font>
+    }<font></font>
+<font></font>
+    ~B() {<font></font>
+        Console.WriteLine(<span class="hljs-string">"Destruct instance of B"</span>);<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">Test</span><font></font>
+{<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>) </span>{<font></font>
+        B b = <span class="hljs-keyword">new</span> B(<span class="hljs-keyword">new</span> A());<font></font>
+        b = <span class="hljs-literal">null</span>;<font></font>
+        GC.Collect();<font></font>
+        GC.WaitForPendingFinalizers();<font></font>
+    }<font></font>
+}<font></font>
+</code></pre><p>creates an instance of class <code>A</code> and an instance of class <code>B</code>. These objects become eligible for garbage collection when the variable <code>b</code> is assigned the value <code>null</code>, since after this time it is impossible for any user-written code to access them. The output could be either</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language"></span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code>Destruct instance of A<font></font>
+Destruct instance of B<font></font>
+</code></pre><p>or</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language"></span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code>Destruct instance of B<font></font>
+Destruct instance of A<font></font>
+</code></pre><p>because the language imposes no constraints on the order in which objects are garbage collected.</p>
+<p>In subtle cases, the distinction between "eligible for destruction" and "eligible for collection" can be important. For example,</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language">C#</span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code class="lang-csharp"><span class="hljs-keyword">using</span> System;<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">A</span><font></font>
+{<font></font>
+    ~A() {<font></font>
+        Console.WriteLine(<span class="hljs-string">"Destruct instance of A"</span>);<font></font>
+    }<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">F</span>(<span class="hljs-params"></span>) </span>{<font></font>
+        Console.WriteLine(<span class="hljs-string">"A.F"</span>);<font></font>
+        Test.RefA = <span class="hljs-keyword">this</span>;<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">B</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">public</span> A Ref;<font></font>
+<font></font>
+    ~B() {<font></font>
+        Console.WriteLine(<span class="hljs-string">"Destruct instance of B"</span>);<font></font>
+        Ref.F();<font></font>
+    }<font></font>
+}<font></font>
+<font></font>
+<span class="hljs-keyword">class</span> <span class="hljs-title">Test</span><font></font>
+{<font></font>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> A RefA;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> B RefB;<font></font>
+<font></font>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"></span>) </span>{<font></font>
+        RefB = <span class="hljs-keyword">new</span> B();<font></font>
+        RefA = <span class="hljs-keyword">new</span> A();<font></font>
+        RefB.Ref = RefA;<font></font>
+        RefB = <span class="hljs-literal">null</span>;<font></font>
+        RefA = <span class="hljs-literal">null</span>;<font></font>
+<font></font>
+        <span class="hljs-comment">// A and B now eligible for destruction</span><font></font>
+        GC.Collect();<font></font>
+        GC.WaitForPendingFinalizers();<font></font>
+<font></font>
+        <span class="hljs-comment">// B now eligible for collection, but A is not</span>
+        <span class="hljs-keyword">if</span> (RefA != <span class="hljs-literal">null</span>)<font></font>
+            Console.WriteLine(<span class="hljs-string">"RefA is not null"</span>);<font></font>
+    }<font></font>
+}<font></font>
+</code></pre><p>In the above program, if the garbage collector chooses to run the destructor of <code>A</code> before the destructor of <code>B</code>, then the output of this program might be:</p>
+<div class="codeHeader" data-bi-name="code-header"><span class="language"></span>
+			<button class="action copy" data-bi-name="copy">
+				<span>复制</span>
+			</button></div><pre><code>Destruct instance of A<font></font>
+Destruct instance of B<font></font>
+A.F<font></font>
+RefA is not null<font></font>
+</code></pre><p>Note that although the instance of <code>A</code> was not in use and <code>A</code>'s destructor was run, it is still possible for methods of <code>A</code> (in this case, <code>F</code>) to be called from another destructor. Also, note that running of a destructor may cause an object to become usable from the mainline program again. In this case, the running of <code>B</code>'s destructor caused an instance of <code>A</code> that was previously not in use to become accessible from the live reference <code>Test.RefA</code>. After the call to <code>WaitForPendingFinalizers</code>, the instance of <code>B</code> is eligible for collection, but the instance of <code>A</code> is not, because of the reference <code>Test.RefA</code>.</p>
+<p>To avoid confusion and unexpected behavior, it is generally a good idea for destructors to only perform cleanup on data stored in their object's own fields, and not to perform any actions on referenced objects or static fields.</p>
+<p>An alternative to using destructors is to let a class implement the <code>System.IDisposable</code> interface. This allows the client of the object to determine when to release the resources of the object, typically by accessing the object as a resource in a <code>using</code> statement (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/statements#the-using-statement" data-linktype="relative-path">The using statement</a>).</p>
+<h2 id="execution-order" class="heading-with-anchor">Execution order<a class="docon docon-link heading-anchor" aria-hidden="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#execution-order"></a><a class="docon docon-link heading-anchor" aria-hidden="true" href="file:///C:/Users/andyl/OneDrive/Project/Console%20App/CCS/Docs/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5_%20Microsoft%20Docs.html#execution-order"></a></h2>
+<p>Execution of a C# program proceeds such that the side effects of each executing thread are preserved at critical execution points. A <strong><em>side effect</em></strong> is defined as a read or write of a volatile field, a write to a non-volatile variable, a write to an external resource, and the throwing of an exception. The critical execution points at which the order of these side effects must be preserved are references to volatile fields (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#volatile-fields" data-linktype="relative-path">Volatile fields</a>), <code>lock</code> statements (<a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/statements#the-lock-statement" data-linktype="relative-path">The lock statement</a>), and thread creation and termination. The execution environment is free to change the order of execution of a C# program, subject to the following constraints:</p>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">数据依赖性保存在执行线程内。</font><font style="vertical-align: inherit;">也就是说，计算每个变量的值就好像线程中的所有语句都是按原始程序顺序执行的。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">初始化排序规则被保留（</font></font><a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#field-initialization" data-linktype="relative-path"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">字段初始化</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#variable-initializers" data-linktype="relative-path"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">变量初始值设定项</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">相对于易失性读取和写入（</font></font><a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes#volatile-fields" data-linktype="relative-path"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">易失性字段</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">）</font><font style="vertical-align: inherit;">保留副作用的排序</font><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">此外，如果执行环境能够推断出该表达式的值未被使用并且没有产生所需的副作用（包括由调用方法或访问易失性字段引起的任何副作用），则执行环境不需要评估表达式的一部分。</font><font style="vertical-align: inherit;">当程序执行被异步事件（例如另一个线程抛出的异常）中断时，不保证可观察到的副作用在原始程序顺序中可见。</font></font></li>
+</ul>
+
+				<!-- </content> -->
+
+
+			</main>
+
+
+					<div id="comments-container" ms.cmpgrp="comments" data-bi-name="comments" role="form"></div>
+		</div>
+
+		
+
+		<div class="sidebar" id="sidebar" ms.cmpgrp="left toc" data-bi-name="left toc" role="navigation" aria-label="主导航">
+			<div id="sidebarContent" style="top: 0px; bottom: 24px;">
+				<div class="filterHolder">
+				<form class="tocFilter"><input placeholder="筛选器" aria-label="筛选器" type="search"><a href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts#" title="清除筛选" class="clearInput"><span class="visually-hidden">清除筛选</span></a></form><div class="emptyFilterMessage">无结果</div></div>
+				<nav class="toc" role="application"><ul aria-treegrid="true" onclick="msDocs.functions.stopSomePropagation(event, &quot;top&quot;)" class="noSibs"><li aria-expanded="true" aria-treeitem="true" onclick="event.stopPropagation();msDocs.functions.toggleAriaExpanded(this)" class="noSubs"><a onclick="msDocs.functions.stopSomePropagation(event, &quot;left&quot;)" tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/" data-text="c# 6.0 草稿规范 ">C# 6.0 草稿规范</a><ul aria-treegrid="true" onclick="msDocs.functions.stopSomePropagation(event, &quot;top&quot;)"><li><a onclick="msDocs.functions.stopSomePropagation(event, &quot;left&quot;)" tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/lexical-structure" data-text="词法结构 ">词法结构</a></li><li class="selectedHolder"><a tabindex="0" class="selected" data-showme="true" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts" data-text="基本概念 ">基本概念</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/types" data-text="类型 ">类型</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/variables" data-text="变量 ">变量</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/conversions" data-text="转换 ">转换</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/expressions" data-text="表达式 ">表达式</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/statements" data-text="语句 ">语句</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/namespaces" data-text="命名空间 ">命名空间</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/classes" data-text="类 ">类</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/structs" data-text="结构 ">结构</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/arrays" data-text="阵列 ">阵列</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/interfaces" data-text="接口 ">接口</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/enums" data-text="枚举 ">枚举</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/delegates" data-text="委托 ">委托</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/exceptions" data-text="异常 ">异常</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/attributes" data-text="特性 ">特性</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/unsafe-code" data-text="不安全代码 ">不安全代码</a></li><li><a tabindex="0" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/language-reference/language-specification/documentation-comments" data-text="文档注释 ">文档注释</a></li></ul></li></ul></nav>
+				<div class="pdfDownloadHolder"></div>
+			</div>
+			<div class="tocSpace"></div>
+		</div>
+
+		<div id="menu-nav" class="dropdown-container">
+			<div class="dropdown dropdown-full mobilenavi">
+					<select><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">C# 6.0 草稿规范</font></font></option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/lexical-structure">&nbsp;&nbsp;&nbsp;词法结构</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/basic-concepts" selected="selected">&nbsp;&nbsp;&nbsp;基本概念</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/types">&nbsp;&nbsp;&nbsp;类型</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/variables">&nbsp;&nbsp;&nbsp;变量</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/conversions">&nbsp;&nbsp;&nbsp;转换</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/expressions">&nbsp;&nbsp;&nbsp;表达式</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/statements">&nbsp;&nbsp;&nbsp;语句</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/namespaces">&nbsp;&nbsp;&nbsp;命名空间</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/classes">&nbsp;&nbsp;&nbsp;类</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/structs">&nbsp;&nbsp;&nbsp;结构</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/arrays">&nbsp;&nbsp;&nbsp;阵列</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/interfaces">&nbsp;&nbsp;&nbsp;接口</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/enums">&nbsp;&nbsp;&nbsp;枚举</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/delegates">&nbsp;&nbsp;&nbsp;委托</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/exceptions">&nbsp;&nbsp;&nbsp;异常</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/attributes">&nbsp;&nbsp;&nbsp;特性</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/unsafe-code">&nbsp;&nbsp;&nbsp;不安全代码</option><option value="/zh-cn/dotnet/csharp/language-reference/language-specification/documentation-comments">&nbsp;&nbsp;&nbsp;文档注释</option></select>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="openFeedbackContainer" class="openfeedback-container or-t-ml or-pc" style="z-index: 1000;"></div>
+
+	<div class="container footerContainer">
+<footer id="footer" ms.pgarea="footer" data-bi-name="footer" class="footer-layout">
+  <div class="container" role="contentinfo">
+
+    <a data-mscc-ic="false" id="locale-selector-link" href="file:///C:/zh-cn/locale?target=%2FC%3A%2FUsers%2Fandyl%2FOneDrive%2FProject%2FConsole%2520App%2FCCS%2FDocs%2F%25E5%259F%25BA%25E6%259C%25AC%25E6%25A6%2582%25E5%25BF%25B5_%2520Microsoft%2520Docs.html" data-bi-name="select-locale" ms.cmpnm="select-locale">中文 (中华人民共和国)</a>
+
+    <ul class="links" ms.cmpgrp="footerlinks" data-bi-name="footerlinks">
+		<li><a data-mscc-ic="false" href="https://docs.microsoft.com/previous-versions/" data-bi-name="archivelink">旧版文档</a></li>
+		<li><a data-mscc-ic="false" href="https://docs.microsoft.com/teamblog" ms.cmpnm="bloglink" data-bi-name="bloglink">博客</a></li>
+		<li><a data-mscc-ic="false" href="https://docs.microsoft.com/contribute" ms.cmpnm="contributorGuide" data-bi-name="contributorGuide">如何参与</a></li>
+		<li><a data-mscc-ic="false" href="https://privacy.microsoft.com/zh-cn/" ms.cmpnm="privacy" data-bi-name="privacy">隐私和 Cookie</a></li>
+		<li><a data-mscc-ic="false" href="https://docs.microsoft.com/zh-cn/legal/termsofuse" ms.cmpnm="termsofuse" data-bi-name="termsofuse">使用条款</a></li>
+		<li><a data-mscc-ic="false" href="https://aka.ms/sitefeedback" ms.cmpnm="feedback" data-bi-name="feedback">反馈</a></li>
+		<li><a data-mscc-ic="false" href="https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/EN-US.aspx" ms.cmpnm="trademarks" data-bi-name="trademarks">商标</a></li>
+    </ul>
+  </div>
+</footer>	</div>
+
+
+<script src="./基本概念_ Microsoft Docs_files/open-rating.entry.min.js.下载" async="" defer=""></script><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./基本概念_ Microsoft Docs_files/translate_24dp.png" width="20" height="20" alt="Google 翻译"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">提供更好的翻译建议</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><script type="text/javascript" src="./基本概念_ Microsoft Docs_files/open-rating.ui-v0.6.1-97-g14612aa.master.min.js.下载"></script><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./基本概念_ Microsoft Docs_files/translate_24dp(1).png" width="20" height="20" alt="Google 翻译"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">提供更好的翻译建议</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><script src="file:///C:/_chrome/rating/open-rating.entry.min.js" async="" defer=""></script><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>
