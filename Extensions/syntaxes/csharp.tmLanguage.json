@@ -83,99 +83,10 @@
 					"include": "#storage-modifier"
 				},
 				{
-					"include": "#class-declaration"
-				},
-				{
 					"include": "#delegate-declaration"
 				},
 				{
 					"include": "#enum-declaration"
-				},
-				{
-					"include": "#interface-declaration"
-				},
-				{
-					"include": "#struct-declaration"
-				},
-				{
-					"include": "#attribute-section"
-				},
-				{
-					"include": "#punctuation-semicolon"
-				}
-			]
-		},
-		"class-or-struct-members": {
-			"patterns": [
-				{
-					"include": "#preprocessor"
-				},
-				{
-					"include": "#comment"
-				},
-				{
-					"include": "#storage-modifier"
-				},
-				{
-					"include": "#type-declarations"
-				},
-				{
-					"include": "#field-declaration"
-				},
-				{
-					"include": "#event-declaration"
-				},
-				{
-					"include": "#property-declaration"
-				},
-				{
-					"include": "#indexer-declaration"
-				},
-				{
-					"include": "#variable-initializer"
-				},
-				{
-					"include": "#constructor-declaration"
-				},
-				{
-					"include": "#destructor-declaration"
-				},
-				{
-					"include": "#operator-declaration"
-				},
-				{
-					"include": "#conversion-operator-declaration"
-				},
-				{
-					"include": "#method-declaration"
-				},
-				{
-					"include": "#attribute-section"
-				},
-				{
-					"include": "#punctuation-semicolon"
-				}
-			]
-		},
-		"interface-members": {
-			"patterns": [
-				{
-					"include": "#preprocessor"
-				},
-				{
-					"include": "#comment"
-				},
-				{
-					"include": "#event-declaration"
-				},
-				{
-					"include": "#property-declaration"
-				},
-				{
-					"include": "#indexer-declaration"
-				},
-				{
-					"include": "#method-declaration"
 				},
 				{
 					"include": "#attribute-section"
@@ -215,7 +126,7 @@
 					"include": "#switch-statement"
 				},
 				{
-					"include": "#goto-statement"
+					"include": "#main-statement"
 				},
 				{
 					"include": "#return-statement"
@@ -376,7 +287,7 @@
 							"name": "keyword.other.static.ccs"
 						}
 					},
-					"end": "(?=;)",
+					"end": "(?=)",
 					"patterns": [
 						{
 							"include": "#type"
@@ -393,7 +304,7 @@
 							"name": "entity.name.type.alias.ccs"
 						}
 					},
-					"end": "(?=;)",
+					"end": "(?=)",
 					"patterns": [
 						{
 							"include": "#comment"
@@ -413,7 +324,7 @@
 							"name": "keyword.other.using.ccs"
 						}
 					},
-					"end": "(?=;)",
+					"end": "(?=)",
 					"patterns": [
 						{
 							"include": "#comment"
@@ -562,63 +473,6 @@
 			"name": "storage.modifier.ccs",
 			"match": "(?<!\\.)\\b(new|public|protected|internal|private|abstract|virtual|override|sealed|static|partial|readonly|volatile|const|extern|async|unsafe)\\b"
 		},
-		"class-declaration": {
-			"begin": "(?=\\bclass\\b)",
-			"end": "(?<=\\})",
-			"patterns": [
-				{
-					"begin": "(?x)\n\\b(class)\\b\\s+\n([_[:alpha:]][_[:alnum:]]*)\\s*",
-					"beginCaptures": {
-						"1": {
-							"name": "keyword.other.class.ccs"
-						},
-						"2": {
-							"name": "entity.name.type.class.ccs"
-						}
-					},
-					"end": "(?=\\{)",
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"include": "#type-parameter-list"
-						},
-						{
-							"include": "#base-types"
-						},
-						{
-							"include": "#generic-constraints"
-						}
-					]
-				},
-				{
-					"begin": "\\{",
-					"beginCaptures": {
-						"0": {
-							"name": "punctuation.curlybrace.open.ccs"
-						}
-					},
-					"end": "\\}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.curlybrace.close.ccs"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#class-or-struct-members"
-						}
-					]
-				},
-				{
-					"include": "#preprocessor"
-				},
-				{
-					"include": "#comment"
-				}
-			]
-		},
 		"delegate-declaration": {
 			"begin": "(?x)\n(?:\\b(delegate)\\b)\\s+\n(?<type-name>\n  (?:\n    (?:ref\\s+)?   # ref return\n    (?:\n      (?:(?<identifier>[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n      (?<name-and-type-args> # identifier + type arguments (if any)\n        \\g<identifier>\\s*\n        (?<type-args>\\s*<(?:[^<>]|\\g<type-args>)+>\\s*)?\n      )\n      (?:\\s*\\.\\s*\\g<name-and-type-args>)* | # Are there any more names being dotted into?\n      (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n    )\n    (?:\\s*\\*\\s*)* # pointer suffix?\n    (?:\\s*\\?\\s*)? # nullable suffix?\n    (?:\\s*\\[(?:\\s*,\\s*)*\\]\\s*)* # array suffix?\n  )\n)\\s+\n(\\g<identifier>)\\s*\n(<([^<>]+)>)?\\s*\n(?=\\()",
 			"beginCaptures": {
@@ -736,120 +590,6 @@
 									"include": "#variable-initializer"
 								}
 							]
-						}
-					]
-				},
-				{
-					"include": "#preprocessor"
-				},
-				{
-					"include": "#comment"
-				}
-			]
-		},
-		"interface-declaration": {
-			"begin": "(?=\\binterface\\b)",
-			"end": "(?<=\\})",
-			"patterns": [
-				{
-					"begin": "(?x)\n(interface)\\b\\s+\n([_[:alpha:]][_[:alnum:]]*)",
-					"beginCaptures": {
-						"1": {
-							"name": "keyword.other.interface.ccs"
-						},
-						"2": {
-							"name": "entity.name.type.interface.ccs"
-						}
-					},
-					"end": "(?=\\{)",
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"include": "#type-parameter-list"
-						},
-						{
-							"include": "#base-types"
-						},
-						{
-							"include": "#generic-constraints"
-						}
-					]
-				},
-				{
-					"begin": "\\{",
-					"beginCaptures": {
-						"0": {
-							"name": "punctuation.curlybrace.open.ccs"
-						}
-					},
-					"end": "\\}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.curlybrace.close.ccs"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#interface-members"
-						}
-					]
-				},
-				{
-					"include": "#preprocessor"
-				},
-				{
-					"include": "#comment"
-				}
-			]
-		},
-		"struct-declaration": {
-			"begin": "(?=\\bstruct\\b)",
-			"end": "(?<=\\})",
-			"patterns": [
-				{
-					"begin": "(?x)\n(struct)\\b\\s+\n([_[:alpha:]][_[:alnum:]]*)",
-					"beginCaptures": {
-						"1": {
-							"name": "keyword.other.struct.ccs"
-						},
-						"2": {
-							"name": "entity.name.type.struct.ccs"
-						}
-					},
-					"end": "(?=\\{)",
-					"patterns": [
-						{
-							"include": "#comment"
-						},
-						{
-							"include": "#type-parameter-list"
-						},
-						{
-							"include": "#base-types"
-						},
-						{
-							"include": "#generic-constraints"
-						}
-					]
-				},
-				{
-					"begin": "\\{",
-					"beginCaptures": {
-						"0": {
-							"name": "punctuation.curlybrace.open.ccs"
-						}
-					},
-					"end": "\\}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.curlybrace.close.ccs"
-						}
-					},
-					"patterns": [
-						{
-							"include": "#class-or-struct-members"
 						}
 					]
 				},
@@ -1270,92 +1010,6 @@
 				}
 			]
 		},
-		"constructor-declaration": {
-			"begin": "(?=[_[:alpha:]][_[:alnum:]]*\\s*\\()",
-			"end": "(?<=\\})|(?=;)",
-			"patterns": [
-				{
-					"match": "\\b([_[:alpha:]][_[:alnum:]]*)\\b",
-					"captures": {
-						"1": {
-							"name": "entity.name.function.ccs"
-						}
-					}
-				},
-				{
-					"begin": "(:)",
-					"beginCaptures": {
-						"1": {
-							"name": "punctuation.separator.colon.ccs"
-						}
-					},
-					"end": "(?=\\{|=>)",
-					"patterns": [
-						{
-							"include": "#constructor-initializer"
-						}
-					]
-				},
-				{
-					"include": "#parenthesized-parameter-list"
-				},
-				{
-					"include": "#preprocessor"
-				},
-				{
-					"include": "#comment"
-				},
-				{
-					"include": "#expression-body"
-				},
-				{
-					"include": "#block"
-				}
-			]
-		},
-		"constructor-initializer": {
-			"begin": "\\b(?:(base)|(this))\\b\\s*(?=\\()",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.other.base.ccs"
-				},
-				"2": {
-					"name": "keyword.other.this.ccs"
-				}
-			},
-			"end": "(?<=\\))",
-			"patterns": [
-				{
-					"include": "#argument-list"
-				}
-			]
-		},
-		"destructor-declaration": {
-			"begin": "(~)([_[:alpha:]][_[:alnum:]]*)\\s*(?=\\()",
-			"beginCaptures": {
-				"1": {
-					"name": "punctuation.tilde.ccs"
-				},
-				"2": {
-					"name": "entity.name.function.ccs"
-				}
-			},
-			"end": "(?<=\\})|(?=;)",
-			"patterns": [
-				{
-					"include": "#comment"
-				},
-				{
-					"include": "#parenthesized-parameter-list"
-				},
-				{
-					"include": "#expression-body"
-				},
-				{
-					"include": "#block"
-				}
-			]
-		},
 		"operator-declaration": {
 			"begin": "(?x)\n(?<type-name>\n  (?:\n    (?:ref\\s+)?   # ref return\n    (?:\n      (?:(?<identifier>[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n      (?<name-and-type-args> # identifier + type arguments (if any)\n        \\g<identifier>\\s*\n        (?<type-args>\\s*<(?:[^<>]|\\g<type-args>)+>\\s*)?\n      )\n      (?:\\s*\\.\\s*\\g<name-and-type-args>)* | # Are there any more names being dotted into?\n      (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n    )\n    (?:\\s*\\*\\s*)* # pointer suffix?\n    (?:\\s*\\?\\s*)? # nullable suffix?\n    (?:\\s*\\[(?:\\s*,\\s*)*\\]\\s*)* # array suffix?\n  )\n)\\s*\n(?<operator-keyword>(?:\\b(?:operator)))\\s*\n(?<operator>(?:\\+|-|\\*|/|%|&|\\||\\^|\\<\\<|\\>\\>|==|!=|\\>|\\<|\\>=|\\<=|!|~|\\+\\+|--|true|false))\\s*\n(?=\\()",
 			"beginCaptures": {
@@ -1492,40 +1146,40 @@
 				}
 			]
 		},
-		"goto-statement": {
-			"begin": "(?<!\\.)\\b(goto)\\b",
+
+		"main-statement": {
+			"begin": "(?<!\\.)\\b(main)\\b\\s*(?=\\()",
 			"beginCaptures": {
 				"1": {
-					"name": "keyword.control.goto.ccs"
+					"name": "keyword.other.using.ccs"
 				}
 			},
-			"end": "(?=;)",
+			"end": "(?=\\;|})",
 			"patterns": [
 				{
-					"begin": "\\b(case)\\b",
+					"begin": "\\(",
 					"beginCaptures": {
-						"1": {
-							"name": "keyword.control.case.ccs"
+						"0": {
+							"name": "punctuation.parenthesis.open.ccs"
 						}
 					},
-					"end": "(?=;)",
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.parenthesis.close.ccs"
+						}
+					},
 					"patterns": [
+						{
+							"include": "#local-variable-declaration"
+						},
 						{
 							"include": "#expression"
 						}
 					]
 				},
 				{
-					"match": "\\b(default)\\b",
-					"captures": {
-						"1": {
-							"name": "keyword.control.default.ccs"
-						}
-					}
-				},
-				{
-					"name": "entity.name.label.ccs",
-					"match": "[_[:alpha:]][_[:alnum:]]*"
+					"include": "#statement"
 				}
 			]
 		},
