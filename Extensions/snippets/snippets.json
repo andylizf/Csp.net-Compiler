@@ -39,16 +39,6 @@
         ],
         "description": "Checked block"
     },
-    "Class": {
-        "prefix": "class",
-        "body": [
-            "class ${1:Name}",
-            "{",
-            "    $0",
-            "}"
-        ],
-        "description": "Class"
-    },
     "Console.WriteLine": {
         "prefix": "cw",
         "body": [
@@ -185,16 +175,6 @@
             "}"
         ],
         "description": "Indexer"
-    },
-    "Interface": {
-        "prefix": "interface",
-        "body": [
-            "interface I${1:Name}",
-            "{",
-            "    $0",
-            "}"
-        ],
-        "description": "Interface"
     },
     "Safely invoking an event": {
         "prefix": "invoke",
@@ -349,16 +329,6 @@
         ],
         "description": "int Main()"
     },
-    "Struct": {
-        "prefix": "struct",
-        "body": [
-            "struct ${1:Name}",
-            "{",
-            "    $0",
-            "}"
-        ],
-        "description": "Struct"
-    },
     "svm": {
         "prefix": "svm",
         "body": [
@@ -448,6 +418,46 @@
             "}"
         ],
         "description": "While loop"
+    },
+    "Main proc0": {
+        "prefix": "main",
+        "body": [
+            "main = ()",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Main proc"
+    },
+    "Main proc1": {
+        "prefix": "main",
+        "body": [
+            "main = (string[] args)",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Main proc"
+    },
+    "Main proc2": {
+        "prefix": "main",
+        "body": [
+            "main = (): int",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Main proc"
+    },
+    "Main proc3": {
+        "prefix": "main",
+        "body": [
+            "main = (string[] args): int",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Main proc"
     },
     "constructor": {
         "prefix": "ctor",
