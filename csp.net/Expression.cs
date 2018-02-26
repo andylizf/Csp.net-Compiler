@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using RegexGrammar.Expression.Operation;
 using RegexGrammar.Element.RegexGrammar.Name;
-using RegexGrammar.Element;
 
 namespace RegexGrammar.Expression
-{ 
+{
     static class Expression
     {
         public static IEnumerable<Type> GetMethodsFromClass(Type interfaceType)
@@ -54,7 +53,7 @@ namespace RegexGrammar.Expression
                 if (structExp != null)
                 {
 #if DEBUG
-                    Console.WriteLine($"IExpression {structExp.GetType()} {structExp}");
+                    Console.WriteLine($"IExpression {structExp}");
 #endif
                     return structExp as IStatement;
                 }
@@ -68,12 +67,17 @@ namespace RegexGrammar.Expression
         public static IValue Find(String str)
         {
             var finds = Expression.GetMethodsFromClass(typeof(IValue));
+            Level level = null;
             foreach (var find in finds)
             {
                 Object structExp;
+                Level findLevel = null;
                 try
                 {
-                    structExp = find.GetMethod("Find", new[] { typeof(String)/*, typeof(Level) */}).Invoke(null, new[] { str });
+                    if(level == null)
+                        structExp = find.GetMethod("Find", new[] { typeof(String)/*, typeof(Level) */}).Invoke(null, new[] { str });
+                    else
+                        structExp = find.GetMethod("Find", new[] { typeof(String), typeof(Level) }).Invoke(null, new object[] { str, findLevel });
                 }
                 catch
                 {
@@ -82,8 +86,9 @@ namespace RegexGrammar.Expression
                 if (structExp != null)
                 {
 #if DEBUG
-                    Console.WriteLine($"IValue {structExp.GetType()} {structExp}");
+                    Console.WriteLine($"IValue {structExp}");
 #endif
+                    findLevel = find.GetField("level").GetValue(null) as Level;
                     return structExp as IValue;
                 }
             }
@@ -96,7 +101,7 @@ namespace RegexGrammar.Expression
     }
     class IncrementDecrementOperator : OperatorExpression, IStatement, IValue
     {
-        static Level level = new Level(14);
+        public static Level level = new Level(12);
         static Regex Is = GetIs();
         public static Regex GetIs(String Prefix = "Prefix", String Postfix = "Postfix", String Operand = "Operand")
         {
@@ -107,7 +112,7 @@ namespace RegexGrammar.Expression
         }
         public static IncrementDecrementOperator Find(String str, Level alrFindLv)
         {
-            if (level >= alrFindLv)
+            if (level <= alrFindLv)
                 return null;
 
             return Find(str);
@@ -141,8 +146,106 @@ namespace RegexGrammar.Expression
         (String Prefix, String Postfix) oper;
         VaribleName operand;
     }
+    class PlusMinusOperator : OperatorExpression, IValue
+    {
+        public static Level level = new Level(14);
+        static Regex Is = GetIs();
+        public static Regex GetIs(String PreOperand = "PreOperand", String PostOperand = "PostOperand", String Operator = "Operator")
+        {
+            var PlOrMi = @"(\+|\-)";
+            return new Regex($"(?<{PreOperand}>{Value.Is}) ?(?<{Operator}>{PlOrMi}) ?(?<{PostOperand}>{Value.Is})");
+        }
+        public static PlusMinusOperator Find(String str, Level alrFindLv)
+        {
+            if (level <= alrFindLv)
+                return null;
+
+            return Find(str);
+        }
+        public static PlusMinusOperator Find(String str)
+        {
+            var match = Is.MatchesAll(str);
+            if (match == null)
+                return null;
+            var operand = (Value.Find(match.Groups["PreOperand"].ToString().Trim()), Value.Find(match.Groups["PostOperand"].ToString().Trim()));
+            if (operand.Item1 == null || operand.Item2 == null)
+                return null;
+
+            return new PlusMinusOperator()
+            {
+                match = match,
+                str = str,
+                oper = match.Groups["Operator"].ToString(),
+                operand = operand
+            };
+        }
+
+        public string StatementToCS()
+        {
+            return ValueToCS() + ";";
+        }
+        public string ValueToCS()
+        {
+            return Is.Replace(str, "${PreOperand}" + oper + " ${PostOperand}");
+        }
+        Match match;
+        String str;
+
+        String oper;
+        (IValue pre, IValue post) operand;
+    }
+
+    class TimesDivOperator : OperatorExpression, IValue
+    {
+        public static Level level = new Level(13);
+        static Regex Is = GetIs();
+        public static Regex GetIs(String PreOperand = "PreOperand", String PostOperand = "PostOperand", String Operator = "Operator")
+        {
+            var PlOrMi = @"(\*|/)";
+            return new Regex($"(?<{PreOperand}>{Value.Is}) ?(?<{Operator}>{PlOrMi}) ?(?<{PostOperand}>{Value.Is})");
+        }
+        public static TimesDivOperator Find(String str, Level alrFindLv)
+        {
+            if (level <= alrFindLv)
+                return null;
+
+            return Find(str);
+        }
+        public static TimesDivOperator Find(String str)
+        {
+            var match = Is.MatchesAll(str);
+            if (match == null)
+                return null;
+            var operand = (Value.Find(match.Groups["PreOperand"].ToString().Trim()), Value.Find(match.Groups["PostOperand"].ToString().Trim()));
+            if (operand.Item1 == null || operand.Item2 == null)
+                return null;
+
+            return new TimesDivOperator()
+            {
+                match = match,
+                str = str,
+                oper = match.Groups["Operator"].ToString(),
+                operand = operand
+            };
+        }
+
+        public string StatementToCS()
+        {
+            return ValueToCS() + ";";
+        }
+        public string ValueToCS()
+        {
+            return Is.Replace(str, "${PreOperand}" + oper + " ${PostOperand}");
+        }
+        Match match;
+        String str;
+
+        String oper;
+        (IValue pre, IValue post) operand;
+    }
     class FuncCallExpression : OperatorExpression, IStatement, IValue
     {
+        public static Level level = new Level(15);
         static Regex Is = GetIs();
         static Regex GetIs(String OperandValue = "OperandValue", String ClassName = "ClassName",
         String FuncName = "FuncName", String FuncValue = "FuncValue", String Parameters = "Parameters")
@@ -163,6 +266,13 @@ namespace RegexGrammar.Expression
             //(funcvalue)(parameters)
             //      IValue(parameters)
             return new Regex($"({operandOrClassname}|{funcValue})\\({paras}\\)"/*, RegexOptions.RightToLeft*/);
+        }
+        public static FuncCallExpression Find(String str, Level alrFindLv)
+        {
+            if (level <= alrFindLv)
+                return null;
+
+            return Find(str);
         }
         public static FuncCallExpression Find(String str)
         {
@@ -190,7 +300,12 @@ namespace RegexGrammar.Expression
 
         public string ValueToCS()
         {
-            return Is.Replace(str, "(?(FuncName)" + operandValue?.ValueToCS() + "${ClassName}.${FuncName}|" + funcValue.ValueToCS() + ")\\(" + parameters.ValueToCS() + "\\)");
+            string replace_str;
+            if (funcName != null)
+                replace_str = operandValue?.ValueToCS() + "${ClassName}.${FuncName}";
+            else
+                replace_str = funcValue?.ValueToCS();
+            return Is.Replace(str, replace_str + parameters.ValueToCS());
         }
         public string StatementToCS()
         {
@@ -219,7 +334,16 @@ namespace RegexGrammar.Expression
             var match = Is.MatchesAll(str);
             if (match == null)
                 return null;
-
+            
+            if (str == "")
+            {
+                return new ParametersCall()
+                {
+                    match = match,
+                    str = str,
+                    parametersValue = new IValue[] { }
+                };
+            }
             var parametersValue = new List<IValue>();
             foreach (Capture capture in match.Groups["ParametersValue"].Captures)
             {
@@ -241,9 +365,9 @@ namespace RegexGrammar.Expression
             if (parametersValue.Length == 0)
                 return "()";
             string replace_str = parametersValue[0].ValueToCS();
-            foreach(var value in parametersValue)
+            for(int i = 1; i < parametersValue.Length; i++)
             {
-                replace_str += "," + value.ValueToCS();
+                replace_str += "," + parametersValue[i].ValueToCS();
             }
             return $"({replace_str})";
         }
@@ -256,12 +380,20 @@ namespace RegexGrammar.Expression
 
     class AssignmentOperatorExpression : OperatorExpression, IStatement, IValue
     {
+        public static Level level = new Level(16);
         static Regex Is = GetIs();
         public static Regex GetIs(String AssignVarible = "AssignVarible", String AssignValue = "AssignValue")
         {
             var first = $"(?<{AssignVarible}>{VaribleName.Is})";
             var end = $"(?<{AssignValue}>{Value.Is})";
             return new Regex(first + " ?= ?" + end);
+        }
+        public static AssignmentOperatorExpression Find(String str, Level alrFindLv)
+        {
+            if (level <= alrFindLv)
+                return null;
+
+            return Find(str);
         }
         public static AssignmentOperatorExpression Find(String str)
         {
@@ -284,8 +416,7 @@ namespace RegexGrammar.Expression
 
         public string ValueToCS()
         {
-            Is.Replace(str, "${AssignVarible} = " + AssignValue.ValueToCS());
-            return str;
+            return Is.Replace(str, "${AssignVarible} = " + AssignValue.ValueToCS());
         }
         public string StatementToCS()
         {
@@ -306,7 +437,7 @@ namespace RegexGrammar.Expression
             var varname = LocalVaribleName.Is;
             var vartypename = MemberName.Is;
             var assign = $"( ?= ?(?<{ValueExpression}>{Value.Is}))";
-            return new Regex($"var (?<{VarVaribleName}>{varname})(( )?:( )?(?<{Type}>{vartypename}))? (?({Type}){assign}?|{assign})");
+            return new Regex($"var (?<{VarVaribleName}>{varname})( ?: ?(?<{Type}>{vartypename}))?(?({Type}){assign}?|{assign})");
         }
         public static VarExpression Find(String str)
         {
@@ -315,7 +446,7 @@ namespace RegexGrammar.Expression
                 return null;
 
             var varValue = Value.Find(match.Groups["ValueExpression"].ToString());
-            if (varValue == null)
+            if (varValue == null && match.Groups["Type"].ToString() == "")
                 return null;
 
             return new VarExpression()
@@ -330,14 +461,16 @@ namespace RegexGrammar.Expression
 
         public string StatementToCS()
         {
-            String TypeOrVar;
+            String typeOrVar;
             if (varType.Name != "")
-                TypeOrVar = varType.Name;
-            else TypeOrVar = "var";
-
+                typeOrVar = varType.Name;
+            else typeOrVar = "var";
+            String isValue;
             if (varValue != null)
-                Is.Replace(str, TypeOrVar + " ${LocalVaribleName} = " + varValue.ValueToCS() + ";");
-            return str;
+                isValue = " = " + varValue.ValueToCS();
+            else
+                isValue = "";
+            return typeOrVar + $" {varName}{isValue}" + ";";
         }
         String str;
         Match match;
