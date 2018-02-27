@@ -62,7 +62,11 @@
     "Namespace": {
         "prefix": "namespace",
         "body": [
+<<<<<<< HEAD
+            "namespace ${1:Name}$0"
+=======
             "namespace ${1:Name}"
+>>>>>>> master
         ],
         "description": "Namespace"
     },
