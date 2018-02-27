@@ -25,6 +25,15 @@ namespace RegexGrammar.Expression
                 return null;
             return match;
         }
+        public static bool IsAllEmpty(this CaptureCollection captures)
+        {
+            foreach(Capture capture in captures)
+            {
+                if (capture.Length != 0)
+                    return false;
+            }
+            return true;
+        }
     }
     interface IValue
     {
@@ -54,7 +63,7 @@ namespace RegexGrammar.Expression
                 if (structExp != null)
                 {
 #if DEBUG
-                    Console.WriteLine($"IExpression {structExp}");
+                    Console.WriteLine($"IStatement {structExp}");
 #endif
                     return structExp as IStatement;
                 }
@@ -281,8 +290,8 @@ namespace RegexGrammar.Expression
             if (match == null)
                 return null;
 
-            var operandValue = Value.Find(match.Groups["OperandValue"].ToString());
-            var funcValue = Value.Find(match.Groups["FuncValue"].ToString());
+            var operandValue = Value.Find(match.Groups["OperandValue"].ToString().Trim());
+            var funcValue = Value.Find(match.Groups["FuncValue"].ToString().Trim());
             var parameters = ParametersCall.Find(match.Groups["Parameters"].ToString());
             if ((operandValue == null && funcValue == null) || parameters == null)
                 return null;
@@ -336,19 +345,19 @@ namespace RegexGrammar.Expression
             if (match == null)
                 return null;
             
-            if (match.Groups["ParametersValue"].Captures.Count == 0)// Count?
+            if (match.Groups["ParametersValue"].Captures.IsAllEmpty())// Count?
             {
                 return new ParametersCall()
                 {
                     match = match,
                     str = str,
-                    parametersValue = new IValue[] { }
+                    parametersValue = new IValue[] {}
                 };
             }
             var parametersValue = new List<IValue>();
             foreach (Capture capture in match.Groups["ParametersValue"].Captures)
             {
-                var parameterValue = Value.Find(capture.ToString());
+                var parameterValue = Value.Find(capture.ToString().Trim());
                 if (parameterValue == null)
                     return null;
                 parametersValue.Add(parameterValue);
@@ -402,7 +411,7 @@ namespace RegexGrammar.Expression
             if (match == null)
                 return null;
 
-            var assignValue = Value.Find(match.Groups["AssignValue"].ToString());
+            var assignValue = Value.Find(match.Groups["AssignValue"].ToString().Trim());
             if (assignValue == null)
                 return null;
 
@@ -446,7 +455,7 @@ namespace RegexGrammar.Expression
             if (match == null)
                 return null;
 
-            var varValue = Value.Find(match.Groups["ValueExpression"].ToString());
+            var varValue = Value.Find(match.Groups["ValueExpression"].ToString().Trim());
             if (varValue == null && match.Groups["Type"].ToString() == "")
                 return null;
 

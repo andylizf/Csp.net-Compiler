@@ -20,13 +20,6 @@ namespace RegexGrammar.Element
         {
             Name = name;
         }
-        public Element NameEmpty()
-        {
-            if (Name == null)
-                return null;
-            else
-                return this;
-        }
     }
     namespace Literal
     {
