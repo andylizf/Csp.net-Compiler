@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using RegexGrammar.Expression;
+using RegexGrammar.Expression.Operation;
 
 namespace RegexGrammar.Element
 {
@@ -19,13 +20,6 @@ namespace RegexGrammar.Element
         {
             Name = name;
         }
-        public Element NameEmpty()
-        {
-            if (Name == null)
-                return null;
-            else
-                return this;
-        }
     }
     namespace Literal
     {
@@ -40,6 +34,7 @@ namespace RegexGrammar.Element
         }
         class IntLiteral: Literal
         {
+            public static Level level = Level.Min;
             public static Regex Is = new Regex("[0-9]+");
             IntLiteral(String name): base(name){ }
             public static IValue Find(String str)
@@ -52,6 +47,7 @@ namespace RegexGrammar.Element
         }
         class DoubleLiteral: Literal
         {
+            public static Level level = Level.Min;
             public static Regex Is = new Regex($"{IntLiteral.Is}.{IntLiteral.Is}");
             public DoubleLiteral(String name): base(name) { }
             public static IValue Find(String str)
@@ -64,6 +60,7 @@ namespace RegexGrammar.Element
         }
         class StringLiteral: Literal
         {
+            public static Level level = Level.Min;
             public static Regex Is = new Regex(@"""[ \S]*""");
             StringLiteral(String name): base(name) { }
             public static IValue Find(String str)
@@ -88,6 +85,7 @@ namespace RegexGrammar.Element
         }
         class VaribleName : AllName, IValue
         {
+            static Level level = Level.Min;
             public VaribleName(String name): base(name) { }
             public static IValue Find(String str)
             {
