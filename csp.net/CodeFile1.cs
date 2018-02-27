@@ -14,6 +14,8 @@ namespace RegexGrammar
     {
         static void Main(String[] args)
         {
+            Console.WriteLine("Welcome to csp.net!");
+            
             string line;
             while((line = Console.ReadLine()) != null)
             {

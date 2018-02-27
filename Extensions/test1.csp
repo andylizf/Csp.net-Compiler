@@ -1,0 +1,8 @@
+using System
+
+namespace name1.n2
+
+main = ()
+{
+    Console.WriteLine("Hello, world!")
+}

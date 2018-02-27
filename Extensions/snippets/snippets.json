@@ -266,10 +266,7 @@
     "Namespace": {
         "prefix": "namespace",
         "body": [
-            "namespace ${1:Name}",
-            "{",
-            "    $0",
-            "}"
+            "namespace ${1:Name}$0"
         ],
         "description": "Namespace"
     },

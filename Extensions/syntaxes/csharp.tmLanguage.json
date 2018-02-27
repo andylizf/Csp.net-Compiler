@@ -5,10 +5,10 @@
 		"Once accepted there, we are happy to receive an update request."
 	],
 	"version": "https://github.com/dotnet/csharp-tmLanguage/commit/ca22c5211b87a6a1a8fd5356895237bb821df728",
-	"name": "CC#",
-	"scopeName": "source.ccs",
+	"name": "CSP",
+	"scopeName": "source.csp",
 	"fileTypes": [
-		"ccs"
+		"csp"
 	],
 	"uuid": "f7de61e2-bdde-4e2a-a139-8221b179584e",
 	"patterns": [
