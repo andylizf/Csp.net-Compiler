@@ -36,6 +36,7 @@ namespace RegexGrammar.Expression
     }
     static class Statement
     {
+        public static Regex Is = new Regex(@".*");
         public static IStatement Find(String str)
         {
             var finds = Expression.GetMethodsFromClass(typeof(IStatement));
@@ -335,7 +336,7 @@ namespace RegexGrammar.Expression
             if (match == null)
                 return null;
             
-            if (str == "")
+            if (match.Groups["ParametersValue"].Captures.Count == 0)// Count?
             {
                 return new ParametersCall()
                 {
