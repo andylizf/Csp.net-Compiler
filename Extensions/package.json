@@ -1,8 +1,8 @@
 {
-    "name": "ccs-snippets",
-    "displayName": "ccs_snippets",
+    "name": "csp",
+    "displayName": "Csp.net",
     "description": "",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "Anti-Li",
     "engines": {
         "vscode": "^1.19.0"

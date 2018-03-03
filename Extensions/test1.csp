@@ -1,8 +1,6 @@
-using System
-
-namespace name1.n2
-
-main = ()
+using A
+namespace A.B
+main = (args): int
 {
-    Console.WriteLine("Hello, world!")
+    
 }
