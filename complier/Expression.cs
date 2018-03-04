@@ -182,7 +182,6 @@ namespace RegexGrammar.Expression
 
             return new IncrementDecrementOperator()
             {
-                match = match,
                 str = str,
                 oper = (match.Groups["Prefix"].ToString(), match.Groups["Postfix"].ToString()),
                 operand = new VaribleName(match.Groups["Operand"].ToString())
@@ -197,7 +196,6 @@ namespace RegexGrammar.Expression
         {
             return Is.Replace(str, "${Prefix}" + operand.ValueToCS() + "${Postfix}");
         }
-        Match match;
         String str;
 
         (String Prefix, String Postfix) oper;
@@ -230,10 +228,8 @@ namespace RegexGrammar.Expression
 
             return new PlusMinusOperator()
             {
-                match = match,
                 str = str,
-                oper = match.Groups["Operator"].ToString(),
-                operand = operand
+                oper = match.Groups["Operator"].ToString()
             };
         }
 
@@ -245,11 +241,9 @@ namespace RegexGrammar.Expression
         {
             return Is.Replace(str, "${PreOperand}" + oper + " ${PostOperand}");
         }
-        Match match;
         String str;
 
         String oper;
-        (IValue pre, IValue post) operand;
     }
 
     class TimesDivOperator : OperatorExpression, IValue
@@ -279,7 +273,6 @@ namespace RegexGrammar.Expression
 
             return new TimesDivOperator()
             {
-                match = match,
                 str = str,
                 oper = match.Groups["Operator"].ToString(),
                 operand = operand
@@ -294,62 +287,107 @@ namespace RegexGrammar.Expression
         {
             return Is.Replace(str, "${PreOperand}" + oper + " ${PostOperand}");
         }
-        Match match;
         String str;
 
         String oper;
         (IValue pre, IValue post) operand;
     }
-    class FuncCallExpression : OperatorExpression, IStatement, IValue
+    class FuncCallStatement : OperatorExpression, IStatement, IValue
     {
-        public static Level level = new Level(15);
-        static Regex Is = GetIs();
-        static Regex GetIs(String OperandValue = "OperandValue", String ClassName = "ClassName",
-        String FuncName = "FuncName", String FuncValue = "FuncValue", String Parameters = "Parameters")
+        class ActualParameters
         {
-            var classname = MemberName.Is;
-            var methodname = LocalVaribleName.Is;
-            var value = Value.Is;
+            public static Regex Is => new Regex($"({Element.Element.GetRegexLikeABA($"(?<FuncCallStatement_ActualParameters_Value>{Value.Is})", ",")})?");
 
-            var paras = ParametersCall.Is;
-            var operandOrClassname = $"(((?<{OperandValue}>{value})|(?<{ClassName}>{classname}))\\.(?<{FuncName}>{methodname}))";
-            //(operandvalue).funcname(parameters)
-            //      IValue.funcname(parameters)
-            //classname.funcname(parameters)
-            //      MemberName.funcname(parameters)
-            // TODO: If operandvalue is a VaribleName, VaribleName.Is == MemberName.Is. The Regex Engine may choose the first one that is operandvalue.
-            var funcValue = $"(?<{FuncValue}>{value})";
-                
-            //(funcvalue)(parameters)
-            //      IValue(parameters)
-            return new Regex($"({operandOrClassname}|{funcValue})\\({paras}\\)"/*, RegexOptions.RightToLeft*/);
+            public static ActualParameters Find(String str)
+            {
+                var match = Is.MatchesAll(str);
+                if (match == null)
+                    return null;
+
+                if (match.Groups["FuncCallStatement_ActualParameters_Value"].Captures.IsAllEmpty())// Count?
+                {
+                    return new ActualParameters()
+                    {
+                        parametersValue = new IValue[] { }
+                    };
+                }
+                var parametersValue = new List<IValue>();
+                foreach (Capture capture in match.Groups["FuncCallStatement_ActualParameters_Value"].Captures)
+                {
+                    var parameterValue = Value.Find(capture.ToString().Trim());
+                    if (parameterValue == null)
+                        return null;
+                    parametersValue.Add(parameterValue);
+                }
+
+                return new ActualParameters()
+                {
+                    parametersValue = parametersValue.ToArray()
+                };
+            }
+            public string ValueToCS()
+            {
+                if (parametersValue.Length == 0)
+                    return "()";
+                string replace_str = parametersValue[0].ValueToCS();
+                for (int i = 1; i < parametersValue.Length; i++)
+                {
+                    replace_str += "," + parametersValue[i].ValueToCS();
+                }
+                return $"({replace_str})";
+            }
+            
+            IValue[] parametersValue;
         }
-        public static FuncCallExpression Find(String str, Level alrFindLv)
+        public static Level level = new Level(15);
+        static Regex Is
+        {
+            get
+            {
+                var classname = MemberName.Is;
+                var methodname = LocalVaribleName.Is;
+                var value = Value.Is;
+
+                var paras = ActualParameters.Is;
+                var operandOrClassname = $"(((?<FuncCallStatement_OperandValue>{value})|(?<FuncCallStatement_ClassName>{classname}))\\.(?<FuncCallStatement_FuncName>{methodname}))";
+                //(operandvalue).funcname(parameters)
+                //      IValue.funcname(parameters)
+                //classname.funcname(parameters)
+                //      MemberName.funcname(parameters)
+                // TODO: If operandvalue is a VaribleName, VaribleName.Is == MemberName.Is. The Regex Engine may choose the first one that is operandvalue.
+                var funcValue = $"(?<FuncCallStatement_FuncValue>{value})";
+
+                //(funcvalue)(parameters)
+                //      IValue(parameters)
+                return new Regex($"({operandOrClassname}|{funcValue})\\((?<FuncCallStatement_ActualParameters>{paras})\\)");
+            }
+        }
+
+        public static FuncCallStatement Find(String str, Level alrFindLv)
         {
             if (level <= alrFindLv)
                 return null;
 
             return Find(str);
         }
-        public static FuncCallExpression Find(String str)
+        public static FuncCallStatement Find(String str)
         {
             var match = Is.MatchesAll(str);
             if (match == null)
                 return null;
 
-            var operandValue = Value.Find(match.Groups["OperandValue"].ToString().Trim());
-            var funcValue = Value.Find(match.Groups["FuncValue"].ToString().Trim());
-            var parameters = ParametersCall.Find(match.Groups["Parameters"].ToString());
+            var operandValue = Value.Find(match.Groups["FuncCallStatement_OperandValue"].ToString().Trim());
+            var funcValue = Value.Find(match.Groups["FuncCallStatement_FuncValue"].ToString().Trim());
+            var parameters = ActualParameters.Find(match.Groups["FuncCallStatement_ActualParameters"].ToString());
             if ((operandValue == null && funcValue == null) || parameters == null)
                 return null;
 
-            return new FuncCallExpression()
+            return new FuncCallStatement()
             {
-                match = match,
                 str = str,
                 operandValue = operandValue,
-                className = new MemberName(match.Groups["ClassName"].ToString()),
-                funcName = new LocalVaribleName(match.Groups["FuncName"].ToString()),
+                className = new MemberName(match.Groups["FuncCallStatement_ClassName"].ToString()),
+                funcName = new LocalVaribleName(match.Groups["FuncCallStatement_FuncName"].ToString()),
                 funcValue = funcValue,
                 parameters = parameters
             };
@@ -359,7 +397,7 @@ namespace RegexGrammar.Expression
         {
             string replaceStr;
             if (funcName != null)
-                replaceStr = operandValue?.ValueToCS() + "${ClassName}.${FuncName}";
+                replaceStr = operandValue?.ValueToCS() + "${FuncCallStatement_ClassName}.${FuncCallStatement_FuncName}";
             else
                 replaceStr = funcValue?.ValueToCS();
             return Is.Replace(str, replaceStr + parameters.ValueToCS());
@@ -368,72 +406,16 @@ namespace RegexGrammar.Expression
         {
             return ValueToCS() + ";";
         }
-
-        Match match;
+        
         String str;
 
         IValue operandValue;
         MemberName className;
         LocalVaribleName funcName;
         IValue funcValue;
-        ParametersCall parameters;
+        ActualParameters parameters;
     }
     
-    class ParametersCall
-    {
-        public static Regex Is
-        {
-            get { return new Regex($"({Element.Element.GetRegexLikeABA($"(?<ParametersValue>{Value.Is})", ",")})?"); }
-        }
-
-        public static ParametersCall Find(String str)
-        {
-            var match = Is.MatchesAll(str);
-            if (match == null)
-                return null;
-            
-            if (match.Groups["ParametersValue"].Captures.IsAllEmpty())// Count?
-            {
-                return new ParametersCall()
-                {
-                    match = match,
-                    str = str,
-                    parametersValue = new IValue[] {}
-                };
-            }
-            var parametersValue = new List<IValue>();
-            foreach (Capture capture in match.Groups["ParametersValue"].Captures)
-            {
-                var parameterValue = Value.Find(capture.ToString().Trim());
-                if (parameterValue == null)
-                    return null;
-                parametersValue.Add(parameterValue);
-            }
-
-            return new ParametersCall()
-            {
-                match = match,
-                str = str,
-                parametersValue = parametersValue.ToArray()
-            };
-        }
-        public string ValueToCS()
-        {
-            if (parametersValue.Length == 0)
-                return "()";
-            string replace_str = parametersValue[0].ValueToCS();
-            for(int i = 1; i < parametersValue.Length; i++)
-            {
-                replace_str += "," + parametersValue[i].ValueToCS();
-            }
-            return $"({replace_str})";
-        }
-
-        Match match;
-        String str;
-
-        IValue[] parametersValue;
-    }
 
     class AssignmentStatement : OperatorExpression, IStatement, IValue
     {
