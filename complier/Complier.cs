@@ -22,7 +22,7 @@ namespace RegexGrammar
         static void ReadFromConsole()
         {
             string line;
-            int lineNum = 1;
+            var lineNum = 1;
             while ((line = Console.ReadLine()) != null)
             {
                 string csline;
@@ -30,7 +30,7 @@ namespace RegexGrammar
                 {
                     csline = Statement.Find(line.Trim()).StatementToCS();
                 }
-                catch (Exception exception)
+                catch (Exception)
                 {
                     Error.WriteLine($"ERROR: Can't translate! Uncaught SyntaxError: Unexpected token `{line}`.", FontRed);
                     Error.WriteLine($"意外的标记`{line}`导致的语法错误。");
@@ -42,9 +42,15 @@ namespace RegexGrammar
                 lineNum++;
             }
         }
-        static void Main(/*String[] args*/)
+        static void Main(
+#if! DEBUG 
+            String[] args
+#endif
+            )
         {
-            var args = new String[] { @"C:\Users\andyl\Desktop\myApp\Program.cs.csp" };
+#if DEBUG
+            var args = new [] { @"C:\Users\andyl\Desktop\myApp\Program.csp" };
+#endif
             if (Path.GetExtension(args[0]) != ".csp")
             {
                 Error.WriteLine("参数file不是以.csp为结尾的文件。如欲进行项目编译，运行dotnet run命令，complier仅翻译csp文件");
@@ -67,7 +73,7 @@ namespace RegexGrammar
 
             var fileStr = reader.ReadToEnd();
             reader.Close();
-            var structLine = FileSign.Find(fileStr);
+            var structLine = CspFile.Find(fileStr);
             if (structLine == null)
             {
                 errors.Add(lineNum, ($"ERROR: Can't translate! Uncaught SyntaxError: Unexpected token `{fileStr}`.", $"意外的标记`{fileStr}`导致的语法错误。"));
@@ -116,7 +122,7 @@ namespace RegexGrammar
                     {
                         structExp = find.GetMethod("Find", new[] { typeof(String) }).Invoke(null, new[] { str.Trim() });
                     }
-                    catch (Exception exception)
+                    catch (Exception)
                     {
                         structExp = null;
                     }
@@ -167,7 +173,7 @@ namespace RegexGrammar
             static Regex Is = GetIs();
             public static Regex GetIs(String UsingNamespaceName = "UsingNamespaceName")
             {
-                return Element.Element.GetRegexLikeABA(FileSign.NextLine.ToString(), $"using (?<{UsingNamespaceName}>{MemberName.Is})");
+                return Element.Element.GetRegexLikeABA($"using (?<{UsingNamespaceName}>{MemberName.Is})", FileSign.NextLine.ToString());
             }
             public static NamespaceUsing Find(String str)
             {
@@ -256,7 +262,7 @@ namespace RegexGrammar
             static public Regex GetIs(String ArgsName = "ArgsName", String ReturnInt = "ReturnInt", String Statements = "Statements")
             {
                 var begin = $"main = (\\((?<{ArgsName}>{LocalVaribleName.Is})?\\))? ?(: ?(?<{ReturnInt}>int))?{FileSign.NextOrThisLine}*{{\\s*";
-                var middle = Element.Element.GetRegexLikeABA(FileSign.NextLine.ToString(), $"(?<{Statements}>{Statement.Is.ToString()})");
+                var middle = Element.Element.GetRegexLikeABA($"(?<{Statements}>{Statement.Is.ToString()})", FileSign.NextLine.ToString());
                 var end = FileSign.NextOrThisLine + "}";
                 return new Regex(begin + middle + end);
             }

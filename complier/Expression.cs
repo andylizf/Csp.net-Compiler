@@ -311,7 +311,7 @@ namespace RegexGrammar.Expression
             var methodname = LocalVaribleName.Is;
             var value = Value.Is;
 
-            var paras = ParametersCall.GetIs(Parameters);
+            var paras = ParametersCall.Is;
             var operandOrClassname = $"(((?<{OperandValue}>{value})|(?<{ClassName}>{classname}))\\.(?<{FuncName}>{methodname}))";
             //(operandvalue).funcname(parameters)
             //      IValue.funcname(parameters)
@@ -357,12 +357,12 @@ namespace RegexGrammar.Expression
 
         public string ValueToCS()
         {
-            string replace_str;
+            string replaceStr;
             if (funcName != null)
-                replace_str = operandValue?.ValueToCS() + "${ClassName}.${FuncName}";
+                replaceStr = operandValue?.ValueToCS() + "${ClassName}.${FuncName}";
             else
-                replace_str = funcValue?.ValueToCS();
-            return Is.Replace(str, replace_str + parameters.ValueToCS());
+                replaceStr = funcValue?.ValueToCS();
+            return Is.Replace(str, replaceStr + parameters.ValueToCS());
         }
         public string StatementToCS()
         {
@@ -381,11 +381,11 @@ namespace RegexGrammar.Expression
     
     class ParametersCall
     {
-        static Regex Is = GetIs();
-        public static Regex GetIs(String ParametersValue = "ParametersValue")
+        public static Regex Is
         {
-            return new Regex($"({Element.Element.GetRegexLikeABA(",", $"(?<{ParametersValue}>{Value.Is})")})?");
+            get { return new Regex($"({Element.Element.GetRegexLikeABA($"(?<ParametersValue>{Value.Is})", ",")})?"); }
         }
+
         public static ParametersCall Find(String str)
         {
             var match = Is.MatchesAll(str);
@@ -435,105 +435,99 @@ namespace RegexGrammar.Expression
         IValue[] parametersValue;
     }
 
-    class AssignmentOperatorExpression : OperatorExpression, IStatement, IValue
+    class AssignmentStatement : OperatorExpression, IStatement, IValue
     {
         public static Level level = new Level(16);
-        static Regex Is = GetIs();
-        public static Regex GetIs(String AssignVarible = "AssignVarible", String AssignValue = "AssignValue")
+        static Regex Is
         {
-            var first = $"(?<{AssignVarible}>{VaribleName.Is})";
-            var end = $"(?<{AssignValue}>{Value.Is})";
-            return new Regex(first + " ?= ?" + end);
+            get
+            {
+                var first = $"(?<AssignmentStatement_Varible>{VaribleName.Is})";
+                var end = $"(?<AssignmentStatement_Value>{Value.Is})";
+                return new Regex(first + " ?= ?" + end);
+            }
         }
-        public static AssignmentOperatorExpression Find(String str, Level alrFindLv)
+        public static AssignmentStatement Find(String str, Level alrFindLv)
         {
             if (level <= alrFindLv)
                 return null;
 
             return Find(str);
         }
-        public static AssignmentOperatorExpression Find(String str)
+        public static AssignmentStatement Find(String str)
         {
             var match = Is.MatchesAll(str);
             if (match == null)
                 return null;
 
-            var assignValue = Value.Find(match.Groups["AssignValue"].ToString().Trim());
+            var assignValue = Value.Find(match.Groups["AssignmentStatement_Value"].ToString().Trim());
             if (assignValue == null)
                 return null;
 
-            return new AssignmentOperatorExpression()
+            return new AssignmentStatement()
             {
-                match = match,
                 str = str,
-                AssignVarible = new VaribleName(match.Groups["AssignVarible"].ToString()),
+                AssignVarible = new VaribleName(match.Groups["AssignmentStatement_Varible"].ToString()),
                 AssignValue = assignValue
             };
         }
 
         public string ValueToCS()
         {
-            return Is.Replace(str, "${AssignVarible} = " + AssignValue.ValueToCS());
+            return Is.Replace(str, "${AssignmentStatement_Varible} = " + AssignValue.ValueToCS());
         }
         public string StatementToCS()
         {
             return ValueToCS() + ";";
         }
-        Match match;
         String str;
 
         VaribleName AssignVarible;
         IValue AssignValue;
     }
-    class VarExpression : IStatement
+    class VarStatement : IStatement
     {
-        static Regex Is = GetIs();
-        //var (?<LocalVaribleName>{strname})(: (?<Type>{nspname}))? (?(Type){assign}?|{assign})
-        public static Regex GetIs(String VarVaribleName = "LocalVaribleName", String Type = "Type", String ValueExpression = "ValueExpression")
+        static Regex Is
         {
-            var varname = LocalVaribleName.Is;
-            var vartypename = MemberName.Is;
-            var assign = $"( ?= ?(?<{ValueExpression}>{Value.Is}))";
-            return new Regex($"var (?<{VarVaribleName}>{varname})( ?: ?(?<{Type}>{vartypename}))?(?({Type}){assign}?|{assign})");
+            get
+            {
+                var varname = LocalVaribleName.Is;
+                var vartypename = MemberName.Is;
+                var assign = $"( ?= ?(?<VarStatement_Value>{Value.Is}))";
+                return new Regex($"var (?<VarStatement_VarName>{varname})( ?: ?(?<VarStatement_Type>{vartypename}))?(?(VarStatement_Type){assign}?|{assign})");
+            }
         }
-        public static VarExpression Find(String str)
+        //var (?<LocalVaribleName>{strname})(: (?<Type>{nspname}))? (?(Type){assign}?|{assign})
+        public static VarStatement Find(String str)
         {
             var match = Is.MatchesAll(str);
             if (match == null)
                 return null;
 
-            var varValue = Value.Find(match.Groups["ValueExpression"].ToString().Trim());
-            if (varValue == null && match.Groups["Type"].ToString() == "")
+            var varValue = Value.Find(match.Groups["VarStatement_Value"].ToString().Trim());
+            if (varValue == null && match.Groups["VarStatement_Type"].ToString() == "")
                 return null;
 
-            return new VarExpression()
+            return new VarStatement()
             {
-                str = str,
-                match = match,
-                varName = new LocalVaribleName(match.Groups["LocalVaribleName"].ToString()),
-                varType = new MemberName(match.Groups["Type"].ToString()),
-                varValue = varValue
+                _varName = new LocalVaribleName(match.Groups["VarStatement_VarName"].ToString()),
+                _varType = new MemberName(match.Groups["VarStatement_Type"].ToString()),
+                _varValue = varValue
             };
         }
 
         public string StatementToCS()
         {
-            String typeOrVar;
-            if (varType.Name != "")
-                typeOrVar = varType.Name;
-            else typeOrVar = "var";
+            var typeOrVar = _varType.Name != "" ? _varType.Name : "var";
             String isValue;
-            if (varValue != null)
-                isValue = " = " + varValue.ValueToCS();
+            if (_varValue != null)
+                isValue = " = " + _varValue.ValueToCS();
             else
                 isValue = "";
-            return typeOrVar + $" {varName}{isValue}" + ";";
+            return typeOrVar + $" {_varName}{isValue}" + ";";
         }
-        String str;
-        Match match;
-
-        LocalVaribleName varName;
-        MemberName varType;
-        IValue varValue;
+        LocalVaribleName _varName;
+        MemberName _varType;
+        IValue _varValue;
     }
 }

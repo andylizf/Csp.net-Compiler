@@ -7,7 +7,7 @@ namespace RegexGrammar.Element
 {
     abstract class Element
     {
-        public static Regex GetRegexLikeABA(String infix, String str)
+        public static Regex GetRegexLikeABA(String str, String infix)
         {
             return new Regex($"{str}({infix}{str})*");
         } // Return like this: str(infixstr)*
@@ -76,7 +76,7 @@ namespace RegexGrammar.Element
     {
         abstract class AllName : Element
         {
-            public static Regex Is = GetRegexLikeABA("\\.", LocalVaribleName.Is.ToString());
+            public static Regex Is = GetRegexLikeABA(LocalVaribleName.Is.ToString(), "\\.");
             public AllName(String name) : base(name) { }
         }
         class MemberName : AllName
