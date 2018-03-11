@@ -25,7 +25,6 @@ namespace Translation.Element
     {
         abstract class Literal : Element, IValue
         {
-            ///- TODO: 0.0F······
             public string ValueToCS()
             {
                 return Name;

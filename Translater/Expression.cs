@@ -89,6 +89,7 @@ namespace Translation.Expression
             return null;
         }
     }
+    
     static class Value
     {
         public static Regex Is = new Regex(@".*");
@@ -122,40 +123,70 @@ namespace Translation.Expression
             return null;
         }
     }
-    abstract class OperatorExpression
+    class EmptyStatement : IStatement
     {
-        // a++ a-- ++a --a a = b
+        static Regex Is
+        {
+            get
+            {
+                return new Regex(@"\s*");
+            }
+        }
+        public static EmptyStatement Find(String str)
+        {
+            var match = Is.MatchesAll(str);
+            if (match == null)
+                return null;
+            
+            return new EmptyStatement
+            {
+                str = str
+            };
+        }
+
+        public string StatementToCS()
+        {
+            return str;
+        }
+        String str;
     }
     class ReturnStatement : IStatement
     {
         static Regex Is = GetIs();
         public static Regex GetIs(String ReturnValue = "ReturnValue")
         {
-            return new Regex($"return (?<{ReturnValue}>{Value.Is})");
+            return new Regex($"return (?<{ReturnValue}>{Value.Is})?");
         }
         public static ReturnStatement Find(String str)
         {
             var match = Is.MatchesAll(str);
             if (match == null)
                 return null;
+            
+            var returnValueStr = match.Groups["ReturnValue"].ToString();
+            if (returnValueStr == "")
+                return new ReturnStatement
+                {
+                    valueStr = ""
+                };
+            var returnValue = Value.Find(returnValueStr);
 
-            var returnValue = Value.Find(match.Groups["ReturnValue"].ToString());
             if (returnValue == null)
                 return null;
 
             return new ReturnStatement()
             {
-                returnValue = returnValue
+                valueStr = returnValue.ValueToCS()
             };
         }
 
         public string StatementToCS()
         {
-            return "return " + returnValue.ValueToCS() + ";";
+            return "return " + valueStr + ";";
         }
-        IValue returnValue;
+        String valueStr;
     }
-    class IncrementDecrementOperator : OperatorExpression, IStatement, IValue
+    class IncrementDecrementOperator : IStatement, IValue
     {
         public static Level level = new Level(12);
         static Regex Is = GetIs();
@@ -200,7 +231,7 @@ namespace Translation.Expression
         (String Prefix, String Postfix) oper;
         VaribleName operand;
     }
-    class PlusMinusOperator : OperatorExpression, IValue
+    class PlusMinusOperator : IValue
     {
         public static Level level = new Level(14);
         static Regex Is = GetIs();
@@ -244,7 +275,7 @@ namespace Translation.Expression
         String oper;
     }
 
-    class TimesDivOperator : OperatorExpression, IValue
+    class TimesDivOperator : IValue
     {
         public static Level level = new Level(13);
         static Regex Is = GetIs();
@@ -273,7 +304,6 @@ namespace Translation.Expression
             {
                 str = str,
                 oper = match.Groups["Operator"].ToString(),
-                operand = operand
             };
         }
 
@@ -286,11 +316,9 @@ namespace Translation.Expression
             return Is.Replace(str, "${PreOperand}" + oper + " ${PostOperand}");
         }
         String str;
-
         String oper;
-        (IValue pre, IValue post) operand;
     }
-    class FuncCallStatement : OperatorExpression, IStatement, IValue
+    class FuncCallStatement : IStatement, IValue
     {
         class ActualParameters
         {
@@ -413,9 +441,8 @@ namespace Translation.Expression
         IValue funcValue;
         ActualParameters parameters;
     }
-    
 
-    class AssignmentStatement : OperatorExpression, IStatement, IValue
+    class AssignmentStatement : IStatement, IValue
     {
         public static Level level = new Level(16);
         static Regex Is

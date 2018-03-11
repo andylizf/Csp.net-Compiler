@@ -73,8 +73,9 @@ namespace Cspnet
             }
             return;
         }
-        static void Main(string[] args)
+        static void Main(/*string[] args*/)
         {
+            var args = new[] { "run" };
             var mayArgsLen = 0;
             if (args.Length >= 1)
             {
@@ -98,7 +99,7 @@ namespace Cspnet
                             InvalidInput(args.SubArray(2));
                         return;
                     case "run":
-                        foreach(FileInfo file in new DirectoryInfo(Environment.CurrentDirectory).GetFiles())
+                        foreach(FileInfo file in new DirectoryInfo(@"C:\Users\andyl\Desktop\myCspNetApp2"/*Environment.CurrentDirectory*/).GetFiles())
                         {
                             if(file.Extension == ".csp")
                             {
