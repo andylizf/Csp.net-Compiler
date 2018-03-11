@@ -17,7 +17,7 @@ namespace Translation
             {
                 throw new Exception("参数path的文件非.csp文件");
             }
-            using (var reader = new StreamReader("path"))
+            using (var reader = new StreamReader(path))
             {
                 cspFilePath = path;
                 var lineNum = 0;
