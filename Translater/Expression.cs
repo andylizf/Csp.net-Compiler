@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using RegexGrammar.Element.RegexGrammar.Name;
-using RegexGrammar.Expression.Operation;
+using Translation.Element.RegexGrammar.Name;
+using Translation.Expression.Operation;
 
-namespace RegexGrammar.Expression
+namespace Translation.Expression
 {
     namespace Operation
     {
@@ -57,11 +57,11 @@ namespace RegexGrammar.Expression
     {
         string ValueToCS();
     }
-    interface IStatement
+    public interface IStatement
     {
         string StatementToCS();
     }
-    static class Statement
+    public static class Statement
     {
         public static Regex Is = new Regex(@".*");
         public static IStatement Find(String str)
@@ -95,14 +95,13 @@ namespace RegexGrammar.Expression
         public static IValue Find(String str)
         {
             var finds = Expression.GetMethodsFromClass(typeof(IValue));
-            Level level = null;
             foreach (var find in finds)
             {
                 Object structExp;
                 Level findLevel = null;
                 try
                 {
-                    if(level == null)
+                    if(findLevel == null)
                         structExp = find.GetMethod("Find", new[] { typeof(String)/*, typeof(Level) */}).Invoke(null, new[] { str });
                     else
                         structExp = find.GetMethod("Find", new[] { typeof(String), typeof(Level) }).Invoke(null, new object[] { str, findLevel });
@@ -242,7 +241,6 @@ namespace RegexGrammar.Expression
             return Is.Replace(str, "${PreOperand}" + oper + " ${PostOperand}");
         }
         String str;
-
         String oper;
     }
 
@@ -306,9 +304,9 @@ namespace RegexGrammar.Expression
 
                 if (match.Groups["FuncCallStatement_ActualParameters_Value"].Captures.IsAllEmpty())// Count?
                 {
-                    return new ActualParameters()
+                    return new ActualParameters
                     {
-                        parametersValue = new IValue[] { }
+                        _parametersValue = new IValue[] { }
                     };
                 }
                 var parametersValue = new List<IValue>();
@@ -320,24 +318,24 @@ namespace RegexGrammar.Expression
                     parametersValue.Add(parameterValue);
                 }
 
-                return new ActualParameters()
+                return new ActualParameters
                 {
-                    parametersValue = parametersValue.ToArray()
+                    _parametersValue = parametersValue.ToArray()
                 };
             }
             public string ValueToCS()
             {
-                if (parametersValue.Length == 0)
+                if (_parametersValue.Length == 0)
                     return "()";
-                string replace_str = parametersValue[0].ValueToCS();
-                for (int i = 1; i < parametersValue.Length; i++)
+                string replace_str = _parametersValue[0].ValueToCS();
+                for (int i = 1; i < _parametersValue.Length; i++)
                 {
-                    replace_str += "," + parametersValue[i].ValueToCS();
+                    replace_str += "," + _parametersValue[i].ValueToCS();
                 }
                 return $"({replace_str})";
             }
             
-            IValue[] parametersValue;
+            IValue[] _parametersValue;
         }
         public static Level level = new Level(15);
         static Regex Is

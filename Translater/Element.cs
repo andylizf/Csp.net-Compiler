@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using RegexGrammar.Expression;
-using RegexGrammar.Expression.Operation;
+using Translation.Expression;
+using Translation.Expression.Operation;
 
-namespace RegexGrammar.Element
+namespace Translation.Element
 {
     abstract class Element
     {

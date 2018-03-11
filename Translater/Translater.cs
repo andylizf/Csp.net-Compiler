@@ -2,94 +2,46 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using RegexGrammar.Element.RegexGrammar.Name;
-using RegexGrammar.Expression;
+using Translation.Element.RegexGrammar.Name;
+using Translation.Expression;
 
-namespace RegexGrammar
+namespace Translation
 {
-    class Error
+    public class Translater
     {
-        public static void WriteLine(String str, ConsoleColor color = ConsoleColor.White)
-        {
-            Console.ForegroundColor = color;
-            Console.WriteLine(str);
-        }
-    }
-    class Complier
-    {
-        static ConsoleColor FontRed = ConsoleColor.Red,
-            FontBlue = ConsoleColor.Blue;
-        static void ReadFromConsole()
-        {
-            string line;
-            var lineNum = 1;
-            while ((line = Console.ReadLine()) != null)
+        Dictionary<int, (string, string)> errors = new Dictionary<int, (string, string)>();
+        List<String> translatedLine = new List<string>();
+        String cspFilePath = null;
+        public Translater(String path) {
+            if (Path.GetExtension(path) != ".csp")
             {
-                string csline;
-                try
+                throw new Exception("参数path的文件非.csp文件");
+            }
+            using (var reader = new StreamReader("path"))
+            {
+                cspFilePath = path;
+                var lineNum = 0;
+                var fileStr = reader.ReadToEnd();
+                var structLine = CspFile.Find(fileStr);
+                if (structLine == null)
                 {
-                    csline = Statement.Find(line.Trim()).StatementToCS();
+                    errors.Add(lineNum, ($"ERROR: Can't translate! Uncaught SyntaxError: Unexpected token `{fileStr}`.", $"意外的标记`{fileStr}`导致的语法错误。"));
                 }
-                catch (Exception)
-                {
-                    Error.WriteLine($"ERROR: Can't translate! Uncaught SyntaxError: Unexpected token `{line}`.", FontRed);
-                    Error.WriteLine($"意外的标记`{line}`导致的语法错误。");
-                    continue;
-                }
-
-                Error.WriteLine($"Line {lineNum}: ", FontBlue);
-                Error.WriteLine(csline);
+                else
+                    translatedLine.Add(structLine.FileSignToCS());
                 lineNum++;
             }
         }
-        static void Main(
-#if! DEBUG 
-            String[] args
-#endif
-            )
+        public void WriteToCSFile()
         {
-#if DEBUG
-            var args = new [] { @"C:\Users\andyl\Desktop\myApp\Program.csp" };
-#endif
-            if (Path.GetExtension(args[0]) != ".csp")
-            {
-                Error.WriteLine("参数file不是以.csp为结尾的文件。如欲进行项目编译，运行dotnet run命令，complier仅翻译csp文件");
-                return;
-            }
-            StreamReader reader;
-            try
-            {
-                reader = new StreamReader(args[0]);
-            }
-            catch
-            {
-                ReadFromConsole();
-                return;
-            }
-
-            int lineNum = 0;
-            var translatedFile = new List<string>();
-            var errors = new Dictionary<int, (string, string)>();
-
-            var fileStr = reader.ReadToEnd();
-            reader.Close();
-            var structLine = CspFile.Find(fileStr);
-            if (structLine == null)
-            {
-                errors.Add(lineNum, ($"ERROR: Can't translate! Uncaught SyntaxError: Unexpected token `{fileStr}`.", $"意外的标记`{fileStr}`导致的语法错误。"));
-            }
-            else
-                translatedFile.Add(structLine.FileSignToCS());
-            lineNum++;
-
             if (errors.Count == 0)
             {
-                foreach (var i in translatedFile)
+                foreach (var i in translatedLine)
                 {
                     Console.WriteLine(i);
                 }
-                using (StreamWriter CSFile = new StreamWriter(args[0] + ".cs"))
-                    foreach (var i in translatedFile)
+                using (StreamWriter CSFile = new StreamWriter(cspFilePath + ".cs"))
+                    foreach (var i in translatedLine)
                     {
                         CSFile.Write(i);
                     }
@@ -98,11 +50,10 @@ namespace RegexGrammar
             {
                 foreach (var error in errors)
                 {
-                    Error.WriteLine(error.Value.Item1, FontRed);
-                    Error.WriteLine(error.Value.Item2);
+                    Error.WriteLine(error.Value.Item1, Error.FontRed);
+                    Error.WriteLine(error.Value.Item2, Error.FontWhite);
                 }
             }
-            Console.ReadKey();
         }
         private interface IFileSign
         {
