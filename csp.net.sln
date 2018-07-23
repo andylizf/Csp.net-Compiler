@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrammarHelper", "GrammarHel
 		{1C96FFE0-CB85-4BA0-9ED1-0F5A871C4199} = {1C96FFE0-CB85-4BA0-9ED1-0F5A871C4199}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexTest", "RegexTest\RegexTest.csproj", "{B2621F9D-6CEA-434C-8D19-DA0A6C41743E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommentTest", "CommentTest\CommentTest.csproj", "{0E22F573-7F11-4629-B7DC-C8D63A38FFBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,14 @@ Global
 		{93F0A966-89C2-402D-AF31-47B79CFB0AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93F0A966-89C2-402D-AF31-47B79CFB0AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93F0A966-89C2-402D-AF31-47B79CFB0AFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2621F9D-6CEA-434C-8D19-DA0A6C41743E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2621F9D-6CEA-434C-8D19-DA0A6C41743E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2621F9D-6CEA-434C-8D19-DA0A6C41743E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2621F9D-6CEA-434C-8D19-DA0A6C41743E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E22F573-7F11-4629-B7DC-C8D63A38FFBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E22F573-7F11-4629-B7DC-C8D63A38FFBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E22F573-7F11-4629-B7DC-C8D63A38FFBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E22F573-7F11-4629-B7DC-C8D63A38FFBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
