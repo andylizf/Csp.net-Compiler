@@ -1,5 +1,6 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "name": "csp",
     "displayName": "Csp.net",
     "description": "",
@@ -12,6 +13,8 @@
         "Snippets",
         "Languages"
 =======
+=======
+>>>>>>> 9aed4bf3802579aa20fdc4297dabc800116e4066
   "name": "csp",
   "displayName": "Csp.net",
   "description": "",
@@ -31,6 +34,7 @@
         "language": "csp",
         "path": "./snippets/snippets.json"
       }
+<<<<<<< HEAD
     ],
     "languages": [
       {
@@ -41,6 +45,17 @@
       }
 >>>>>>> 9aed4bf3802579aa20fdc4297dabc800116e4066
     ],
+=======
+    ],
+    "languages": [
+      {
+        "id": "csp",
+        "aliases": [ "CSP", "csp" ],
+        "extensions": [ ".csp" ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+>>>>>>> 9aed4bf3802579aa20fdc4297dabc800116e4066
     "grammars": [
       {
         "language": "csp",
