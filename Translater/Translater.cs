@@ -3,18 +3,31 @@ using System.Collections.Generic;
 using System.IO;
 using Translation.RegexExt;
 using Translation.Expression;
+<<<<<<< HEAD
 using Capture = System.Text.RegularExpressions.Capture;
 using Translation.Element.Literal.RegexGrammar.Name;
+=======
+using Match = Translation.RegexExt.Match;
+using Regex = Translation.RegexExt.Regex;
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
 
 namespace Translation
 {
     public class Translater
     {
         Dictionary<int, (string, string)> errors = new Dictionary<int, (string, string)>();
+<<<<<<< HEAD
         List<string> translatedLine = new List<string>();
         string cspFilePath;
 
         public Translater(string path)
+=======
+        List<String> translatedLine = new List<string>();
+        String cspFilePath;
+        public bool Success;
+
+        public Translater(String path)
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
         {
             if (Path.GetExtension(path) != ".csp")
             {
@@ -38,6 +51,10 @@ namespace Translation
 
                 lineNum++;
             }
+
+            if (errors.Count == 0)
+                Success = true;
+
         }
 
         public void WriteToCSFile()
@@ -68,26 +85,41 @@ namespace Translation
 
     class FileSign
     {
+<<<<<<< HEAD
         public static Regex Letters = new Regex("[A-Za-z]+");
         public static Regex NotLineFeed = new Regex("[^\\n]*");
         public static Regex Empty = new Regex("\\s*");
         public static Regex NextLine = new Regex("\\s*\n\\s*");
         public static Regex NextOrThisLine = new Regex("\\s*\n?\\s*");
         public static Regex LineEndAndComment = new Regex($"(?<Comment>\\s*(//{NotLineFeed})?)");
+=======
+        public static Regex Empty = new Regex("\\s*");
+        public static Regex NextLine = new Regex("\\s*\n\\s*");
+        public static Regex NextOrThisLine = new Regex("\\s*\n?\\s*");
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
     }
 
     class CspFile
     {
         static Regex Is = GetIs();
 
+<<<<<<< HEAD
         static Regex GetIs(string FileNamespaceUsing = "FileNamespaceUsing",
             string FileNamespaceBlock = "FileNamespaceBlock", string UsingNamespaceName = "UsingNamespaceName")
+=======
+        static Regex GetIs(String FileNamespaceUsing = "FileNamespaceUsing",
+            String FileNamespaceBlock = "FileNamespaceBlock", String UsingNamespaceName = "UsingNamespaceName")
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
         {
             return new Regex(
                 $"(?<{FileNamespaceUsing}>{NamespaceUsing.GetIs(UsingNamespaceName)}){FileSign.NextLine}(?<{FileNamespaceBlock}>{NamespaceBlock.GetIs()})");
         }
         
+<<<<<<< HEAD
         public static CspFile Find(string str)
+=======
+        public static CspFile Find(String str)
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
         {
             Match match = Is.MatchesAll(str);
             if (match == null)
@@ -97,11 +129,16 @@ namespace Translation
             if (block == null)
                 return null;
 
+<<<<<<< HEAD
             return new CspFile()
+=======
+            return new CspFile
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             {
                 namespaceUsing = NamespaceUsing.Find(match.Groups["FileNamespaceUsing"].ToString()),
                 namespaceBlock = block
             };
+<<<<<<< HEAD
         }
 
         NamespaceUsing namespaceUsing;
@@ -125,6 +162,31 @@ namespace Translation
 
         public static NamespaceUsing Find(string str)
         {
+=======
+        }
+
+        NamespaceUsing namespaceUsing;
+        NamespaceBlock namespaceBlock;
+
+        public string FileSignToCS()
+        {
+            return namespaceUsing.FileSignToCS() + namespaceBlock.FileSignToCS();
+        }
+    }
+
+    class NamespaceUsing
+    {
+        static Regex Is = GetIs();
+
+        public static Regex GetIs(String UsingNamespaceName = "UsingNamespaceName")
+        {
+            return Element.Element.GetTailLoopRegex($"using (?<{UsingNamespaceName}>{MemberName.Is})",
+                FileSign.NextLine.ToString());
+        }
+
+        public static NamespaceUsing Find(String str)
+        {
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             Match match = Is.MatchesAll(str);
             if (match == null)
                 return null;
@@ -137,10 +199,17 @@ namespace Translation
                 namespacesName.Add(new MemberName(capture.ToString()));
             }
 
+<<<<<<< HEAD
             return new NamespaceUsing()
             {
                 Exist = exist,
                 namespacesUsing = namespacesName.ToArray(),
+=======
+            return new NamespaceUsing
+            {
+                Exist = exist,
+                namespacesUsing = namespacesName.ToArray()
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             };
         }
 
@@ -172,7 +241,11 @@ namespace Translation
             return new Regex(NamespaceStr + $"(?<NamespaceBlock_Main>{MainFunc.Is})");
         }
 
+<<<<<<< HEAD
         public static NamespaceBlock Find(string str)
+=======
+        public static NamespaceBlock Find(String str)
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
         {
             Match match = Is.MatchesAll(str);
             if (match == null)
@@ -182,7 +255,11 @@ namespace Translation
             if (main == null)
                 return null;
 
+<<<<<<< HEAD
             return new NamespaceBlock()
+=======
+            return new NamespaceBlock
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             {
                 main = main,
                 thisNamespace = new MemberName(match.Groups["NamespaceBlock_namespace"].ToString())
@@ -221,7 +298,11 @@ namespace Translation
                 }
 
             }
+<<<<<<< HEAD
             public static MainFunc Find(string str)
+=======
+            public static MainFunc Find(String str)
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             {
                 Match match = Is.MatchesAll(str);
                 if (match == null)
@@ -247,14 +328,24 @@ namespace Translation
             Statements statements;
             public string FileSignToCS()
             {
+<<<<<<< HEAD
                 string param;
+=======
+                String param;
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
                 if (argsName.Name == "")
                     param = "";
                 else
                     param = "String[] " + argsName;
+<<<<<<< HEAD
                 string begin = $"static {returnIntOrVoid} Main({param}){{";
                 string middle = statements.FileSignToCS();
                 string end = "}";
+=======
+                String begin = $"static {returnIntOrVoid} Main({param}){{";
+                String middle = statements.FileSignToCS();
+                String end = "}";
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
                 return begin + " \n\t" + middle + "\n" + end;
             }
             
@@ -344,7 +435,11 @@ namespace Translation
         public static Regex Is =>
             Element.Element.GetTailLoopRegex($"(?<_statements>{Statement.Is})", FileSign.NextLine.ToString());
 
+<<<<<<< HEAD
         public static Statements Find(string str)
+=======
+        public static Statements Find(String str)
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
         {
             Match match = Is.MatchesAll(str);
             if (match == null)
@@ -385,7 +480,11 @@ namespace Translation
                 var statement = Statement.Find(captures[i].ToString());
                 if (statement == null)
                 {
+<<<<<<< HEAD
                     Error.WriteLine($"In main scope: {str}, error {captures[i]}", ConsoleColor.Red);
+=======
+                    Console.WriteLine($"In main scope: {str}, error {captures[i]}");
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
                     return null;
                 }
                 statements.Add(statement);

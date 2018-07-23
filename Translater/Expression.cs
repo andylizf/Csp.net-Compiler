@@ -4,11 +4,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+<<<<<<< HEAD
 using Translation.Expression.Operation;
 using Capture = System.Text.RegularExpressions.Capture;
 using CaptureCollection = System.Text.RegularExpressions.CaptureCollection;
 using Translation.Element.Literal.RegexGrammar.Name;
 using Translation.Expression;
+=======
+using System.Text;
+using Translation.Element.RegexGrammar.Name;
+using Translation.Expression.Operation;
+using Capture = System.Text.RegularExpressions.Capture;
+using CaptureCollection = System.Text.RegularExpressions.CaptureCollection;
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
 
 namespace Translation.Expression
 {
@@ -33,7 +41,10 @@ namespace Translation.Expression
             public static bool operator <=(Level a, Level b) => a.nLevel <= b.nLevel;
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
     public static class Expression
     {
         public static IEnumerable<Type> GetMethodsFromClass(Type interfaceType)
@@ -65,7 +76,10 @@ namespace Translation.Expression
             return true;
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
     public interface IValue
     {
         string ValueToCS();
@@ -79,6 +93,7 @@ namespace Translation.Expression
 
     public static class Statement
     {
+<<<<<<< HEAD
         public static Regex Is => new Regex(@".*");
         static readonly IEnumerable<Type> classesImplIStatement = Expression.GetMethodsFromClass(typeof(IStatement));
 
@@ -90,13 +105,36 @@ namespace Translation.Expression
             }
 
             foreach (var find in classesImplIStatement)
+=======
+        //public static Regex Is = new Regex(@".*");
+
+        public static Regex Is
+        {
+            get
+            {
+
+            }
+        }
+        public static IStatement Find(String str)
+        {
+            var finds = Expression.GetMethodsFromClass(typeof(IStatement));
+            if (str == String.Empty)
+            {
+                return new EmptyStatement();
+            }
+            foreach (var find in finds)
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             {
                 object structExp;
                 try
                 {
                     // Trim to let str like "\r\nConsole.WriteLine()\r\n" can be recognition.
+<<<<<<< HEAD
                     structExp = find.GetMethod("Find", new[] { typeof(string) })
                         ?.Invoke(null, new[] { str.Trim() }); //TODO Unreserved original format(indentation, etc.)
+=======
+                    structExp = find.GetMethod("Find", new[] { typeof(String)})?.Invoke(null, new[] { str.Trim() });//TODO Unreserved original format(indentation, etc.)
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
                 }
                 catch
                 {
@@ -115,6 +153,7 @@ namespace Translation.Expression
             return null;
         }
 
+<<<<<<< HEAD
         public class Comment
         {
             public static Dictionary<String, Regex> Map = new Dictionary<String, Regex>();
@@ -161,8 +200,22 @@ namespace Translation.Expression
     {
         public static Regex Is => new Regex(@".*");
 
+=======
+    }
+    
+    public static class Value
+    {
+        public static Regex statements = new Regex($@"\(\)\{{{Statements.Is}\}}");
+        public static Regex Is = new Regex($@"((.*)|({statements}))");
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
         public static IValue Find(string str)
         {
+            
+            if (statements.MatchesAll(str) != null)
+            {
+                Console.Write("Read a function");
+                return null;
+            }
             var finds = Expression.GetMethodsFromClass(typeof(IValue));
             foreach (var find in finds)
             {
@@ -200,6 +253,7 @@ namespace Translation.Expression
     {
         static Regex Is => new Regex(@"\s*");
 
+<<<<<<< HEAD
         public static EmptyStatement Find(string str)
         {
             var match = Is.MatchesAll(str);
@@ -319,6 +373,9 @@ namespace Translation.Expression
             return Find(str);
         }
         public static FuncCallStatement Find(String str)
+=======
+        public static EmptyStatement Find(String str)
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
         {
             var match = Is.MatchesAll(str);
             if (match == null)
@@ -561,9 +618,13 @@ namespace Translation.Expression
     {
         class ActualParameters
         {
+<<<<<<< HEAD
             public static Regex Is =>
                 new Regex(
                     $"({Element.Element.GetTailLoopRegex($"(?<FuncCallStatement_ActualParameters_Value>{Value.Is})", ",")})?");
+=======
+            public static Regex Is => new Regex($"({Element.Element.GetTailLoopRegex($"(?<FuncCallStatement_ActualParameters_Value>{Value.Is})", ",")})?");
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
 
             public static ActualParameters Find(string str)
             {

@@ -68,7 +68,11 @@ namespace Cspnet
         }
         static void Main(string[] args)
         {
+<<<<<<< HEAD
             //var args = new[] { "run" };
+=======
+            bool otherwise = false;
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             if (args.Length >= 1)
             {
                 switch (args[0])
@@ -88,37 +92,58 @@ namespace Cspnet
                         }
                         else
                             InvalidInput(args.SubArray(2));
-                        return;
+
+                        otherwise = true;
+                        break;
                     case "run":
                         foreach(FileInfo file in new DirectoryInfo(Environment.CurrentDirectory).GetFiles())
                         {
                             if (file.Extension != ".csp") continue;
                             var t = new Translater(file.FullName);
+<<<<<<< HEAD
                             t.WriteToCSFile();
-                        }
-                        using (var runP = CallDotnet("run"))
-                        {
-                            runP.BeginOutputReadLine();
-                            runP.BeginErrorReadLine();
-                            runP.WaitForExit();
+=======
+                            if (!t.Success) continue;
+                            t.WriteToCSFile();
+                            using (var runP = CallDotnet("run"))
+                            {
+                                runP.BeginOutputReadLine();
+                                runP.BeginErrorReadLine();
+                                runP.WaitForExit();
 
-                            Thread.Sleep(10);// For safety reason.
+                                Thread.Sleep(10);// For safety reason.
+                            }
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
                         }
-                        return;
+
+                        otherwise = true;
+                        break;
                     case "--help":
                         Console.WriteLine(help.help_txt);
-                        return;
+
+                        otherwise = true;
+                        break;
                     case "--version":
                         Console.WriteLine("Csp.net 版本" + Assembly.GetExecutingAssembly().GetName().Version);
                         Console.Write(".NET Core SDK 版本");
                         CallDotnet("--version");
-                        return;
+
+                        otherwise = true;
+                        break;
                     default:
                         CallDotnet(args);
-                        return;
+
+                        otherwise = true;
+                        break;
                 }
             }
+<<<<<<< HEAD
             Console.WriteLine(help.help_txt);
+=======
+            if(! otherwise)
+                Console.WriteLine(help.help_txt);
+            Console.ReadKey();
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
         }
     }
 }

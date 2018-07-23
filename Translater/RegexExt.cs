@@ -8,8 +8,13 @@ namespace Translation
     {
         public class SafetyGroupsHelper
         {
+<<<<<<< HEAD
             protected string[] _groupsname;
             public SafetyGroupsHelper(string[] groupsname)
+=======
+            protected String[] _groupsname;
+            public SafetyGroupsHelper(String[] groupsname)
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             {
                 _groupsname = groupsname;
             }
@@ -17,13 +22,18 @@ namespace Translation
         public class Regex
         {
             System.Text.RegularExpressions.Regex _regex;
+<<<<<<< HEAD
             public Regex(string pattern): this(new System.Text.RegularExpressions.Regex(pattern))
+=======
+            public Regex(String pattern): this(new System.Text.RegularExpressions.Regex(pattern))
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             {
             }
             public Regex(System.Text.RegularExpressions.Regex regex)
             {
                 _regex = regex;
             }
+<<<<<<< HEAD
 
             public string[] GetGroupNames()
             {
@@ -31,6 +41,9 @@ namespace Translation
             }
             public bool IsMatch(string input) => _regex.IsMatch(input);
             public Match Match(string input)
+=======
+            public Match Match(String input)
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             {
                 return new Match(_regex.Match(input), _regex.GetGroupNames());
             }
@@ -39,12 +52,20 @@ namespace Translation
             {
                 return _regex.Replace(input, replacement);
             }
+<<<<<<< HEAD
             public MatchCollection Matches(string input)
+=======
+            public MatchCollection Matches(String input)
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             {
                 return new MatchCollection(_regex.Matches(input), _regex.GetGroupNames());
             }
 
+<<<<<<< HEAD
             public override string ToString()
+=======
+            public override String ToString()
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             {
                 return _regex.ToString();
             }
@@ -52,7 +73,11 @@ namespace Translation
         public class MatchCollection: SafetyGroupsHelper
         {
             System.Text.RegularExpressions.MatchCollection _matchCollection;
+<<<<<<< HEAD
             public MatchCollection(System.Text.RegularExpressions.MatchCollection matchCollection, string[] groupsname):
+=======
+            public MatchCollection(System.Text.RegularExpressions.MatchCollection matchCollection, String[] groupsname):
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
                 base(groupsname)
             {
                 _matchCollection = matchCollection;
@@ -62,10 +87,19 @@ namespace Translation
         public class Match: SafetyGroupsHelper
         {
             System.Text.RegularExpressions.Match _match;
+<<<<<<< HEAD
             public Match(System.Text.RegularExpressions.Match match, string[] groupsname):
                 base(groupsname) => _match = match;
 
             public override string ToString() => _match.ToString();
+=======
+            public Match(System.Text.RegularExpressions.Match match, String[] groupsname):
+                base(groupsname)
+            {
+                _match = match;
+            }
+
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             public int Length => _match.Length;
             public int Index => _match.Index;
             public bool Success => _match.Success;
@@ -74,7 +108,11 @@ namespace Translation
         public class GroupCollection: SafetyGroupsHelper
         {
             readonly System.Text.RegularExpressions.GroupCollection _groupCollection;
+<<<<<<< HEAD
             public GroupCollection(System.Text.RegularExpressions.GroupCollection groupCollection, string[] groupsname):
+=======
+            public GroupCollection(System.Text.RegularExpressions.GroupCollection groupCollection, String[] groupsname):
+>>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
                 base(groupsname)
             {
                 _groupCollection = groupCollection;
