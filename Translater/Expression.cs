@@ -1,9 +1,12 @@
-﻿using System.Text.RegularExpressions;
+﻿using Translation.RegexExt;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using Translation.Element.RegexGrammar.Name;
 using Translation.Expression.Operation;
+using Capture = System.Text.RegularExpressions.Capture;
+using CaptureCollection = System.Text.RegularExpressions.CaptureCollection;
 
 namespace Translation.Expression
 {
@@ -25,7 +28,7 @@ namespace Translation.Expression
             public static bool operator <=(Level a, Level b) => a.nLevel <= b.nLevel;
         }
     }
-    static class Expression
+    public static class Expression
     {
         public static IEnumerable<Type> GetMethodsFromClass(Type interfaceType)
         {
@@ -53,26 +56,40 @@ namespace Translation.Expression
             return true;
         }
     }
-    interface IValue
+    public interface IValue
     {
         string ValueToCS();
     }
     public interface IStatement
     {
         string StatementToCS();
+        //static Regex Is;
     }
     public static class Statement
     {
-        public static Regex Is = new Regex(@".*");
+        //public static Regex Is = new Regex(@".*");
+
+        public static Regex Is
+        {
+            get
+            {
+
+            }
+        }
         public static IStatement Find(String str)
         {
             var finds = Expression.GetMethodsFromClass(typeof(IStatement));
+            if (str == String.Empty)
+            {
+                return new EmptyStatement();
+            }
             foreach (var find in finds)
             {
                 Object structExp;
                 try
                 {
-                    structExp = find.GetMethod("Find", new[] { typeof(String)/*, typeof(Level) */}).Invoke(null, new[] { str });
+                    // Trim to let str like "\r\nConsole.WriteLine()\r\n" can be recognition.
+                    structExp = find.GetMethod("Find", new[] { typeof(String)})?.Invoke(null, new[] { str.Trim() });//TODO Unreserved original format(indentation, etc.)
                 }
                 catch
                 {
@@ -88,13 +105,21 @@ namespace Translation.Expression
             }
             return null;
         }
+
     }
     
-    static class Value
+    public static class Value
     {
-        public static Regex Is = new Regex(@".*");
-        public static IValue Find(String str)
+        public static Regex statements = new Regex($@"\(\)\{{{Statements.Is}\}}");
+        public static Regex Is = new Regex($@"((.*)|({statements}))");
+        public static IValue Find(string str)
         {
+            
+            if (statements.MatchesAll(str) != null)
+            {
+                Console.Write("Read a function");
+                return null;
+            }
             var finds = Expression.GetMethodsFromClass(typeof(IValue));
             foreach (var find in finds)
             {
@@ -125,13 +150,8 @@ namespace Translation.Expression
     }
     class EmptyStatement : IStatement
     {
-        static Regex Is
-        {
-            get
-            {
-                return new Regex(@"\s*");
-            }
-        }
+        static Regex Is => new Regex(@"\s*");
+
         public static EmptyStatement Find(String str)
         {
             var match = Is.MatchesAll(str);
@@ -322,7 +342,7 @@ namespace Translation.Expression
     {
         class ActualParameters
         {
-            public static Regex Is => new Regex($"({Element.Element.GetRegexLikeABA($"(?<FuncCallStatement_ActualParameters_Value>{Value.Is})", ",")})?");
+            public static Regex Is => new Regex($"({Element.Element.GetTailLoopRegex($"(?<FuncCallStatement_ActualParameters_Value>{Value.Is})", ",")})?");
 
             public static ActualParameters Find(String str)
             {
@@ -380,7 +400,7 @@ namespace Translation.Expression
                 //      IValue.funcname(parameters)
                 //classname.funcname(parameters)
                 //      MemberName.funcname(parameters)
-                // TODO: If operandvalue is a VaribleName, VaribleName.Is == MemberName.Is. The Regex Engine may choose the first one that is operandvalue.
+                //NOTE If operandvalue is a VaribleName, VaribleName.Is == MemberName.Is. The Regex Engine may choose the first one that is operandvalue.
                 var funcValue = $"(?<FuncCallStatement_FuncValue>{value})";
 
                 //(funcvalue)(parameters)
