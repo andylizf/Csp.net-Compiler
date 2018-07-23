@@ -1,56 +1,10 @@
 {
-    "Attribute using recommended pattern": {
-        "prefix": "attribute",
-        "body": [
-            "[System.AttributeUsage(System.AttributeTargets.${1:All}, Inherited = ${2:false}, AllowMultiple = ${3:true})]",
-            "sealed class ${4:My}Attribute : System.Attribute",
-            "{",
-            "    // See the attribute guidelines at",
-            "    //  http://go.microsoft.com/fwlink/?LinkId=85236",
-            "    readonly string positionalString;",
-            "    ",
-            "    // This is a positional argument",
-            "    public ${4:My}Attribute(string positionalString)",
-            "    {",
-            "        this.positionalString = positionalString;",
-            "        ",
-            "        // TODO: Implement code here",
-            "        ${5:throw new System.NotImplementedException();}",
-            "    }",
-            "    ",
-            "    public string PositionalString",
-            "    {",
-            "        get { return positionalString; }",
-            "    }",
-            "    ",
-            "    // This is a named argument",
-            "    public int NamedInt { get; set; }",
-            "}"
-        ],
-        "description": "Attribute using recommended pattern"
-    },
     "Console.WriteLine": {
         "prefix": "cw",
         "body": [
             "System.Console.WriteLine($0);"
         ],
         "description": "Console.WriteLine"
-    },
-    "Exception": {
-        "prefix": "exception",
-        "body": [
-            "[System.Serializable]",
-            "public class ${1:My}Exception : ${2:System.Exception}",
-            "{",
-            "    public ${1:My}Exception() { }",
-            "    public ${1:My}Exception(string message) : base(message) { }",
-            "    public ${1:My}Exception(string message, System.Exception inner) : base(message, inner) { }",
-            "    protected ${1:My}Exception(",
-            "        System.Runtime.Serialization.SerializationInfo info,",
-            "        System.Runtime.Serialization.StreamingContext context) : base(info, context) { }",
-            "}"
-        ],
-        "description": "Exception"
     },
     "MessageBox.Show": {
         "prefix": "mbox",
@@ -59,18 +13,21 @@
         ],
         "description": "MessageBox.Show"
     },
+    "Using": {
+        "prefix": "using",
+        "body": [
+            "using $0"
+        ],
+        "description": "Using namespace"
+    },
     "Namespace": {
         "prefix": "namespace",
         "body": [
-<<<<<<< HEAD
-            "namespace ${1:Name}$0"
-=======
             "namespace ${1:Name}"
->>>>>>> master
         ],
         "description": "Namespace"
     },
-    "Main proc0": {
+    "Main () -> void": {
         "prefix": "main",
         "body": [
             "main = ()",
@@ -80,17 +37,17 @@
         ],
         "description": "Main proc"
     },
-    "Main proc1": {
+    "Main (string[]) -> void": {
         "prefix": "main",
         "body": [
-            "main = (string[] args)",
+            "main = (args)",
             "{",
             "    $0",
             "}"
         ],
         "description": "Main proc"
     },
-    "Main proc2": {
+    "Main () -> int": {
         "prefix": "main",
         "body": [
             "main = (): int",
@@ -100,10 +57,10 @@
         ],
         "description": "Main proc"
     },
-    "Main proc3": {
+    "Main (string[]) -> int": {
         "prefix": "main",
         "body": [
-            "main = (string[] args): int",
+            "main = (args): int",
             "{",
             "    $0",
             "}"

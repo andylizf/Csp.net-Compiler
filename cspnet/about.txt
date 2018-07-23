@@ -1,0 +1,20 @@
+Csp.NET 命令行工具 (2.1.4)
+dotnet 
+	--version        显示 .NET Core SDK 版本。
+	--info           显示 .NET Core 信息。
+	--help           显示帮助。
+dotnet 
+	new [output]
+		output:
+			要初始化的 .NET 项目路径。
+			--force	 强制生成内容，即使该内容会更改现有文件。
+		--help       显示有关此命令的帮助。
+	run:
+		编译并立即执行 .NET 项目。
+		--help       显示有关此命令的帮助。
+	build:
+		生成 .NET 项目。
+		--help       显示有关此命令的帮助。
+dotnet [path-to-application]
+	path-to-application:
+		要执行的 .dll 文件的路径。

@@ -1,0 +1,86 @@
+{
+  "name": "csp.net",
+  "desc": "Csp.net 命令行工具",
+  "args": [
+    {
+      "name": "path-to-application",
+      "desc": "要执行的 .dll 文件的路径。"
+    }
+  ],
+  "options": [
+    {
+      "name": "new",
+      "desc": "初始化一个 Csp.net 项目。",
+      "args": [
+        {
+          "name": "output",
+          "desc": "要初始化的 .NET 项目路径。",
+          "options": [
+            {
+              "name": "--force",
+              "desc": "强制生成内容，即使该内容会更改现有文件。"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "name": "--help",
+          "desc": "显示有关此命令的帮助。"
+        }
+      ]
+    },
+    {
+      "name": "run",
+      "desc": "编译并立即执行 .NET 项目。",
+      "options": [
+        {
+          "name": "--help",
+          "desc": "显示有关此命令的帮助。"
+        }
+      ]
+    },
+    {
+      "name": "build",
+      "desc": "生成 .NET 项目。",
+      "options": [
+        {
+          "name": "--help",
+          "desc": "显示有关此命令的帮助。"
+        }
+      ]
+    },
+    {
+      "name": "--version",
+      "desc": "显示 .NET Core SDK 版本。"
+    },
+    {
+      "name": "--info",
+      "desc": "显示 .NET Core 信息"
+    },
+    {
+      "name": "--help",
+      "desc": "显示帮助。"
+    }
+  ]
+}
+/*
+csp.net
+	[path-to-application]:
+		要执行的 .dll 文件的路径。
+	new
+    初始化一个 Csp.net 项目。
+		[output]:
+			要初始化的 .NET 项目路径。
+			--force	   强制生成内容，即使该内容会更改现有文件。
+		--help       显示有关此命令的帮助。
+	run
+		编译并立即执行 .NET 项目。
+		--help       显示有关此命令的帮助。
+	build
+		生成 .NET 项目。
+		--help       显示有关此命令的帮助。
+	--version      显示 .NET Core SDK 版本。
+	--info         显示 .NET Core 信息。
+	--help         显示帮助。
+*/

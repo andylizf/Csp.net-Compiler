@@ -1,8 +1,9 @@
 {
-    "name": "ccs-snippets",
-    "displayName": "ccs_snippets",
+<<<<<<< HEAD
+    "name": "csp",
+    "displayName": "Csp.net",
     "description": "",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "Anti-Li",
     "engines": {
         "vscode": "^1.19.0"
@@ -10,22 +11,174 @@
     "categories": [
         "Snippets",
         "Languages"
+=======
+  "name": "csp",
+  "displayName": "Csp.net",
+  "description": "",
+  "version": "0.0.2",
+  "publisher": "Anti-Li",
+  "engines": {
+    "vscode": "^1.19.0"
+  },
+  "categories": [
+    "Snippets",
+    "Languages",
+    "Debuggers"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "csp",
+        "path": "./snippets/snippets.json"
+      }
     ],
-    "contributes": {
-        "snippets": [{
-            "language": "csp",
-            "path": "./snippets/snippets.json"
-        }],
-        "languages": [{
-            "id": "csp",
-            "aliases": ["CSP", "csp"],
-            "extensions": [".csp"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "csp",
-            "scopeName": "source.csp",
-            "path": "./syntaxes/csharp.tmLanguage.json"
-        }]
+    "languages": [
+      {
+        "id": "csp",
+        "aliases": [ "CSP", "csp" ],
+        "extensions": [ ".csp" ],
+        "configuration": "./language-configuration.json"
+      }
+>>>>>>> 9aed4bf3802579aa20fdc4297dabc800116e4066
+    ],
+    "grammars": [
+      {
+        "language": "csp",
+        "scopeName": "source.csp",
+        "path": "./syntaxes/csharp.tmLanguage.json"
+      }
+    ]
+  },
+  "extensionDependencies": [
+    "ms-vscode.csharp"
+  ]
+  "runtimeDependencies": [
+    {
+      "description": "OmniSharp for Windows (.NET 4.6 / x86)",
+      "url": "https://download.visualstudio.microsoft.com/download/pr/11655913/afaf4c0f0bee0304c8b1c55dfc190a9f/omnisharp-win-x86-1.29.1.zip",
+      "fallbackUrl": "https://omnisharpdownload.blob.core.windows.net/ext/omnisharp-win-x86-1.29.1.zip",
+      "installPath": ".omnisharp",
+      "platforms": [
+        "win32"
+      ],
+      "architectures": [
+        "x86"
+      ],
+      "installTestPath": "./.omnisharp/OmniSharp.exe",
+      "platformId": "win-x86"
+    },
+    {
+      "description": "OmniSharp for Windows (.NET 4.6 / x64)",
+      "url": "https://download.visualstudio.microsoft.com/download/pr/11655914/fc5dedbd95030e4015ffc24e48177255/omnisharp-win-x64-1.29.1.zip",
+      "fallbackUrl": "https://omnisharpdownload.blob.core.windows.net/ext/omnisharp-win-x64-1.29.1.zip",
+      "installPath": ".omnisharp",
+      "platforms": [
+        "win32"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "installTestPath": "./.omnisharp/OmniSharp.exe",
+      "platformId": "win-x64"
+    },
+    {
+      "description": "OmniSharp for OSX",
+      "url": "https://download.visualstudio.microsoft.com/download/pr/11655911/eee9835195b397df4c80ca16c51e1a58/omnisharp-osx-1.29.1.zip",
+      "fallbackUrl": "https://omnisharpdownload.blob.core.windows.net/ext/omnisharp-osx-1.29.1.zip",
+      "installPath": ".omnisharp",
+      "platforms": [
+        "darwin"
+      ],
+      "binaries": [
+        "./mono.osx",
+        "./run"
+      ],
+      "installTestPath": "./.omnisharp/mono.osx",
+      "platformId": "osx"
+    },
+    {
+      "description": "OmniSharp for Linux (x86)",
+      "url": "https://download.visualstudio.microsoft.com/download/pr/11655910/48d2fd69a5061fee074219c8a9b37232/omnisharp-linux-x86-1.29.1.zip",
+      "fallbackUrl": "https://omnisharpdownload.blob.core.windows.net/ext/omnisharp-linux-x86-1.29.1.zip",
+      "installPath": ".omnisharp",
+      "platforms": [
+        "linux"
+      ],
+      "architectures": [
+        "x86",
+        "i686"
+      ],
+      "binaries": [
+        "./mono.linux-x86",
+        "./run"
+      ],
+      "installTestPath": "./.omnisharp/mono.linux-x86",
+      "platformId": "linux-x86"
+    },
+    {
+      "description": "OmniSharp for Linux (x64)",
+      "url": "https://download.visualstudio.microsoft.com/download/pr/11655912/d0b11407c8b6a61cc0cf8071b2a07c87/omnisharp-linux-x64-1.29.1.zip",
+      "fallbackUrl": "https://omnisharpdownload.blob.core.windows.net/ext/omnisharp-linux-x64-1.29.1.zip",
+      "installPath": ".omnisharp",
+      "platforms": [
+        "linux"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "binaries": [
+        "./mono.linux-x86_64",
+        "./run"
+      ],
+      "installTestPath": "./.omnisharp/mono.linux-x86_64",
+      "platformId": "linux-x64"
+    },
+    {
+      "description": ".NET Core Debugger (Windows / x64)",
+      "url": "https://download.visualstudio.microsoft.com/download/pr/11709463/613b1473e1b85d7688b288818321b729/coreclr-debug-win7-x64.zip",
+      "fallbackUrl": "https://vsdebugger.blob.core.windows.net/coreclr-debug-1-15-0/coreclr-debug-win7-x64.zip",
+      "installPath": ".debugger",
+      "platforms": [
+        "win32"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "installTestPath": "./.debugger/vsdbg-ui.exe"
+    },
+    {
+      "description": ".NET Core Debugger (macOS / x64)",
+      "url": "https://download.visualstudio.microsoft.com/download/pr/11709463/613b1473e1b85d7688b288818321b729/coreclr-debug-osx-x64.zip",
+      "fallbackUrl": "https://vsdebugger.blob.core.windows.net/coreclr-debug-1-15-0/coreclr-debug-osx-x64.zip",
+      "installPath": ".debugger",
+      "platforms": [
+        "darwin"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "binaries": [
+        "./vsdbg-ui",
+        "./vsdbg"
+      ],
+      "installTestPath": "./.debugger/vsdbg-ui"
+    },
+    {
+      "description": ".NET Core Debugger (linux / x64)",
+      "url": "https://download.visualstudio.microsoft.com/download/pr/11709463/613b1473e1b85d7688b288818321b729/coreclr-debug-linux-x64.zip",
+      "fallbackUrl": "https://vsdebugger.blob.core.windows.net/coreclr-debug-1-15-0/coreclr-debug-linux-x64.zip",
+      "installPath": ".debugger",
+      "platforms": [
+        "linux"
+      ],
+      "architectures": [
+        "x86_64"
+      ],
+      "binaries": [
+        "./vsdbg-ui",
+        "./vsdbg"
+      ],
+      "installTestPath": "./.debugger/vsdbg-ui"
     }
+  ]
 }
