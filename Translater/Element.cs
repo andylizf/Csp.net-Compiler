@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text.RegularExpressions;
+using Translation.RegexExt;
 using Translation.Expression;
 using Translation.Expression.Operation;
 
@@ -7,7 +7,7 @@ namespace Translation.Element
 {
     abstract class Element
     {
-        public static Regex GetRegexLikeABA(String str, String infix)
+        public static Regex GetTailLoopRegex(String str, String infix)//ABABABABABA......
         {
             return new Regex($"{str}({infix}{str})*");
         } // Return like this: str(infixstr)*
@@ -41,7 +41,7 @@ namespace Translation.Element
                 var match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
-                else return new IntLiteral(str);
+                return new IntLiteral(str);
             }
         }
         class DoubleLiteral : Literal
@@ -54,7 +54,7 @@ namespace Translation.Element
                 var match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
-                else return new DoubleLiteral(str);
+                return new DoubleLiteral(str);
             }
         }
         class StringLiteral : Literal
@@ -67,7 +67,7 @@ namespace Translation.Element
                 var match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
-                else return new StringLiteral(str);
+                return new StringLiteral(str);
             }
         }
     }
@@ -75,7 +75,7 @@ namespace Translation.Element
     {
         abstract class AllName : Element
         {
-            public static Regex Is = GetRegexLikeABA(LocalVaribleName.Is.ToString(), "\\.");
+            public static Regex Is = GetTailLoopRegex(LocalVaribleName.Is.ToString(), "\\.");
             public AllName(String name) : base(name) { }
         }
         class MemberName : AllName
@@ -91,7 +91,7 @@ namespace Translation.Element
                 var match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
-                else return new VaribleName(str);
+                return new VaribleName(str);
             }
             public string ValueToCS()
             {
@@ -107,7 +107,7 @@ namespace Translation.Element
                 var match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
-                else return new VaribleName(str);
+                return new VaribleName(str);
             }
         }
     }

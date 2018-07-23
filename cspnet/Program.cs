@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using Translation;
@@ -71,15 +65,12 @@ namespace Cspnet
                 Console.WriteLine();
                 Error.Write("  " + str);
             }
-            return;
         }
-        static void Main(/*string[] args*/)
+        static void Main(string[] args)
         {
-            var args = new[] { "run" };
-            var mayArgsLen = 0;
+            //var args = new[] { "run" };
             if (args.Length >= 1)
             {
-                mayArgsLen++;
                 switch (args[0])
                 {
                     case "new":
@@ -99,13 +90,11 @@ namespace Cspnet
                             InvalidInput(args.SubArray(2));
                         return;
                     case "run":
-                        foreach(FileInfo file in new DirectoryInfo(@"C:\Users\andyl\Desktop\myCspNetApp2"/*Environment.CurrentDirectory*/).GetFiles())
+                        foreach(FileInfo file in new DirectoryInfo(Environment.CurrentDirectory).GetFiles())
                         {
-                            if(file.Extension == ".csp")
-                            {
-                                var t = new Translater(file.FullName);
-                                t.WriteToCSFile();
-                            }
+                            if (file.Extension != ".csp") continue;
+                            var t = new Translater(file.FullName);
+                            t.WriteToCSFile();
                         }
                         using (var runP = CallDotnet("run"))
                         {
@@ -129,10 +118,7 @@ namespace Cspnet
                         return;
                 }
             }
-            else
-            {
-                Console.WriteLine(help.help_txt);
-            }
+            Console.WriteLine(help.help_txt);
         }
     }
 }
