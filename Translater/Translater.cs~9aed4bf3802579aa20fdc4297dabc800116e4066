@@ -5,7 +5,6 @@ using Translation.RegexExt;
 using Translation.Element.RegexGrammar.Name;
 using Translation.Expression;
 using Capture = System.Text.RegularExpressions.Capture;
-using System.Text;
 
 namespace Translation
 {
@@ -407,4 +406,5 @@ namespace Translation
             return csStatements;
         }
     }
+
 }
