@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RegexExt.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

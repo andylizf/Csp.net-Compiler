@@ -1,0 +1,6 @@
+using A
+namespace A.B
+main = (args): int
+{
+    
+}
