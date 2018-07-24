@@ -1,6 +1,12 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Threading;
 using Translation;
@@ -20,9 +26,9 @@ namespace System
 }
 namespace Cspnet
 {
-    public class Program
+    class Program
     {
-        static Process CallDotnet(string argument = "")
+        static Process CallDotnet(String argument = "")
         {
             var startInfo = new ProcessStartInfo
             {
@@ -43,10 +49,10 @@ namespace Cspnet
             p.Start();
             return p;
         }
-        static Process CallDotnet(string[] arguments)
+        static Process CallDotnet(String[] arguments)
         {
             var argumentsStr = "";
-            if (arguments.Length > 0)
+            if(arguments.Length > 0)
             {
                 argumentsStr = arguments[0];
                 for (var i = 1; i < arguments.Length; i++)
@@ -65,22 +71,15 @@ namespace Cspnet
                 Console.WriteLine();
                 Error.Write("  " + str);
             }
+            return;
         }
-<<<<<<< HEAD
-        public static void Main(string[] args)
+        static void Main(/*string[] args*/)
         {
-            bool otherwise = false;
-=======
-        static void Main(string[] args)
-        {
-<<<<<<< HEAD
-            //var args = new[] { "run" };
-=======
-            bool otherwise = false;
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
+            var args = new[] { "run" };
+            var mayArgsLen = 0;
             if (args.Length >= 1)
             {
+                mayArgsLen++;
                 switch (args[0])
                 {
                     case "new":
@@ -98,75 +97,42 @@ namespace Cspnet
                         }
                         else
                             InvalidInput(args.SubArray(2));
-
-                        otherwise = true;
-                        break;
+                        return;
                     case "run":
-<<<<<<< HEAD
-                        foreach (FileInfo file in new DirectoryInfo(Environment.CurrentDirectory).GetFiles())
+                        foreach(FileInfo file in new DirectoryInfo(@"C:\Users\andyl\Desktop\myCspNetApp2"/*Environment.CurrentDirectory*/).GetFiles())
                         {
-                            if (file.Extension != ".csp") continue;
-                            var t = new Translater(file.FullName);
-                            t.Output();
-                            if (!t.Success) continue;
-=======
-                        foreach(FileInfo file in new DirectoryInfo(Environment.CurrentDirectory).GetFiles())
-                        {
-                            if (file.Extension != ".csp") continue;
-                            var t = new Translater(file.FullName);
-<<<<<<< HEAD
-                            t.WriteToCSFile();
-=======
-                            if (!t.Success) continue;
-                            t.WriteToCSFile();
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-                            using (var runP = CallDotnet("run"))
+                            if(file.Extension == ".csp")
                             {
-                                runP.BeginOutputReadLine();
-                                runP.BeginErrorReadLine();
-                                runP.WaitForExit();
-
-                                Thread.Sleep(10);// For safety reason.
+                                var t = new Translater(file.FullName);
+                                t.WriteToCSFile();
                             }
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
                         }
+                        using (var runP = CallDotnet("run"))
+                        {
+                            runP.BeginOutputReadLine();
+                            runP.BeginErrorReadLine();
+                            runP.WaitForExit();
 
-                        otherwise = true;
-                        break;
+                            Thread.Sleep(10);// For safety reason.
+                        }
+                        return;
                     case "--help":
                         Console.WriteLine(help.help_txt);
-
-                        otherwise = true;
-                        break;
+                        return;
                     case "--version":
                         Console.WriteLine("Csp.net 版本" + Assembly.GetExecutingAssembly().GetName().Version);
                         Console.Write(".NET Core SDK 版本");
                         CallDotnet("--version");
-
-                        otherwise = true;
-                        break;
+                        return;
                     default:
                         CallDotnet(args);
-
-                        otherwise = true;
-                        break;
+                        return;
                 }
             }
-<<<<<<< HEAD
-            if (!otherwise)
+            else
+            {
                 Console.WriteLine(help.help_txt);
-#if DEBUG
-            Console.ReadKey();
-#endif
-=======
-<<<<<<< HEAD
-            Console.WriteLine(help.help_txt);
-=======
-            if(! otherwise)
-                Console.WriteLine(help.help_txt);
-            Console.ReadKey();
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
+            }
         }
     }
 }

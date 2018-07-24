@@ -1,0 +1,70 @@
+{
+    "Console.WriteLine": {
+        "prefix": "cw",
+        "body": [
+            "System.Console.WriteLine($0);"
+        ],
+        "description": "Console.WriteLine"
+    },
+    "MessageBox.Show": {
+        "prefix": "mbox",
+        "body": [
+            "System.Windows.Forms.MessageBox.Show(\"${1:Text}\");$0"
+        ],
+        "description": "MessageBox.Show"
+    },
+    "Using": {
+        "prefix": "using",
+        "body": [
+            "using $0"
+        ],
+        "description": "Using namespace"
+    },
+    "Namespace": {
+        "prefix": "namespace",
+        "body": [
+            "namespace ${1:Name}"
+        ],
+        "description": "Namespace"
+    },
+    "Main () -> void": {
+        "prefix": "main",
+        "body": [
+            "main = ()",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Main proc"
+    },
+    "Main (string[]) -> void": {
+        "prefix": "main",
+        "body": [
+            "main = (args)",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Main proc"
+    },
+    "Main () -> int": {
+        "prefix": "main",
+        "body": [
+            "main = (): int",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Main proc"
+    },
+    "Main (string[]) -> int": {
+        "prefix": "main",
+        "body": [
+            "main = (args): int",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Main proc"
+    }
+}
