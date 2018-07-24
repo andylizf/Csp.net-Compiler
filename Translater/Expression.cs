@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 <<<<<<< HEAD
-<<<<<<< HEAD
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -13,9 +12,6 @@ using Translation.Expression.Operation;
 using Capture = System.Text.RegularExpressions.Capture;
 =======
 using System.Reflection;
-=======
-using System.Reflection;
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 <<<<<<< HEAD
 using Translation.Expression.Operation;
 using Capture = System.Text.RegularExpressions.Capture;
@@ -29,9 +25,6 @@ using Translation.Expression.Operation;
 using Capture = System.Text.RegularExpressions.Capture;
 using CaptureCollection = System.Text.RegularExpressions.CaptureCollection;
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 
 namespace Translation.Expression
@@ -61,11 +54,7 @@ namespace Translation.Expression
 
 =======
 <<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
@@ -81,12 +70,9 @@ namespace Translation.Expression
             }
         }
 <<<<<<< HEAD
-<<<<<<< HEAD
     }
 
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 
         public static Match MatchesAll(this Regex regex, string str)
         {
@@ -111,9 +97,6 @@ namespace Translation.Expression
 
 =======
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
     public interface IValue
     {
@@ -129,7 +112,6 @@ namespace Translation.Expression
 
     public static class Statement
     {
-<<<<<<< HEAD
 <<<<<<< HEAD
         public static Regex Is
         {
@@ -165,8 +147,6 @@ namespace Translation.Expression
             {
 =======
 <<<<<<< HEAD
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         public static Regex Is => new Regex(@".*");
         static readonly IEnumerable<Type> classesImplIStatement = Expression.GetMethodsFromClass(typeof(IStatement));
 
@@ -198,9 +178,6 @@ namespace Translation.Expression
             foreach (var find in finds)
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             {
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
                 object structExp;
                 try
@@ -211,13 +188,8 @@ namespace Translation.Expression
                         ?.Invoke(null, new[] { str.Trim() }); //TODO Unreserved original format(indentation, etc.)
 =======
 <<<<<<< HEAD
-<<<<<<< HEAD
                     structExp = find.GetMethod("Find", new[] { typeof(string) })
                         ?.Invoke(null, new[] { str.Trim() }); //TODO Unreserved original format(indentation, etc.)
-=======
-                    structExp = find.GetMethod("Find", new[] { typeof(String)})?.Invoke(null, new[] { str.Trim() });//TODO Unreserved original format(indentation, etc.)
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
                     structExp = find.GetMethod("Find", new[] { typeof(String)})?.Invoke(null, new[] { str.Trim() });//TODO Unreserved original format(indentation, etc.)
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
@@ -240,11 +212,6 @@ namespace Translation.Expression
             return null;
         }
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
 
 <<<<<<< HEAD
@@ -255,13 +222,8 @@ namespace Translation.Expression
 
             //TestingFunctionality
 <<<<<<< HEAD
-<<<<<<< HEAD
             static Comment()// Init to add Is field in every class implementing IStatement to the LineEndAndComment
                             // because Is field doesn't above LineEndAndComment and it's too difficult to add it in every class by hand.
-=======
-            static Comment() // Init to add Is field in every class implementing IStatement to the LineEndAndComment
-                             // because Is field doesn't above LineEndAndComment and it's too difficult to add it in every class by hand.
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
             static Comment() // Init to add Is field in every class implementing IStatement to the LineEndAndComment
                              // because Is field doesn't above LineEndAndComment and it's too difficult to add it in every class by hand.
@@ -274,19 +236,13 @@ namespace Translation.Expression
                     try
                     {
 <<<<<<< HEAD
-<<<<<<< HEAD
                         var memberIs = classImplIStatement.GetProperty("Is", BindingFlags.Static | BindingFlags.NonPublic);
                         Map.Add(classImplIStatement.FullName, new Regex($"{memberIs.GetValue(null) as Regex}{FileSign.LineEndAndComment}"));
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
                         var memberIs =
                             classImplIStatement.GetProperty("Is", BindingFlags.Static | BindingFlags.NonPublic);
                         Map.Add(classImplIStatement.FullName,
                             new Regex($"{memberIs.GetValue(null) as Regex}{FileSign.LineEndAndComment}"));
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
                     }
                     catch (Exception e)
@@ -302,13 +258,7 @@ namespace Translation.Expression
                 }
             }
 <<<<<<< HEAD
-<<<<<<< HEAD
         }
-=======
-
-        }
-
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
 
         }
@@ -321,15 +271,12 @@ namespace Translation.Expression
 
         }
 <<<<<<< HEAD
-<<<<<<< HEAD
     }
     public static class Value
     {
         public static Regex Is => new Regex(@".*");
 
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
     }
 
     public static class Value
@@ -344,9 +291,6 @@ namespace Translation.Expression
         public static Regex statements = new Regex($@"\(\)\{{{Statements.Is}\}}");
         public static Regex Is = new Regex($@"((.*)|({statements}))");
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         public static IValue Find(string str)
         {
@@ -388,7 +332,6 @@ namespace Translation.Expression
             return null;
         }
     }
-<<<<<<< HEAD
 <<<<<<< HEAD
     //BUG Do not implement IStatement becuase implementing the IStatement interface means participating in a Regex Expansion of statement for all classes that implement the IStatement interface, and it causes a bug, for unknown reason.
     //BUG The empty line may disrupt the order of output Lines. Maybe it's because of the nested parentheses's match pattern of Regex.        
@@ -457,8 +400,6 @@ namespace Translation.Expression
 
             public static FuncDeclare Find(String str)
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 
     class EmptyStatement : IStatement
     {
@@ -493,16 +434,12 @@ namespace Translation.Expression
             public static Regex Is => new Regex($"({Element.Element.GetTailLoopRegex($"(?<FuncLiteral_FormalParameters_Value>{Value.Is} ?: ?(?<>{MemberName.Is}) ?)", ",")})?");
 
             public static FormalParameters Find(String str)
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             {
                 var match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
 
-<<<<<<< HEAD
 <<<<<<< HEAD
                 var nameCaptures = match.Groups["FuncLiteral_FuncDeclare_ParameterName"].Captures;
                 var typeCaptures = match.Groups["FuncLiteral_FuncDeclare_ParameterType"].Captures;
@@ -545,8 +482,6 @@ namespace Translation.Expression
                     return _parameters[0].name.ToString();
                 //Lambda a => {}
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
                 var 
 
                 var statements = new List<IStatement>();
@@ -591,9 +526,6 @@ namespace Translation.Expression
             {
                 if (_parametersValue.Length == 0)
                     return "()";
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
                 string replace_str = _parametersValue[0].ValueToCS();
                 for (int i = 1; i < _parametersValue.Length; i++)
@@ -604,14 +536,10 @@ namespace Translation.Expression
             }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
             (LocalVaribleName name, MemberName type)[] _parameters;
             /*
             LocalVaribleName[] _parametersVarible;
             MemberName[] _parametersType;*//*
-=======
-            IValue[] _parametersValue;
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
             IValue[] _parametersValue;
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
@@ -626,11 +554,7 @@ namespace Translation.Expression
                 var value = Value.Is;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
                 var paras = FuncDeclare.Is;
-=======
-                var paras = FormalParameters.Is;
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
                 var paras = FormalParameters.Is;
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
@@ -657,12 +581,6 @@ namespace Translation.Expression
         }
         public static FuncCallStatement Find(String str)
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-        public static EmptyStatement Find(String str)
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
 =======
         public static EmptyStatement Find(String str)
@@ -676,23 +594,17 @@ namespace Translation.Expression
             var operandValue = Value.Find(match.Groups["FuncCallStatement_OperandValue"].ToString().Trim());
             var funcValue = Value.Find(match.Groups["FuncCallStatement_FuncValue"].ToString().Trim());
 <<<<<<< HEAD
-<<<<<<< HEAD
             var parameters = FuncDeclare.Find(match.Groups["FuncCallStatement_ActualParameters"].ToString());
             if (operandValue == null && funcValue == null || parameters == null)
                 return null;
 
             return new FuncDeclare
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             var parameters = FormalParameters.Find(match.Groups["FuncCallStatement_ActualParameters"].ToString());
             if ((operandValue == null && funcValue == null) || parameters == null)
                 return null;
 
             return new FormalParameters
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             {
                 str = str,
@@ -725,16 +637,10 @@ namespace Translation.Expression
         LocalVaribleName funcName;
         IValue funcValue;
 <<<<<<< HEAD
-<<<<<<< HEAD
         FuncDeclare parameters;
     }
     */
 
-=======
-        FormalParameters parameters;
-    }
-    */
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
         FormalParameters parameters;
     }
@@ -940,21 +846,15 @@ namespace Translation.Expression
 <<<<<<< HEAD
             public static Regex Is =>
                 new Regex(
-<<<<<<< HEAD
                     $"({Regex.GetTailLoopRegex($"(?<FuncCallStatement_ActualParameters_Value>{Value.Is})", ",")})?");
 =======
 <<<<<<< HEAD
             public static Regex Is =>
                 new Regex(
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
                     $"({Element.Element.GetTailLoopRegex($"(?<FuncCallStatement_ActualParameters_Value>{Value.Is})", ",")})?");
 =======
             public static Regex Is => new Regex($"({Element.Element.GetTailLoopRegex($"(?<FuncCallStatement_ActualParameters_Value>{Value.Is})", ",")})?");
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 
             public static ActualParameters Find(string str)
@@ -1142,11 +1042,8 @@ namespace Translation.Expression
     }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
     public class VarStatement : IStatement
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
     class VarStatement : IStatement
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
     {

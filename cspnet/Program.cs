@@ -67,25 +67,17 @@ namespace Cspnet
             }
         }
 <<<<<<< HEAD
-<<<<<<< HEAD
         public static void Main(string[] args)
         {
             bool otherwise = false;
 =======
         static void Main(string[] args)
         {
-=======
-        static void Main(string[] args)
-        {
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 <<<<<<< HEAD
             //var args = new[] { "run" };
 =======
             bool otherwise = false;
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             if (args.Length >= 1)
             {
@@ -111,7 +103,6 @@ namespace Cspnet
                         break;
                     case "run":
 <<<<<<< HEAD
-<<<<<<< HEAD
                         foreach (FileInfo file in new DirectoryInfo(Environment.CurrentDirectory).GetFiles())
                         {
                             if (file.Extension != ".csp") continue;
@@ -123,20 +114,11 @@ namespace Cspnet
                         {
                             if (file.Extension != ".csp") continue;
                             var t = new Translater(file.FullName);
-=======
-                        foreach(FileInfo file in new DirectoryInfo(Environment.CurrentDirectory).GetFiles())
-                        {
-                            if (file.Extension != ".csp") continue;
-                            var t = new Translater(file.FullName);
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 <<<<<<< HEAD
                             t.WriteToCSFile();
 =======
                             if (!t.Success) continue;
                             t.WriteToCSFile();
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
                             using (var runP = CallDotnet("run"))
                             {
@@ -171,7 +153,6 @@ namespace Cspnet
                 }
             }
 <<<<<<< HEAD
-<<<<<<< HEAD
             if (!otherwise)
                 Console.WriteLine(help.help_txt);
 #if DEBUG
@@ -179,14 +160,6 @@ namespace Cspnet
 #endif
 =======
 <<<<<<< HEAD
-            Console.WriteLine(help.help_txt);
-=======
-            if(! otherwise)
-                Console.WriteLine(help.help_txt);
-            Console.ReadKey();
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
             Console.WriteLine(help.help_txt);
 =======
             if(! otherwise)

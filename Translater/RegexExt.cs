@@ -1,9 +1,6 @@
 ﻿using System;
 <<<<<<< HEAD
-<<<<<<< HEAD
 using System.Linq;
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 using System.Runtime.Serialization;
@@ -13,7 +10,6 @@ namespace Translation
 {
     namespace RegexExt
     {
-<<<<<<< HEAD
 <<<<<<< HEAD
         public static class CapturesExt
         {
@@ -33,8 +29,6 @@ namespace Translation
             protected string[] _groupsname;
             public SafetyGroupsHelper(string[] groupsname)
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         public class SafetyGroupsHelper
         {
 <<<<<<< HEAD
@@ -44,15 +38,11 @@ namespace Translation
             protected String[] _groupsname;
             public SafetyGroupsHelper(String[] groupsname)
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             {
                 _groupsname = groupsname;
             }
         }
-<<<<<<< HEAD
 <<<<<<< HEAD
         /*
         public class RegexBuilder
@@ -78,8 +68,6 @@ namespace Translation
             System.Text.RegularExpressions.Regex _regex;
             public Regex(string pattern) : this(new System.Text.RegularExpressions.Regex(pattern))
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         public class Regex
         {
             System.Text.RegularExpressions.Regex _regex;
@@ -88,9 +76,6 @@ namespace Translation
 =======
             public Regex(String pattern): this(new System.Text.RegularExpressions.Regex(pattern))
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             {
             }
@@ -99,11 +84,8 @@ namespace Translation
                 _regex = regex;
             }
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 <<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 
             public string[] GetGroupNames()
@@ -113,12 +95,6 @@ namespace Translation
             public bool IsMatch(string input) => _regex.IsMatch(input);
             public Match Match(string input)
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-            public Match Match(String input)
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
 =======
             public Match Match(String input)
@@ -136,12 +112,7 @@ namespace Translation
             public MatchCollection Matches(string input)
 =======
 <<<<<<< HEAD
-<<<<<<< HEAD
             public MatchCollection Matches(string input)
-=======
-            public MatchCollection Matches(String input)
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
             public MatchCollection Matches(String input)
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
@@ -152,7 +123,6 @@ namespace Translation
 
 <<<<<<< HEAD
             public override string ToString()
-<<<<<<< HEAD
             {
                 return _regex.ToString();
             }
@@ -190,8 +160,6 @@ namespace Translation
 <<<<<<< HEAD
             public override string ToString()
 =======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
             public override String ToString()
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
             {
@@ -206,9 +174,6 @@ namespace Translation
 =======
             public MatchCollection(System.Text.RegularExpressions.MatchCollection matchCollection, String[] groupsname):
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
                 base(groupsname)
             {
@@ -216,7 +181,6 @@ namespace Translation
             }
             public virtual Match this[int i] => new Match(_matchCollection[i], _groupsname);
         }
-<<<<<<< HEAD
 <<<<<<< HEAD
         public class Match : SafetyGroupsHelper
         {
@@ -226,8 +190,6 @@ namespace Translation
 
             public override string ToString() => _match.ToString();
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         public class Match: SafetyGroupsHelper
         {
             System.Text.RegularExpressions.Match _match;
@@ -244,9 +206,6 @@ namespace Translation
             }
 
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             public int Length => _match.Length;
             public int Index => _match.Index;
@@ -254,14 +213,11 @@ namespace Translation
             public virtual GroupCollection Groups => new GroupCollection(_match.Groups, _groupsname);
         }
 <<<<<<< HEAD
-<<<<<<< HEAD
         public class GroupCollection : SafetyGroupsHelper
         {
             readonly System.Text.RegularExpressions.GroupCollection _groupCollection;
             public GroupCollection(System.Text.RegularExpressions.GroupCollection groupCollection, string[] groupsname) :
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         public class GroupCollection: SafetyGroupsHelper
         {
             readonly System.Text.RegularExpressions.GroupCollection _groupCollection;
@@ -270,9 +226,6 @@ namespace Translation
 =======
             public GroupCollection(System.Text.RegularExpressions.GroupCollection groupCollection, String[] groupsname):
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
                 base(groupsname)
             {
@@ -280,12 +233,9 @@ namespace Translation
             }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
             /// <summary>
             /// 当不存在此Regex不存在此Group时抛出NoGroupException。
             /// </summary>
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             public Group this[string groupname]
@@ -303,10 +253,7 @@ namespace Translation
         }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
         [Serializable]
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         public class NoGroupException : Exception

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 <<<<<<< HEAD
-<<<<<<< HEAD
 using Translation;
 using Translation.Name;
 using Translation.RegexExt;
@@ -11,10 +10,6 @@ using Capture = System.Text.RegularExpressions.Capture;
 =======
 using Translation.RegexExt;
 using Translation.Expression;
-=======
-using Translation.RegexExt;
-using Translation.Expression;
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 <<<<<<< HEAD
 using Capture = System.Text.RegularExpressions.Capture;
 using Translation.Element.Literal.RegexGrammar.Name;
@@ -22,9 +17,6 @@ using Translation.Element.Literal.RegexGrammar.Name;
 using Match = Translation.RegexExt.Match;
 using Regex = Translation.RegexExt.Regex;
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 
 namespace Translation
@@ -41,7 +33,6 @@ namespace Translation
         List<String> translatedLine = new List<string>();
         String cspFilePath;
 <<<<<<< HEAD
-<<<<<<< HEAD
         /// <summary>
         /// 指示是否分析成功。
         /// </summary>
@@ -49,15 +40,10 @@ namespace Translation
 
         public Translater(String path)
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         public bool Success;
 
         public Translater(String path)
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         {
             if (Path.GetExtension(path) != ".csp")
@@ -82,9 +68,6 @@ namespace Translation
                     translatedLine.Add(structLine.ToCS());
 =======
                     translatedLine.Add(structLine.FileSignToCS());
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 
                 lineNum++;
@@ -96,11 +79,8 @@ namespace Translation
         }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
         public void Output()
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         public void WriteToCSFile()
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         {
@@ -129,17 +109,11 @@ namespace Translation
     }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
     /// <summary>
     /// 帮助类。标识一些可能在语句块等文件标识正则表达式中可能遇到的字段。
     /// </summary>
     static class FileSign
     {
-=======
-    class FileSign
-    {
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
     class FileSign
     {
@@ -151,7 +125,6 @@ namespace Translation
         public static Regex NextLine = new Regex("\\s*\n\\s*");
         public static Regex NextOrThisLine = new Regex("\\s*\n?\\s*");
         public static Regex LineEndAndComment = new Regex($"(?<Comment>\\s*(//{NotLineFeed})?)");
-<<<<<<< HEAD
 <<<<<<< HEAD
     }
 
@@ -165,8 +138,6 @@ namespace Translation
         static Regex GetIs(string FileNamespaceUsing = "FileNamespaceUsing",
             string FileNamespaceBlock = "FileNamespaceBlock", string UsingNamespaceName = "UsingNamespaceName")
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
         public static Regex Empty = new Regex("\\s*");
         public static Regex NextLine = new Regex("\\s*\n\\s*");
@@ -185,9 +156,6 @@ namespace Translation
         static Regex GetIs(String FileNamespaceUsing = "FileNamespaceUsing",
             String FileNamespaceBlock = "FileNamespaceBlock", String UsingNamespaceName = "UsingNamespaceName")
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         {
             return new Regex(
@@ -198,12 +166,7 @@ namespace Translation
         public static CspFile Find(string str)
 =======
 <<<<<<< HEAD
-<<<<<<< HEAD
         public static CspFile Find(string str)
-=======
-        public static CspFile Find(String str)
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
         public static CspFile Find(String str)
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
@@ -221,12 +184,7 @@ namespace Translation
             return new CspFile()
 =======
 <<<<<<< HEAD
-<<<<<<< HEAD
             return new CspFile()
-=======
-            return new CspFile
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
             return new CspFile
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
@@ -236,42 +194,14 @@ namespace Translation
                 namespaceBlock = block
             };
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 <<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
-        }
-
-        NamespaceUsing namespaceUsing;
-        NamespaceBlock namespaceBlock;
-
-        public string FileSignToCS()
-        {
-            return namespaceUsing.FileSignToCS() + namespaceBlock.FileSignToCS();
-        }
-    }
-
-    class NamespaceUsing
-    {
-        static Regex Is = GetIs();
-
-        public static Regex GetIs(string UsingNamespaceName = "UsingNamespaceName")
-        {
-            return Element.Element.GetTailLoopRegex($"using (?<{UsingNamespaceName}>{MemberName.Is})",
-                FileSign.NextLine.ToString());
-        }
-
-        public static NamespaceUsing Find(string str)
-        {
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         }
 
         NamespaceUsing namespaceUsing;
         NamespaceBlock namespaceBlock;
 
-<<<<<<< HEAD
 <<<<<<< HEAD
         public string ToCS()
         {
@@ -319,10 +249,6 @@ namespace Translation
 
         public string FileSignToCS()
         {
-=======
-        public string FileSignToCS()
-        {
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             return namespaceUsing.FileSignToCS() + namespaceBlock.FileSignToCS();
         }
     }
@@ -340,9 +266,6 @@ namespace Translation
         public static NamespaceUsing Find(String str)
         {
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             Match match = Is.MatchesAll(str);
             if (match == null)
@@ -357,32 +280,22 @@ namespace Translation
             }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
             return new NamespaceUsing
-=======
-            return new NamespaceUsing()
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             {
                 Exist = exist,
                 namespacesUsing = namespacesName.ToArray(),
 =======
-<<<<<<< HEAD
 <<<<<<< HEAD
             return new NamespaceUsing()
             {
                 Exist = exist,
                 namespacesUsing = namespacesName.ToArray(),
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             return new NamespaceUsing
             {
                 Exist = exist,
                 namespacesUsing = namespacesName.ToArray()
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             };
         }
@@ -391,11 +304,7 @@ namespace Translation
         public bool Exist = true;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
         public string ToCS()
-=======
-        public string FileSignToCS()
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
         public string FileSignToCS()
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
@@ -414,11 +323,7 @@ namespace Translation
     }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
     public class NamespaceBlock
-=======
-    class NamespaceBlock
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
     class NamespaceBlock
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
@@ -435,12 +340,7 @@ namespace Translation
         public static NamespaceBlock Find(string str)
 =======
 <<<<<<< HEAD
-<<<<<<< HEAD
         public static NamespaceBlock Find(string str)
-=======
-        public static NamespaceBlock Find(String str)
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
         public static NamespaceBlock Find(String str)
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
@@ -458,12 +358,7 @@ namespace Translation
             return new NamespaceBlock()
 =======
 <<<<<<< HEAD
-<<<<<<< HEAD
             return new NamespaceBlock()
-=======
-            return new NamespaceBlock
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
             return new NamespaceBlock
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
@@ -473,7 +368,6 @@ namespace Translation
                 thisNamespace = new MemberName(match.Groups["NamespaceBlock_namespace"].ToString())
             };
         }
-<<<<<<< HEAD
 
         MainFunc main;
         MemberName thisNamespace;
@@ -510,27 +404,6 @@ namespace Translation
 
         private class MainFunc
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
-
-        MainFunc main;
-        MemberName thisNamespace;
-
-        public string FileSignToCS()
-        {
-            if (thisNamespace.Name == "")
-                return main.FileSignToCS();
-            var thisNamespaceStr = thisNamespace.Name;
-            var lastDot = thisNamespaceStr.LastIndexOf('.');
-            var csclass = $"class {thisNamespaceStr.Substring(lastDot + 1)}{{";
-            if (lastDot == -1)
-                return csclass + main.FileSignToCS() + "}";
-
-            var csnamespace = $"namespace {thisNamespaceStr.Substring(0, lastDot)}{{";
-            return csnamespace + csclass + main.FileSignToCS() + "}}";
-        }
-
-        private class MainFunc
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
         {
             
             public static Regex Is
@@ -541,11 +414,7 @@ namespace Translation
                         $"main = (\\((?<MainFunc_argsName>{LocalVaribleName.Is})?\\))? ?(: ?(?<MainFunc_returnInt>int))?({FileSign.NextOrThisLine})*{{\\s*";
                     var middle = $"(?<MainFunc_statements>{Statements.Is})";
 <<<<<<< HEAD
-<<<<<<< HEAD
                     var end = FileSign.NextOrThisLine + @"\}";
-=======
-                    var end = FileSign.NextOrThisLine + "}";
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
                     var end = FileSign.NextOrThisLine + "}";
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
@@ -557,12 +426,7 @@ namespace Translation
             public static MainFunc Find(string str)
 =======
 <<<<<<< HEAD
-<<<<<<< HEAD
             public static MainFunc Find(string str)
-=======
-            public static MainFunc Find(String str)
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
             public static MainFunc Find(String str)
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
@@ -584,11 +448,7 @@ namespace Translation
                 {
                     returnIntOrVoid = returnIntOrVoid,
 <<<<<<< HEAD
-<<<<<<< HEAD
                     _statements = statements,
-=======
-                    statements = statements,
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
                     statements = statements,
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
@@ -598,14 +458,11 @@ namespace Translation
             LocalVaribleName argsName;
             MemberName returnIntOrVoid;
 <<<<<<< HEAD
-<<<<<<< HEAD
             Statements _statements;
             public string ToCS()
             {
                 string param;
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             Statements statements;
             public string FileSignToCS()
             {
@@ -614,9 +471,6 @@ namespace Translation
 =======
                 String param;
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
                 if (argsName.Name == "")
                     param = "";
@@ -624,14 +478,11 @@ namespace Translation
                     param = "String[] " + argsName;
 <<<<<<< HEAD
                 string begin = $"static {returnIntOrVoid} Main({param}){{";
-<<<<<<< HEAD
                 string middle = _statements.ToCS();
                 string end = "}";
 =======
 <<<<<<< HEAD
                 string begin = $"static {returnIntOrVoid} Main({param}){{";
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
                 string middle = statements.FileSignToCS();
                 string end = "}";
 =======
@@ -639,9 +490,6 @@ namespace Translation
                 String middle = statements.FileSignToCS();
                 String end = "}";
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
                 return begin + " \n\t" + middle + "\n" + end;
             }
@@ -728,7 +576,6 @@ namespace Translation
     }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
     public class Statements
     {
         //To match some statements (a block of statements).
@@ -743,8 +590,6 @@ namespace Translation
         {
             Match match = Is.MatchesAll(str.Trim());
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
     class Statements
     {
         public static Regex Is =>
@@ -757,9 +602,6 @@ namespace Translation
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
         {
             Match match = Is.MatchesAll(str);
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             if (match == null)
                 return null;
@@ -777,11 +619,8 @@ namespace Translation
             var statements = new List<IStatement>();
             var captures = match.Groups["_statements"].Captures;// TODO "_" may not be sopported in group name.
 <<<<<<< HEAD
-<<<<<<< HEAD
             for (var i = 0; i < captures.Count; i++)
 =======
-=======
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             for (int i = 0; i < captures.Count; i++)
             //BUG The empty line may disrupt the order of output Lines. Maybe it's because of the nested parentheses's match pattern of Regex.
             //
@@ -801,9 +640,6 @@ namespace Translation
 	
             }}}
              */
-<<<<<<< HEAD
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
-=======
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
             {
                 var statement = Statement.Find(captures[i].ToString());
@@ -813,12 +649,7 @@ namespace Translation
                     Error.WriteLine($"In main scope: {str}, error {captures[i]}", ConsoleColor.Red);
 =======
 <<<<<<< HEAD
-<<<<<<< HEAD
                     Error.WriteLine($"In main scope: {str}, error {captures[i]}", ConsoleColor.Red);
-=======
-                    Console.WriteLine($"In main scope: {str}, error {captures[i]}");
->>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
                     Console.WriteLine($"In main scope: {str}, error {captures[i]}");
 >>>>>>> bb4d2dafdc5a556eb7c5fd073272132e9f41f930
@@ -837,11 +668,7 @@ namespace Translation
         IStatement[] statements;
 
 <<<<<<< HEAD
-<<<<<<< HEAD
         public string ToCS()
-=======
-        public string FileSignToCS()
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
         public string FileSignToCS()
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c

@@ -60,15 +60,9 @@
       <Name>ConsoleError</Name>
     </ProjectReference>
 <<<<<<< HEAD
-<<<<<<< HEAD
     <ProjectReference Include="..\Translater\Translation.csproj">
       <Project>{1C96FFE0-CB85-4BA0-9ED1-0F5A871C4199}</Project>
       <Name>Translation</Name>
-=======
-    <ProjectReference Include="..\Translater\Translater.csproj">
-      <Project>{1C96FFE0-CB85-4BA0-9ED1-0F5A871C4199}</Project>
-      <Name>Translater</Name>
->>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
     <ProjectReference Include="..\Translater\Translater.csproj">
       <Project>{1C96FFE0-CB85-4BA0-9ED1-0F5A871C4199}</Project>
