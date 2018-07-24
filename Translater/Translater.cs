@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
-using Translation.Element.RegexGrammar.Name;
+using Translation;
+using Translation.Name;
+using Translation.RegexExt;
 using Translation.Expression;
+using Capture = System.Text.RegularExpressions.Capture;
 
 namespace Translation
 {
@@ -11,39 +13,55 @@ namespace Translation
     {
         Dictionary<int, (string, string)> errors = new Dictionary<int, (string, string)>();
         List<String> translatedLine = new List<string>();
-        String cspFilePath = null;
-        public Translater(String path) {
+        String cspFilePath;
+        /// <summary>
+        /// 指示是否分析成功。
+        /// </summary>
+        public bool Success;
+
+        public Translater(String path)
+        {
             if (Path.GetExtension(path) != ".csp")
             {
                 throw new Exception("参数path的文件非.csp文件");
             }
+
             using (var reader = new StreamReader(path))
             {
                 cspFilePath = path;
                 var lineNum = 0;
                 var fileStr = reader.ReadToEnd();
-                var structLine = CspFile.Find(fileStr);
+                var structLine = CspFile.Find(fileStr);//Important. Make CspFile structuralization.
                 if (structLine == null)
                 {
-                    errors.Add(lineNum, ($"ERROR: Can't translate! Uncaught SyntaxError: Unexpected token `{fileStr}`.", $"意外的标记`{fileStr}`导致的语法错误。"));
+                    errors.Add(lineNum,
+                        ($"ERROR: Can't translate! Uncaught SyntaxError: Unexpected token `{fileStr}`.",
+                            $"意外的标记`{fileStr}`导致的语法错误。"));
                 }
                 else
-                    translatedLine.Add(structLine.FileSignToCS());
+                    translatedLine.Add(structLine.ToCS());
+
                 lineNum++;
             }
-        }
-        public void WriteToCSFile()
-        {
+
             if (errors.Count == 0)
+                Success = true;
+
+        }
+
+        public void Output()
+        {
+            if (Success)
             {
                 foreach (var i in translatedLine)
                 {
                     Console.WriteLine(i);
                 }
-                using (StreamWriter CSFile = new StreamWriter(cspFilePath + ".cs"))
+
+                using (StreamWriter csFile = new StreamWriter(cspFilePath + ".cs"))
                     foreach (var i in translatedLine)
                     {
-                        CSFile.Write(i);
+                        csFile.Write(i);
                     }
             }
             else
@@ -55,188 +73,241 @@ namespace Translation
                 }
             }
         }
-        private interface IFileSign
+    }
+
+    /// <summary>
+    /// 帮助类。标识一些可能在语句块等文件标识正则表达式中可能遇到的字段。
+    /// </summary>
+    static class FileSign
+    {
+        public static Regex Letters = new Regex("[A-Za-z]+");
+        public static Regex NotLineFeed = new Regex("[^\\n]*");
+        public static Regex Empty = new Regex("\\s*");
+        public static Regex NextLine = new Regex("\\s*\n\\s*");
+        public static Regex NextOrThisLine = new Regex("\\s*\n?\\s*");
+        public static Regex LineEndAndComment = new Regex($"(?<Comment>\\s*(//{NotLineFeed})?)");
+    }
+
+    public class CspFile
+    {
+        /// <summary>
+        /// namespaceBlock与namespaceUsing与一些空格相加的结果。成功匹配是具有Csp.net基本文件标识，即是一个Csp.net代码文件的充要条件。
+        /// </summary>
+        static Regex Is = GetIs();
+
+        static Regex GetIs(string FileNamespaceUsing = "FileNamespaceUsing",
+            string FileNamespaceBlock = "FileNamespaceBlock", string UsingNamespaceName = "UsingNamespaceName")
         {
-            String FileSignToCS();
+            return new Regex(
+                $"(?<{FileNamespaceUsing}>{NamespaceUsing.GetIs(UsingNamespaceName)}){FileSign.NextLine}(?<{FileNamespaceBlock}>{NamespaceBlock.GetIs()})");
         }
-        static class FileSign
+        
+        public static CspFile Find(string str)
         {
-            public static Regex NextLine = new Regex("(\\s*\n\\s*)");
-            public static Regex NextOrThisLine = new Regex("(\\s*\n?\\s*)");
-            public static IFileSign Find(String str)
-            {
-                var finds = Expression.Expression.GetMethodsFromClass(typeof(IFileSign));
-                foreach (var find in finds)
-                {
-                    Object structExp;
-                    try
-                    {
-                        structExp = find.GetMethod("Find", new[] { typeof(String) }).Invoke(null, new[] { str.Trim() });
-                    }
-                    catch (Exception)
-                    {
-                        structExp = null;
-                    }
-                    if (structExp != null)
-                    {
-#if DEBUG
-                        Console.WriteLine($"IFileSign {structExp}");
-#endif
-                        return structExp as IFileSign;
-                    }
-                }
+            Match match = Is.MatchesAll(str);
+            if (match == null)
                 return null;
-            }
+
+            var block = NamespaceBlock.Find(match.Groups["FileNamespaceBlock"].ToString());
+            if (block == null)
+                return null;
+
+            return new CspFile()
+            {
+                namespaceUsing = NamespaceUsing.Find(match.Groups["FileNamespaceUsing"].ToString()),
+                namespaceBlock = block
+            };
         }
 
-        class CspFile : IFileSign
+        NamespaceUsing namespaceUsing;
+        NamespaceBlock namespaceBlock;
+
+        public string ToCS()
         {
-            static Regex Is = GetIs();
-            static Regex GetIs(String FileNamespaceUsing = "FileNamespaceUsing", String FileNamespaceBlock = "FileNamespaceBlock", String UsingNamespaceName = "UsingNamespaceName", String ThisNamespaceName = "ThisNamespaceName", String ArgsName = "ArgsName", String ReturnInt = "ReturnInt", String Statements = "Statements", String Main = "Main")
+            return namespaceUsing.ToCS() + namespaceBlock.ToCS();
+        }
+    }
+
+    class NamespaceUsing
+    {
+        static Regex Is = GetIs();
+
+        public static Regex GetIs(string UsingNamespaceName = "UsingNamespaceName")
+        {
+            return Regex.GetTailLoopRegex($"using (?<{UsingNamespaceName}>{MemberName.Is})",
+                FileSign.NextLine.ToString());
+        }
+
+        public static NamespaceUsing Find(string str)
+        {
+            Match match = Is.MatchesAll(str);
+            if (match == null)
+                return null;
+
+            bool exist = !match.Groups["UsingNamespaceName"].Captures.IsAllEmpty();
+
+            var namespacesName = new List<MemberName>();
+            foreach (Capture capture in match.Groups["UsingNamespaceName"].Captures)
             {
-                return new Regex($"(?<{FileNamespaceUsing}>{NamespaceUsing.GetIs(UsingNamespaceName).ToString()}){FileSign.NextLine}(?<{FileNamespaceBlock}>{NamespaceBlock.GetIs(ThisNamespaceName, ArgsName, ReturnInt, Statements, Main).ToString()})");
+                namespacesName.Add(new MemberName(capture.ToString()));
             }
-            public static CspFile Find(String str)
+
+            return new NamespaceUsing
+            {
+                Exist = exist,
+                namespacesUsing = namespacesName.ToArray(),
+            };
+        }
+
+        MemberName[] namespacesUsing;
+        public bool Exist = true;
+
+        public string ToCS()
+        {
+            if (!Exist)
+                return "";
+            var str = "";
+            foreach (var namespaceUsing in namespacesUsing)
+            {
+                str += $"using {namespaceUsing.Name};\n";
+            }
+
+            return str;
+        }
+
+    }
+
+    public class NamespaceBlock
+    {
+        static Regex Is = GetIs();
+
+        public static Regex GetIs()
+        {
+            var NamespaceStr = $"(namespace (?<NamespaceBlock_namespace>{MemberName.Is}){FileSign.NextLine})?";
+            return new Regex(NamespaceStr + $"(?<NamespaceBlock_Main>{MainFunc.Is})");
+        }
+
+        public static NamespaceBlock Find(string str)
+        {
+            Match match = Is.MatchesAll(str);
+            if (match == null)
+                return null;
+
+            var main = MainFunc.Find(match.Groups["NamespaceBlock_Main"].ToString());
+            if (main == null)
+                return null;
+
+            return new NamespaceBlock()
+            {
+                main = main,
+                thisNamespace = new MemberName(match.Groups["NamespaceBlock_namespace"].ToString())
+            };
+        }
+
+        MainFunc main;
+        MemberName thisNamespace;
+
+        public string ToCS()
+        {
+            if (thisNamespace.Name == "")
+                return main.ToCS();
+            var thisNamespaceStr = thisNamespace.Name;
+            var lastDot = thisNamespaceStr.LastIndexOf('.');
+            var csclass = $"class {thisNamespaceStr.Substring(lastDot + 1)}{{";
+            if (lastDot == -1)
+                return csclass + main.ToCS() + "}";
+
+            var csnamespace = $"namespace {thisNamespaceStr.Substring(0, lastDot)}{{";
+            return csnamespace + csclass + main.ToCS() + "}}";
+        }
+
+        public class MainFunc
+        {
+            
+            public static Regex Is
+            {
+                get
+                {
+                    var begin =
+                        $"main = (\\((?<MainFunc_argsName>{LocalVaribleName.Is})?\\))? ?(: ?(?<MainFunc_returnInt>int))?({FileSign.NextOrThisLine})*{{\\s*";
+                    var middle = $"(?<MainFunc_statements>{Statements.Is})";
+                    var end = FileSign.NextOrThisLine + @"\}";
+                    return new Regex(begin + middle + end);
+                }
+
+            }
+            public static MainFunc Find(string str)
             {
                 Match match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
 
-                var main = NamespaceBlock.Find(match.Groups["Main"].ToString());
-                if (main == null)
+                var returnIntOrVoid = new MemberName("int");
+                if (match.Groups["MainFunc_returnInt"].ToString() == "")
+                    returnIntOrVoid = new MemberName("void");
+
+                var statements = Statements.Find(match.Groups["MainFunc_statements"].ToString());
+                if (statements == null)
                     return null;
 
-                return new CspFile()
+                return new MainFunc
                 {
-                    namespaceUsing = NamespaceUsing.Find(match.Groups["FileNamespaceUsing"].ToString()),
-                    namespaceBlock = NamespaceBlock.Find(match.Groups["FileNamespaceBlock"].ToString())
+                    returnIntOrVoid = returnIntOrVoid,
+                    _statements = statements,
+                    argsName = new LocalVaribleName(match.Groups["MainFunc_argsName"].ToString())
                 };
             }
-            NamespaceUsing namespaceUsing;
-            NamespaceBlock namespaceBlock;
-            public string FileSignToCS()
+            LocalVaribleName argsName;
+            MemberName returnIntOrVoid;
+            Statements _statements;
+            public string ToCS()
             {
-                return namespaceUsing.FileSignToCS() + namespaceBlock.FileSignToCS();
+                string param;
+                if (argsName.Name == "")
+                    param = "";
+                else
+                    param = "String[] " + argsName;
+                string begin = $"static {returnIntOrVoid} Main({param}){{";
+                string middle = _statements.ToCS();
+                string end = "}";
+                return begin + " \n\t" + middle + "\n" + end;
             }
-        }
-        private class NamespaceUsing : IFileSign
-        {
-            static Regex Is = GetIs();
-            public static Regex GetIs(String UsingNamespaceName = "UsingNamespaceName")
+            
+            /*
+            public static Regex Is
             {
-                return Element.Element.GetRegexLikeABA($"using (?<{UsingNamespaceName}>{MemberName.Is})", FileSign.NextLine.ToString());
-            }
-            public static NamespaceUsing Find(String str)
-            {
-                Match match = Is.MatchesAll(str);
-                if (match == null)
-                    return null;
-
-                bool exist = true;
-                if (match.Groups["UsingNamespaceName"].Captures.IsAllEmpty())
+                get
                 {
-                    exist = false;
+                    var begin =
+                        $"main = (\\((?<MainFunc_argsName>{LocalVaribleName.Is})?\\))? ?(: ?(?<MainFunc_returnInt>int))?{FileSign.NextOrThisLine}*{{\\s*";
+                    var middle = Element.Element.GetTailLoopRegex($"(?<MainFunc_statements>{Statement.Is})",
+                        FileSign.NextLine.ToString());
+                    var end = FileSign.NextOrThisLine + "}";
+                    return new Regex(begin + middle + end);
                 }
-                var namespacesName = new List<MemberName>();
-                foreach (Capture capture in match.Groups["UsingNamespaceName"].Captures)
-                {
-                    namespacesName.Add(new MemberName(capture.ToString()));
-                }
-                return new NamespaceUsing()
-                {
-                    Exist = exist,
-                    namespacesUsing = namespacesName.ToArray(),
-                };
             }
 
-            MemberName[] namespacesUsing;
-            public bool Exist = true;
-
-            public string FileSignToCS()
-            {
-                if (!Exist)
-                    return "";
-                var str = "";
-                foreach (var namespaceUsing in namespacesUsing)
-                {
-                    str += $"using {namespaceUsing.Name};\n";
-                }
-                return str;
-            }
-
-        }
-        private class NamespaceBlock : IFileSign
-        {
-            static Regex Is = GetIs();
-            public static Regex GetIs(String ThisNamespaceName = "ThisNamespaceName", String ArgsName = "ArgsName", String ReturnInt = "ReturnInt", String Statements = "Statements", String Main = "Main")
-            {
-                var NamespaceStr = $"(namespace (?<{ThisNamespaceName}>{MemberName.Is}){FileSign.NextLine})?";
-                return new Regex(NamespaceStr + $"(?<{Main}>{MainFunc.GetIs(ArgsName, ReturnInt, Statements)})");
-            }
-            public static NamespaceBlock Find(String str)
-            {
-                Match match = Is.MatchesAll(str);
-                if (match == null)
-                    return null;
-
-                var main = MainFunc.Find(match.Groups["Main"].ToString());
-                if (main == null)
-                    return null;
-
-                return new NamespaceBlock()
-                {
-                    main = main as MainFunc,
-                    thisNamespace = new MemberName(match.Groups["ThisNamespaceName"].ToString())
-                };
-            }
-
-            MainFunc main;
-            MemberName thisNamespace;
-
-            public string FileSignToCS()
-            {
-                if (thisNamespace.Name == "")
-                    return main.FileSignToCS();
-                var thisNamespaceStr = thisNamespace.Name;
-                var lastDot = thisNamespaceStr.LastIndexOf('.');
-                var csclass = $"class {thisNamespaceStr.Substring(lastDot + 1)}{{";
-                if (lastDot == -1)
-                    return csclass + main.FileSignToCS() + "}";
-
-                var csnamespace = $"namespace {thisNamespaceStr.Substring(0, lastDot)}{{";
-                return csnamespace + csclass + main.FileSignToCS() + "}}";
-            }
-        }
-        private class MainFunc : IFileSign
-        {
-            static public Regex Is = GetIs();
-            static public Regex GetIs(String ArgsName = "ArgsName", String ReturnInt = "ReturnInt", String Statements = "Statements")
-            {
-                var begin = $"main = (\\((?<{ArgsName}>{LocalVaribleName.Is})?\\))? ?(: ?(?<{ReturnInt}>int))?{FileSign.NextOrThisLine}*{{\\s*";
-                var middle = Element.Element.GetRegexLikeABA($"(?<{Statements}>{Statement.Is.ToString()})", FileSign.NextLine.ToString());
-                var end = FileSign.NextOrThisLine + "}";
-                return new Regex(begin + middle + end);
-            }
-            public static IFileSign Find(String str)
+            public static MainFunc Find(String str)
             {
                 Match match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
 
                 MemberName returnIntOrVoid = new MemberName("int");
-                if (match.Groups["ReturnInt"].ToString() == "")
+                if (match.Groups["MainFunc_returnInt"].ToString() == "")
                     returnIntOrVoid = new MemberName("void");
-                if (match.Groups["Statements"].Captures.IsAllEmpty())// Count?
+                if (match.Groups["MainFunc_statements"].Captures.IsAllEmpty()) // No statements. Return a empty statements.
                 {
-                    return new MainFunc()
+                    return new MainFunc
                     {
                         returnIntOrVoid = returnIntOrVoid,
                         statements = new IStatement[] { },
-                        argsName = new LocalVaribleName(match.Groups["ArgsName"].ToString())
+                        argsName = new LocalVaribleName(match.Groups["MainFunc_argsName"].ToString())
                     };
                 }
+
                 var statements = new List<IStatement>();
-                foreach (Capture capture in match.Groups["Statements"].Captures)
+                foreach (Capture capture in match.Groups["MainFunc_statements"].Captures)
                 {
                     var captureNoEmpty = capture.ToString().Trim();
                     if (captureNoEmpty == "")
@@ -247,17 +318,18 @@ namespace Translation
                     statements.Add(statement);
                 }
 
-                return new MainFunc()
+                return new MainFunc
                 {
                     returnIntOrVoid = returnIntOrVoid,
                     statements = statements.ToArray(),
-                    argsName = new LocalVaribleName(match.Groups["ArgsName"].ToString())
+                    argsName = new LocalVaribleName(match.Groups["MainFunc_argsName"].ToString())
                 };
             }
 
             LocalVaribleName argsName;
             MemberName returnIntOrVoid;
             IStatement[] statements;
+
             public string FileSignToCS()
             {
                 String param;
@@ -276,9 +348,68 @@ namespace Translation
                 {
                     middle += "\n\t" + statements[i].StatementToCS();
                 }
+
                 return begin + " \n\t" + middle + "\n" + end;
-            }
+            }*/
         }
     }
-}
 
+    public class Statements
+    {
+        //To match some statements (a block of statements).
+        //Contains Statement.Is.
+        /// <summary>
+        /// Is字段是Statement.Is的尾循环。成功匹配是是一个语句块的充要条件。
+        /// </summary>
+        public static Regex Is =>
+                    Regex.GetTailLoopRegex($"(?<_statements>{Statement.Is})", FileSign.NextLine.ToString());
+
+        public static Statements Find(string str)
+        {
+            Match match = Is.MatchesAll(str.Trim());
+            if (match == null)
+                return null;
+
+            /*
+            if (match.Groups["_statements"].Captures.IsAllEmpty())// No statements. Return a empty statements.
+            {
+                return new Statements
+                {
+                    statements = new IStatement[] { }
+                };
+            }
+            */
+
+            var statements = new List<IStatement>();
+            var captures = match.Groups["_statements"].Captures;// TODO "_" may not be sopported in group name.
+            for (var i = 0; i < captures.Count; i++)
+            {
+                var statement = Statement.Find(captures[i].ToString());
+                if (statement == null)
+                {
+                    Error.WriteLine($"In main scope: {str}, error {captures[i]}", ConsoleColor.Red);
+                    return null;
+                }
+                statements.Add(statement);
+            }
+
+            return new Statements
+            {
+                statements = statements.ToArray()
+            };
+        }
+
+        IStatement[] statements;
+
+        public string ToCS()
+        {
+            var csStatements = statements[0].StatementToCS();
+            for (var i = 1; i < statements.Length; i++)
+            {
+                csStatements += "\n\t" + statements[i].StatementToCS();
+            }
+            return csStatements;
+        }
+    }
+
+}

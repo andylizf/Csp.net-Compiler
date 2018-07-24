@@ -1,113 +1,128 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using Translation.Expression;
+﻿using Translation.Expression;
 using Translation.Expression.Operation;
+using Translation.RegexExt;
 
-namespace Translation.Element
+namespace Translation
 {
-    abstract class Element
+    public abstract class ElementBase
     {
-        public static Regex GetRegexLikeABA(String str, String infix)
-        {
-            return new Regex($"{str}({infix}{str})*");
-        } // Return like this: str(infixstr)*
-        public readonly String Name;
-        public override String ToString()
+        public readonly string Name;
+        public override string ToString()
         {
             return Name;
         }
-        public Element(String name)
+        protected ElementBase(string name)
         {
             Name = name;
         }
     }
+
     namespace Literal
     {
-        abstract class Literal : Element, IValue
+        abstract class Literal : ElementBase, IValue
         {
             public string ValueToCS()
             {
                 return Name;
             }
-            public Literal(String name) : base(name) { }
+
+            public Literal(string name) : base(name)
+            {
+            }
         }
+
         class IntLiteral : Literal
         {
             public static Level level = Level.Min;
             public static Regex Is = new Regex("[0-9]+");
-            IntLiteral(String name) : base(name) { }
-            public static IValue Find(String str)
+
+            IntLiteral(string name) : base(name)
+            {
+            }
+
+            public static IValue Find(string str)
             {
                 var match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
-                else return new IntLiteral(str);
+                return new IntLiteral(str);
             }
         }
+
         class DoubleLiteral : Literal
         {
             public static Level level = Level.Min;
             public static Regex Is = new Regex($"{IntLiteral.Is}.{IntLiteral.Is}");
-            public DoubleLiteral(String name) : base(name) { }
-            public static IValue Find(String str)
+
+            public DoubleLiteral(string name) : base(name)
+            {
+            }
+
+            public static IValue Find(string str)
             {
                 var match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
-                else return new DoubleLiteral(str);
+                return new DoubleLiteral(str);
             }
         }
+
         class StringLiteral : Literal
         {
             public static Level level = Level.Min;
             public static Regex Is = new Regex(@"""[ \S]*""");
-            StringLiteral(String name) : base(name) { }
-            public static IValue Find(String str)
+
+            StringLiteral(string name) : base(name)
+            {
+            }
+
+            public static IValue Find(string str)
             {
                 var match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
-                else return new StringLiteral(str);
+                return new StringLiteral(str);
             }
         }
     }
-    namespace RegexGrammar.Name
+
+    namespace Name
     {
-        abstract class AllName : Element
+        public abstract class AllName : ElementBase
         {
-            public static Regex Is = GetRegexLikeABA(LocalVaribleName.Is.ToString(), "\\.");
-            public AllName(String name) : base(name) { }
+            public static Regex Is = Regex.GetTailLoopRegex(LocalVaribleName.Is.ToString(), "\\.");
+            public AllName(string name) : base(name) { }
         }
-        class MemberName : AllName
+        public class MemberName : AllName
         {
-            public MemberName(String name) : base(name) { }
+            public MemberName(string name) : base(name) { }
         }
-        class VaribleName : AllName, IValue
+        public class VaribleName : AllName, IValue
         {
             public static Level level = Level.Min;
-            public VaribleName(String name) : base(name) { }
-            public static IValue Find(String str)
+            public VaribleName(string name) : base(name) { }
+            public static IValue Find(string str)
             {
                 var match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
-                else return new VaribleName(str);
+                return new VaribleName(str);
             }
             public string ValueToCS()
             {
                 return Name;
             }
         }
-        class LocalVaribleName : VaribleName
+        public class LocalVaribleName : VaribleName
         {
             public new static Regex Is = new Regex("[A-Z|a-z][A-Z|a-z|0-9]*");
-            public LocalVaribleName(String name) : base(name) { }
-            public new static IValue Find(String str)
+            public LocalVaribleName(string name) : base(name) { }
+            public new static IValue Find(string str)
             {
                 var match = Is.MatchesAll(str);
                 if (match == null)
                     return null;
-                else return new VaribleName(str);
+                return new VaribleName(str);
             }
         }
     }

@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using Translation;
@@ -26,7 +20,7 @@ namespace System
 }
 namespace Cspnet
 {
-    class Program
+    public class Program
     {
         static Process CallDotnet(String argument = "")
         {
@@ -52,7 +46,7 @@ namespace Cspnet
         static Process CallDotnet(String[] arguments)
         {
             var argumentsStr = "";
-            if(arguments.Length > 0)
+            if (arguments.Length > 0)
             {
                 argumentsStr = arguments[0];
                 for (var i = 1; i < arguments.Length; i++)
@@ -71,15 +65,12 @@ namespace Cspnet
                 Console.WriteLine();
                 Error.Write("  " + str);
             }
-            return;
         }
-        static void Main(/*string[] args*/)
+        public static void Main(string[] args)
         {
-            var args = new[] { "run" };
-            var mayArgsLen = 0;
+            bool otherwise = false;
             if (args.Length >= 1)
             {
-                mayArgsLen++;
                 switch (args[0])
                 {
                     case "new":
@@ -97,42 +88,52 @@ namespace Cspnet
                         }
                         else
                             InvalidInput(args.SubArray(2));
-                        return;
+
+                        otherwise = true;
+                        break;
                     case "run":
-                        foreach(FileInfo file in new DirectoryInfo(@"C:\Users\andyl\Desktop\myCspNetApp2"/*Environment.CurrentDirectory*/).GetFiles())
+                        foreach (FileInfo file in new DirectoryInfo(Environment.CurrentDirectory).GetFiles())
                         {
-                            if(file.Extension == ".csp")
+                            if (file.Extension != ".csp") continue;
+                            var t = new Translater(file.FullName);
+                            t.Output();
+                            if (!t.Success) continue;
+                            using (var runP = CallDotnet("run"))
                             {
-                                var t = new Translater(file.FullName);
-                                t.WriteToCSFile();
+                                runP.BeginOutputReadLine();
+                                runP.BeginErrorReadLine();
+                                runP.WaitForExit();
+
+                                Thread.Sleep(10);// For safety reason.
                             }
                         }
-                        using (var runP = CallDotnet("run"))
-                        {
-                            runP.BeginOutputReadLine();
-                            runP.BeginErrorReadLine();
-                            runP.WaitForExit();
 
-                            Thread.Sleep(10);// For safety reason.
-                        }
-                        return;
+                        otherwise = true;
+                        break;
                     case "--help":
                         Console.WriteLine(help.help_txt);
-                        return;
+
+                        otherwise = true;
+                        break;
                     case "--version":
                         Console.WriteLine("Csp.net 版本" + Assembly.GetExecutingAssembly().GetName().Version);
                         Console.Write(".NET Core SDK 版本");
                         CallDotnet("--version");
-                        return;
+
+                        otherwise = true;
+                        break;
                     default:
                         CallDotnet(args);
-                        return;
+
+                        otherwise = true;
+                        break;
                 }
             }
-            else
-            {
+            if (!otherwise)
                 Console.WriteLine(help.help_txt);
-            }
+#if DEBUG
+            Console.ReadKey();
+#endif
         }
     }
 }

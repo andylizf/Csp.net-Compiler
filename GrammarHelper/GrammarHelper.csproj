@@ -38,7 +38,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -53,9 +52,9 @@
       <Project>{079ac6ce-8602-43ef-81cc-9e155bd9569b}</Project>
       <Name>ConsoleError</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Translater\Translater.csproj">
+    <ProjectReference Include="..\Translater\Translation.csproj">
       <Project>{1c96ffe0-cb85-4ba0-9ed1-0f5a871c4199}</Project>
-      <Name>Translater</Name>
+      <Name>Translation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
