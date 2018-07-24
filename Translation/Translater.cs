@@ -1,7 +1,12 @@
-﻿using System;
+﻿// Packaged interface
+/*
+ * Project: https://github.com/Anti-Li/Csp.net-Complier
+ * Author: https://github.com/Anti-Li
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
-using Translation;
 using Translation.Name;
 using Translation.RegexExt;
 using Translation.Expression;

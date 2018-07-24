@@ -52,7 +52,7 @@
       <Project>{079ac6ce-8602-43ef-81cc-9e155bd9569b}</Project>
       <Name>ConsoleError</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Translater\Translation.csproj">
+    <ProjectReference Include="..\Translation\Translation.csproj">
       <Project>{1c96ffe0-cb85-4ba0-9ed1-0f5a871c4199}</Project>
       <Name>Translation</Name>
     </ProjectReference>

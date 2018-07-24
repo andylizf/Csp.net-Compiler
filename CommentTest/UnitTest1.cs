@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Translation.Expression;
 using Translation.RegexExt;
 
