@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="实现ISratement接口是是一种语句的充要条件。">
+    <Position X="10.528" Y="14.763" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="反射属性&#xD;&#xA;static Regex Is{get;}&#xD;&#xA;反射方法&#xD;&#xA;static IValue Find(string str);&#xD;&#xA;工厂方法，不与Is正则表达式匹配时，返回null。反之，返回新的当前类实例，IValue字段为Value.Find(value命名组的字符串)。">
+    <Position X="12.501" Y="15.835" Height="1.789" Width="2.756" />
+  </Comment>
+  <Comment CommentText="实现IValue接口是是有可能产生值的操作的充要条件。">
+    <Position X="13.515" Y="14.769" Height="0.713" Width="1.7" />
+  </Comment>
+  <Comment CommentText="反射属性&#xD;&#xA;static Regex Is{get;}&#xD;&#xA;反射方法&#xD;&#xA;static IStatement Find(string str);&#xD;&#xA;工厂方法，不与Is正则表达式匹配时，返回null。反之，返回新的当前类实例，其某些非IValue字段先构造，IValue字段为Value.Find(value命名组的字符串)。">
+    <Position X="9.507" Y="15.836" Height="1.801" Width="2.756" />
+  </Comment>
+  <Comment CommentText="静态类。Find方法调用Expression.GetMethodsFromClass方法以使用反射在所有实现了IStatement接口的类中调用Find方法，并返回其中不为null的唯一结果。">
+    <Position X="11.418" Y="20.005" Height="1.888" Width="1.7" />
+  </Comment>
+  <Comment CommentText="静态类。Find方法调用Expression.GetMethodsFromClass方法以使用反射在所有实现了IStatement接口的类中调用Find方法，并返回其中不为null的唯一结果。">
+    <Position X="15.55" Y="20.005" Height="1.73" Width="1.7" />
+  </Comment>
+  <Comment CommentText="静态类，其中GetMethodsFromClass使用反射在程序集中寻找实现了参数指定接口的类，并返回它们中的参数指定方法。">
+    <Position X="7.25" Y="20" Height="1.368" Width="1.7" />
+  </Comment>
+  <Comment CommentText="语法结构的叶节点，递归分析语法本质上在此结束，类似地，递归中间代码转换也在此结束。其为叶节点的原因是：其他中间节点均包含其他IValue成员。而此节点不包含其他IValue成员。">
+    <Position X="7.973" Y="27.008" Height="2.072" Width="1.7" />
+  </Comment>
+  <Comment CommentText="变量。可能产生一个值。">
+    <Position X="5.682" Y="31.754" Height="1.965" Width="1.7" />
+  </Comment>
+  <Comment CommentText="字面量。产生一个值。">
+    <Position X="14.607" Y="30.229" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="1.1">
+    <Position X="11.024" Y="32.609" Height="0.294" Width="1.493" />
+  </Comment>
+  <Comment CommentText="1">
+    <Position X="12.812" Y="32.606" Height="0.294" Width="1.445" />
+  </Comment>
+  <Comment CommentText="“Hello world”">
+    <Position X="14.496" Y="32.597" Height="0.294" Width="1.481" />
+  </Comment>
+  <Comment CommentText="IStatement接口和IValue接口可以这么理解：&#xD;&#xA;IStatement接口是语句，实现它的类总是包含IValue成员。&#xD;&#xA;IValue接口是值，其普遍意义是：有时候语句的某一元素需要一个值。比如ReturnStatement返回语句的正则表达式大意为“return {value}&quot;。这时value可以是任何产生值的操作。可以为&quot;return 1 + 2&quot;，可以为&quot;return a&quot;，可以为&quot;return f(1)&quot;，甚至可以是”return f(1 + 2 + 3)“。这便必须使用递归分析。在一次递归中，如果Value.Find寻找到了一实现IValue接口的类的Is正则表达式匹配成功，则此类的Find方法接下来的操作是，将Is正则表达式中的一些value命名组匹配到的字符串再调用Value.Find递归分析。直到Value叶节点为止。">
+    <Position X="7.871" Y="17.908" Height="1.596" Width="8.026" />
+  </Comment>
+  <Comment CommentText="一个语句块。Is字段是Statement.Is的尾循环。成功匹配是是一个语句块的充要条件。">
+    <Position X="8.537" Y="11.951" Height="1.023" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Is字段中的命名组就像形参：匹配后再将其匹配到的真正值取出。当前Find方法的字符串参数中的部分元素就像实参。当前类的实例的IValue字段为实参的真正值。&#xD;&#xA;逻辑如下：&#xD;&#xA;{ClassIValue/IStatement}{&#xD;&#xA;	Find({value} v){&#xD;&#xA;		return new {ClassIValue/IStatement}(){&#xD;&#xA;			this,v = Value.Find(v)&#xD;&#xA;		}&#xD;&#xA;	}&#xD;&#xA;	IValue v&#xD;&#xA;	OtherMember m&#xD;&#xA;}">
+    <Position X="16.236" Y="14.802" Height="2.859" Width="3.984" />
+  </Comment>
+  <Class Name="Translation.Translater">
+    <Position X="10.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAEIAAAAAgAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Translater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.FileSign">
+    <Position X="12" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAQCAAAAAAAAAAIAAIAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Translater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.CspFile">
+    <Position X="10.25" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAABIIAAAABAAAAAAEAA=</HashCode>
+      <FileName>Translater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.NamespaceUsing">
+    <Position X="13" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAAAAAAAAAAAAAAAAAAABIAAAAAAAAAAEAEAA=</HashCode>
+      <FileName>Translater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.NamespaceBlock">
+    <Position X="10.25" Y="5.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Translation.NamespaceBlock.MainFunc">
+        <TypeIdentifier>
+          <NewMemberFileName>Translater.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAABIAAAACAAAAAAAEAQ=</HashCode>
+      <FileName>Translater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.Statements">
+    <Position X="10.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAABIAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Translater.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="statements" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Translation.Expression.Expression">
+    <Position X="5" Y="20" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.Expression.Statement">
+    <Position X="9.5" Y="20" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Translation.Expression.Statement.Comment" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Expression.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAABIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.Expression.Value">
+    <Position X="13.75" Y="20" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expression.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.RegexExt.SafetyGroupsHelper">
+    <Position X="3.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>RegexExt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.RegexExt.Regex">
+    <Position X="3.5" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ABACAgAAAAAABAAEAAAgAAAAAABAAAgAAAIAAAAAACA=</HashCode>
+      <FileName>RegexExt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.RegexExt.MatchCollection" Collapsed="true">
+    <Position X="1.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RegexExt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.RegexExt.Match" Collapsed="true">
+    <Position X="3.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAgAAAAEAAAAAABAAgAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>RegexExt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.RegexExt.GroupCollection">
+    <Position X="5.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RegexExt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.RegexExt.NoGroupException" Collapsed="true">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RegexExt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.ElementBase">
+    <Position X="10.5" Y="27" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Element.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.Name.AllName" Collapsed="true">
+    <Position X="8.5" Y="30.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Element.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.Name.MemberName" Collapsed="true">
+    <Position X="9.25" Y="31.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Element.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.Name.VaribleName" Collapsed="true">
+    <Position X="7.5" Y="31.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEIIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Element.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Translation.Literal.Literal" Collapsed="true">
+    <Position X="12.75" Y="30.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Element.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Translation.Literal.IntLiteral" Collapsed="true">
+    <Position X="12.75" Y="31.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAFIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Element.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.Literal.DoubleLiteral" Collapsed="true">
+    <Position X="11" Y="31.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAFIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Element.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.Literal.StringLiteral" Collapsed="true">
+    <Position X="14.5" Y="31.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAFIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Element.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.Name.LocalVaribleName" Collapsed="true">
+    <Position X="7.5" Y="33" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Element.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Translation.Expression.AssignmentStatement" Collapsed="true">
+    <Position X="4.75" Y="23.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAACAAAAAAAFIICAAAIAAAAAAAAA=</HashCode>
+      <FileName>Expression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Translation.Expression.VarStatement" Collapsed="true">
+    <Position X="8.5" Y="24.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAABAAAAAAAgAAABIEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Translation.Expression.ReturnStatement" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="24.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAACAAAAAAAAAIAAAAAAAABIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Translation.Expression.IncrementDecrementOperator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="23.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAACAAAAAAAAAAAAAAIAAAFIICAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Translation.Expression.PlusMinusOperator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="24.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAACAAAAAAAAAAAAAAIAAAFIICAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Translation.Expression.TimesDivOperator" Collapsed="true">
+    <Position X="15.75" Y="23.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAACAAAAAAAAAAAAAAIAAAFIICAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Translation.Expression.FuncCallStatement" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="23.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAIIACAAAAAAAAAAAAAAAQAAFIICAAAAAAAACAAAA=</HashCode>
+      <FileName>Expression.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Translation.Expression.IValue">
+    <Position X="12.5" Y="14.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expression.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Translation.Expression.IStatement">
+    <Position X="9.5" Y="14.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Expression.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
