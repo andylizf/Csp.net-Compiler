@@ -2,6 +2,10 @@
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+using Translation.Element.Literal.RegexGrammar.Name;
+>>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
 using Translation.Element.Literal.RegexGrammar.Name;
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
@@ -51,7 +55,11 @@ namespace CommentTest
             TestExpression(@"aaa // egbr", regex);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         /*
+=======
+
+>>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
 
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
@@ -60,8 +68,12 @@ namespace CommentTest
             TestExpression(@"  //declare varible",
                 Statement.Comment.Map["Translation.Expression.Statement+EmptyStatement"]);
 <<<<<<< HEAD
+<<<<<<< HEAD
         //No Empty Statement now.
         */
+=======
+
+>>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
 =======
 
 >>>>>>> 15c06afe46adb851d5e50169b817698f089b622c
