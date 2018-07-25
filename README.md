@@ -4,7 +4,9 @@
 
 
 📝
-***Available***🇨🇳***Version. View this doc in Chinese at***
+***Available***
+🇨🇳
+***Version. View this doc in Chinese at***
 [README_zh-CN](README_zh-CN.md).
 
 Csp.net is a programming language that runs on .NET Core.
@@ -119,4 +121,15 @@ Statement is similar to Value. However, Statement only performs a "find" process
 ### Architecture
 
 [UML](Translation/Generate.cd)
+*(Can be opened in Visual Studio)*
 ![UMLGraph](assets/Generate.png)
+
+## License
+
+[Apache-2.0](https://github.com/Anti-Li/Csp.net-Complier/blob/master/LICENSE)
+
+### Original author
+
+@Anti-Li
+
+In July 2008, the project won the "China Mobile 'HE Education' Cup" 19th **National Primary and Secondary School Computer Production Activities** *Junior High School* Computer Programming First Prize.

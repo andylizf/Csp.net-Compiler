@@ -86,7 +86,7 @@ FuncCall | `obj`.`func`(`paras`)
 
 ![demo](assets/code.png)
 
-<h2>-></h2>
+->The generated syntax tree:
 
 ![result](assets/tree.png)
 
@@ -102,7 +102,7 @@ IValue接口定义了一个Regex字段Is。与之匹配总是属于这种语句�
 
 实现IValue接口的类总是含有一些字段。这些字段代表这种语句含有的一些 **可变的** 字符串。其中部分是IValue的，部分非IValue。这些字段的值总是与匹配的命名组的值相同。
 
-比如，赋值语句的Is定义大致为 Is = $"(?<varible>{Varible.Is}) = (?<value>{Value.Is})"。其中varible不是一个IValue命名组，可以直接构造并赋给新实例的相应字段；value是一个IValue命名组，必须递归分析，直到这个语法树的 **叶节点** (字段、字面值)。这样，例子中的"f(a + 2) + 1"就分解成了相加操作，其中前操作数字段此时为"f(a + 2)"，后操作数为"1"。前操作数又将分解函数调用，函数此时为"f"，参数此时为"a + 2"。参数又将分解为相加操作，其中前操作数字段此时为"a"，后操作数为"2"。
+比如，赋值语句的Is定义大致为 Is = $"(?<varible>{Varible.Is}) = (?<value>{Value.Is})"。其中varible不是一个IValue命名组，可以直接构造并赋给新实例的相应字段；value是一个IValue命名组，必须递归分析，直到这个语法树的 **叶节点** （字段、字面值）。这样，例子中的"f(a + 2) + 1"就分解成了相加操作，其中前操作数字段此时为"f(a + 2)"，后操作数为"1"。前操作数又将分解函数调用，函数此时为"f"，参数此时为"a + 2"。参数又将分解为相加操作，其中前操作数字段此时为"a"，后操作数为"2"。
 
 递归函数Value.Find会调用集合中类的Find方法，如果返回值存在 *唯一* 非null值，返回之；反之，则参数存在语法错误，返回null。
 
@@ -113,4 +113,15 @@ Statement与Value类似。不过，Statement只进行一次“寻找”的过程
 ### 架构
 
 [UML](Translation/Generate-zh_CN.cd)
+*（可在Visual Studio中打开）*
 ![UMLGraph](assets/Generate_zh-CN.png)
+
+## 版权
+
+[Apache-2.0](https://github.com/Anti-Li/Csp.net-Complier/blob/master/LICENSE)
+
+### 原作者
+
+@Anti-Li
+
+二〇一八年七月，本项目荣获“中国移动‘和教育’杯”第十九届 **全国中小学电脑制作活动** *初中组* 计算机程序设计 一等奖。

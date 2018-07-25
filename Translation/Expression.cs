@@ -1,4 +1,10 @@
-﻿using Translation.RegexExt;
+﻿// Core Algorithm
+/*
+ * Project: https://github.com/Anti-Li/Csp.net-Complier
+ * Author: https://github.com/Anti-Li
+ */
+
+using Translation.RegexExt;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
