@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cspnet", "cspnet\Cspnet.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleError", "ConsoleError\ConsoleError.csproj", "{079AC6CE-8602-43EF-81CC-9E155BD9569B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translation", "Translater\Translation.csproj", "{1C96FFE0-CB85-4BA0-9ED1-0F5A871C4199}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translation", "Translation\Translation.csproj", "{1C96FFE0-CB85-4BA0-9ED1-0F5A871C4199}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrammarHelper", "GrammarHelper\GrammarHelper.csproj", "{93F0A966-89C2-402D-AF31-47B79CFB0AFE}"
 	ProjectSection(ProjectDependencies) = postProject

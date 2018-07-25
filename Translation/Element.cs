@@ -1,5 +1,4 @@
 ﻿using Translation.Expression;
-using Translation.Expression.Operation;
 using Translation.RegexExt;
 
 namespace Translation
@@ -33,7 +32,6 @@ namespace Translation
 
         class IntLiteral : Literal
         {
-            public static Level level = Level.Min;
             public static Regex Is = new Regex("[0-9]+");
 
             IntLiteral(string name) : base(name)
@@ -51,7 +49,6 @@ namespace Translation
 
         class DoubleLiteral : Literal
         {
-            public static Level level = Level.Min;
             public static Regex Is = new Regex($"{IntLiteral.Is}.{IntLiteral.Is}");
 
             public DoubleLiteral(string name) : base(name)
@@ -69,7 +66,6 @@ namespace Translation
 
         class StringLiteral : Literal
         {
-            public static Level level = Level.Min;
             public static Regex Is = new Regex(@"""[ \S]*""");
 
             StringLiteral(string name) : base(name)
@@ -99,7 +95,6 @@ namespace Translation
         }
         public class VaribleName : AllName, IValue
         {
-            public static Level level = Level.Min;
             public VaribleName(string name) : base(name) { }
             public static IValue Find(string str)
             {

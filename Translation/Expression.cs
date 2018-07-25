@@ -6,34 +6,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Translation.Name;
-using Translation.Expression.Operation;
 using Capture = System.Text.RegularExpressions.Capture;
-using CaptureCollection = System.Text.RegularExpressions.CaptureCollection;
 
 namespace Translation.Expression
 {
-    namespace Operation
-    {
-        public class Level
-        {
-            int nLevel;
-
-            public Level(int level)
-            {
-                nLevel = level;
-            }
-
-            public static Level None = new Level(0),
-                Min = new Level(int.MinValue),
-                Max = new Level(int.MaxValue);
-
-            public static bool operator >(Level a, Level b) => a.nLevel > b.nLevel;
-            public static bool operator >=(Level a, Level b) => a.nLevel >= b.nLevel;
-            public static bool operator <(Level a, Level b) => a.nLevel < b.nLevel;
-            public static bool operator <=(Level a, Level b) => a.nLevel <= b.nLevel;
-        }
-    }
-
     public static class Expression
     {
         public static IEnumerable<Type> GetMethodsFromClass(Type interfaceType)
@@ -163,15 +139,10 @@ namespace Translation.Expression
             foreach (var find in finds)
             {
                 object structExp;
-                Level findLevel = null;
                 try
                 {
-                    if (findLevel == null)
-                        structExp = find.GetMethod("Find", new[] { typeof(string) /*, typeof(Level) */})
-                            .Invoke(null, new[] { str });
-                    else
-                        structExp = find.GetMethod("Find", new[] { typeof(string), typeof(Level) })
-                            .Invoke(null, new object[] { str, findLevel });
+                        structExp = find.GetMethod("Find", new[] { typeof(string) })
+                            ?.Invoke(null, new[] { str });
                 }
                 catch
                 {
@@ -183,7 +154,6 @@ namespace Translation.Expression
 #if DEBUG
                     Console.WriteLine($"IValue {structExp}");
 #endif
-                    findLevel = find.GetField("level").GetValue(null) as Level;
                     return structExp as IValue;
                 }
             }
@@ -435,7 +405,6 @@ namespace Translation.Expression
 
     class IncrementDecrementOperator : IStatement, IValue
     {
-        public static Level level = new Level(12);
         static Regex Is => GetIs();
 
         public static Regex GetIs(string Prefix = "Prefix", string Postfix = "Postfix", string Operand = "Operand")
@@ -444,14 +413,6 @@ namespace Translation.Expression
             var prefix = $"(?<{Prefix}>{inOrDe})";
             var postfix = $"(?<{Postfix}>{inOrDe})";
             return new Regex($"{prefix}? ?(?<{Operand}>{VaribleName.Is}) ?(?({Prefix})|{postfix})");
-        }
-
-        public static IncrementDecrementOperator Find(string str, Level alrFindLv)
-        {
-            if (level <= alrFindLv)
-                return null;
-
-            return Find(str);
         }
 
         public static IncrementDecrementOperator Find(string str)
@@ -463,7 +424,6 @@ namespace Translation.Expression
             return new IncrementDecrementOperator()
             {
                 str = str,
-                oper = (match.Groups["Prefix"].ToString(), match.Groups["Postfix"].ToString()),
                 operand = new VaribleName(match.Groups["Operand"].ToString())
             };
         }
@@ -479,14 +439,11 @@ namespace Translation.Expression
         }
 
         string str;
-
-        (string Prefix, string Postfix) oper;
         VaribleName operand;
     }
 
     class PlusMinusOperator : IValue
     {
-        public static Level level = new Level(14);
         static Regex Is => GetIs();
 
         public static Regex GetIs(string PreOperand = "PreOperand", string PostOperand = "PostOperand",
@@ -494,14 +451,6 @@ namespace Translation.Expression
         {
             var PlOrMi = @"(\+|\-)";
             return new Regex($"(?<{PreOperand}>{Value.Is}) ?(?<{Operator}>{PlOrMi}) ?(?<{PostOperand}>{Value.Is})");
-        }
-
-        public static PlusMinusOperator Find(string str, Level alrFindLv)
-        {
-            if (level <= alrFindLv)
-                return null;
-
-            return Find(str);
         }
 
         public static PlusMinusOperator Find(string str)
@@ -537,7 +486,6 @@ namespace Translation.Expression
 
     class TimesDivOperator : IValue
     {
-        public static Level level = new Level(13);
         static Regex Is => GetIs();
 
         public static Regex GetIs(string PreOperand = "PreOperand", string PostOperand = "PostOperand",
@@ -546,15 +494,7 @@ namespace Translation.Expression
             var PlOrMi = @"(\*|/)";
             return new Regex($"(?<{PreOperand}>{Value.Is}) ?(?<{Operator}>{PlOrMi}) ?(?<{PostOperand}>{Value.Is})");
         }
-
-        public static TimesDivOperator Find(string str, Level alrFindLv)
-        {
-            if (level <= alrFindLv)
-                return null;
-
-            return Find(str);
-        }
-
+        
         public static TimesDivOperator Find(string str)
         {
             var match = Is.MatchesAll(str);
@@ -639,8 +579,6 @@ namespace Translation.Expression
             IValue[] _parametersValue;
         }
 
-        public static Level level = new Level(15);
-
         static Regex Is
         {
             get
@@ -666,14 +604,6 @@ namespace Translation.Expression
             }
         }
 
-        public static FuncCallStatement Find(string str, Level alrFindLv)
-        {
-            if (level <= alrFindLv)
-                return null;
-
-            return Find(str);
-        }
-
         public static FuncCallStatement Find(string str)
         {
             var match = Is.MatchesAll(str);
@@ -690,7 +620,6 @@ namespace Translation.Expression
             {
                 str = str,
                 operandValue = operandValue,
-                className = new MemberName(match.Groups["FuncCallStatement_ClassName"].ToString()),
                 funcName = new LocalVaribleName(match.Groups["FuncCallStatement_FuncName"].ToString()),
                 funcValue = funcValue,
                 parameters = parameters
@@ -716,7 +645,6 @@ namespace Translation.Expression
         string str;
 
         IValue operandValue;
-        MemberName className;
         LocalVaribleName funcName;
         IValue funcValue;
         ActualParameters parameters;
@@ -724,8 +652,6 @@ namespace Translation.Expression
 
     public class AssignmentStatement : IStatement, IValue
     {
-        public static Level level = new Level(16);
-
         static Regex Is
         {
             get
@@ -734,14 +660,6 @@ namespace Translation.Expression
                 var end = $"(?<AssignmentStatement_Value>{Value.Is})";
                 return new Regex(first + " ?= ?" + end);
             }
-        }
-
-        public static AssignmentStatement Find(string str, Level alrFindLv)
-        {
-            if (level <= alrFindLv)
-                return null;
-
-            return Find(str);
         }
 
         public static AssignmentStatement Find(string str)
@@ -757,7 +675,6 @@ namespace Translation.Expression
             return new AssignmentStatement()
             {
                 str = str,
-                AssignVarible = new VaribleName(match.Groups["AssignmentStatement_Varible"].ToString()),
                 AssignValue = assignValue
             };
         }
@@ -773,8 +690,7 @@ namespace Translation.Expression
         }
 
         string str;
-
-        VaribleName AssignVarible;
+        
         IValue AssignValue;
     }
 
