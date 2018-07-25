@@ -2,8 +2,9 @@
     <img src="assets/icon.png" alt="csp.net"></img>
 </div>
 
+
 📝
-***Available 🇨🇳 Version. View this doc in Chinese at***
+***Available***🇨🇳***Version. View this doc in Chinese at***
 [README_zh-CN](README_zh-CN.md).
 
 Csp.net is a programming language that runs on .NET Core.
@@ -36,8 +37,7 @@ namespace MyFirstCsp.Program
 ```
 ***Required***
 
-`MainFunc` is used to identify the **program entry point**. The parameters of the `MainFunc` can be empty `()` or String[] type parameters `(args)`, the returnType can be empty ` `
-or int type `: int`.
+`MainFunc` is used to identify the **program entry point**. The parameters of the `MainFunc` can be empty `()` or String[] type parameters `(args)`, the returnType can be empty ` ` or int type `: int`.
 ```
 main = {
 
@@ -71,7 +71,7 @@ Statement | Form
 Var | var `varible`~~: `type`~~ ~~= `value`~~     *(There is always one that is necessary in `type` and `value`)*
 FuncCall | `obj`.`func`(`paras`)
 Return | return `value`
-++-- | `field` `\+\+\|\-\-`
+++-- | `field` `++\|--`
 = | `field` = `value`
 
 ### Operation
@@ -80,7 +80,7 @@ When a value is required, the following operations are supported.
 
 Operation | Form
 ------ | ------
-+-*/ | `value` `\+\|\-\|\*\|/` `value`
++-*/ | `value` `+\|-\|*\|/` `value`
 = | `field` = `value`
 FuncCall | `obj`.`func`(`paras`)
 
@@ -92,7 +92,7 @@ The core algorithm is not a compilation principle, but a new algorithm that cons
 
 ![demo](assets/code.png)
 
-## ->
+<h2>-></h2>
 
 ![result](assets/tree.png)
 
@@ -118,5 +118,5 @@ Statement is similar to Value. However, Statement only performs a "find" process
 
 ### Architecture
 
-Translater/Generate.cd
-![UML](assets/Generate.png)
+[UML](Translation/Generate.cd)
+![UMLGraph](assets/Generate.png)

@@ -7,6 +7,7 @@ Csp.net是一门运行在.NET Core上的编程语言。
 ## Why Csp.net?
 Csp.net更适合初学者入门。
 Csp.net更适合编写脚本类程序。与同类语言相比：
+
 编程语言 | 丰富的库支持 | 脚本的便捷性
 ------ | ------ | ------
 C#等.NET语言 |   | 代码量大幅减少，更适合脚本的应用场景。
@@ -24,13 +25,13 @@ using System.IO
 
 `NamespaceName`用于命名当前程序。
 
-*编译器会将`NamespaceName`解释为类所在的命名空间名称（如果它是多级别的）和类的名称*
+*编译器会将`NamespaceName`解释为类所在的命名空间名称（如果它是多级别的）和类的名称。*
 ```
 namespace MyFirstCsp.Program
 ```
 ***必要***
 
-`MainFunc`用于标识 **程序入口点** 。 `MainFunc`的参数可以是空的`()`或String[]类型的`(args)`, 返回类型可以是空的` `或int类型的`: int`.
+`MainFunc`用于标识 **程序入口点** 。 `MainFunc`的参数可以是空的`()`或String[]类型的`(args)`，返回类型可以是空的` `或int类型的`: int`。
 ```
 main = {
 
@@ -64,7 +65,7 @@ main = (args): int{
 Var | var `varible`~~: `type`~~ ~~= `value`~~     *(There is always one that is necessary in `type` and `value`)*
 FuncCall | `obj`.`func`(`paras`)
 Return | return `value`
-++-- | `field` `\+\+|\-\-`
+++-- | `field` `++\|--`
 = | `field` = `value`
 
 ### 操作
@@ -73,7 +74,7 @@ Return | return `value`
 
 操作 | 形式
 ------ | ------
-+-*/ | `value` `\+|\-|\*|/` `value`
++-*/ | `value` `+\|-\|*\|/` `value`
 = | `field` = `value`
 FuncCall | `obj`.`func`(`paras`)
 
@@ -85,7 +86,7 @@ FuncCall | `obj`.`func`(`paras`)
 
 ![demo](assets/code.png)
 
-->
+<h2>-></h2>
 
 ![result](assets/tree.png)
 
@@ -107,9 +108,9 @@ IValue接口定义了一个Regex字段Is。与之匹配总是属于这种语句�
 
 IValue接口定义了一个接受String参数的Find方法。此方法将Is与参数相匹配，如果不成功返回null。反之，属于这种语句。之后先使用非IValue命名组构造相应字段并赋给新实例，再将Value命名组传入Value.Find进行递归，如果返回值非null，赋给相应字段；反之，则命名组处存在语法错误，返回null。
 
-Statement与Value类似。不过，Statement只进行一次“寻找”的过程，就由确定的语句类进行相关构造，一般地会调用Value.Find。
+Statement与Value类似。不过，Statement只进行一次“寻找”的过程，就由确定的语句类进行相关构造，一般地会调用Value.Find方法。
 
 ### 架构
 
-Translater/Generate-zh_CN.cd
-![UML](assets/Generate_zh-CN.png)
+[UML](Translation/Generate-zh_CN.cd)
+![UMLGraph](assets/Generate_zh-CN.png)
