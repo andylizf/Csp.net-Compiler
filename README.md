@@ -1,12 +1,12 @@
 <div align="center">
     <img src="assets/icon.png" alt="csp.net"></img>
 </div>
-📝***Available 🇨🇳 Version. View this doc in Chinese at ***
-[README_zh-CN](README_zh-CN.md)
-.
+
+📝
+***Available 🇨🇳 Version. View this doc in Chinese at***
+[README_zh-CN](README_zh-CN.md).
 
 Csp.net is a programming language that runs on .NET Core.
-![dotnetcore](https://www.microsoft.com/net/images/redesign/downloads-dot-net-core.svg?v=U_8I9gzFF2Cqi5zUNx-kHJuou_BWNurkhN_kSm3mCmo)
 
 ## Why Csp.net?
 Csp.net is more suitable for beginners to get started.
@@ -71,7 +71,7 @@ Statement | Form
 Var | var `varible`~~: `type`~~ ~~= `value`~~     *(There is always one that is necessary in `type` and `value`)*
 FuncCall | `obj`.`func`(`paras`)
 Return | return `value`
-++-- | `field` `\+\+|\-\-`
+++-- | `field` `\+\+\|\-\-`
 = | `field` = `value`
 
 ### Operation
@@ -80,7 +80,7 @@ When a value is required, the following operations are supported.
 
 Operation | Form
 ------ | ------
-+-*/ | `value` `\+|\-|\*|/` `value`
++-*/ | `value` `\+\|\-\|\*\|/` `value`
 = | `field` = `value`
 FuncCall | `obj`.`func`(`paras`)
 
@@ -92,7 +92,7 @@ The core algorithm is not a compilation principle, but a new algorithm that cons
 
 ![demo](assets/code.png)
 
-->
+## ->
 
 ![result](assets/tree.png)
 
@@ -118,5 +118,5 @@ Statement is similar to Value. However, Statement only performs a "find" process
 
 ### Architecture
 
-![UML](assets/Generate.png)
 Translater/Generate.cd
+![UML](assets/Generate.png)

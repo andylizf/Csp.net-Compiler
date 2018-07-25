@@ -3,7 +3,6 @@
 </div>
 
 Csp.net是一门运行在.NET Core上的编程语言。
-![dotnetcore](https://www.microsoft.com/net/images/redesign/downloads-dot-net-core.svg?v=U_8I9gzFF2Cqi5zUNx-kHJuou_BWNurkhN_kSm3mCmo)
 
 ## Why Csp.net?
 Csp.net更适合初学者入门。
