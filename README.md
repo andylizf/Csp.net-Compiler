@@ -94,7 +94,7 @@ The core algorithm is not a compilation principle, but a new algorithm that cons
 
 ![demo](assets/code.png)
 
-<h2>-></h2>
+->The generated syntax tree:
 
 ![result](assets/tree.png)
 
@@ -130,6 +130,6 @@ Statement is similar to Value. However, Statement only performs a "find" process
 
 ### Original author
 
-@Anti-Li
+@[Anti-Li](https://github.com/Anti-Li)
 
 In July 2008, the project won the "China Mobile 'HE Education' Cup" 19th **National Primary and Secondary School Computer Production Activities** *Junior High School* Computer Programming First Prize.

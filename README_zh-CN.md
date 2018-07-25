@@ -112,7 +112,7 @@ Statement与Value类似。不过，Statement只进行一次“寻找”的过程
 
 ### 架构
 
-[UML](Translation/Generate-zh_CN.cd)
+[UML](Translation/Generate_zh-CN.cd)
 *（可在Visual Studio中打开）*
 ![UMLGraph](assets/Generate_zh-CN.png)
 
@@ -122,6 +122,6 @@ Statement与Value类似。不过，Statement只进行一次“寻找”的过程
 
 ### 原作者
 
-@Anti-Li
+@[Anti-Li](https://github.com/Anti-Li)
 
-二〇一八年七月，本项目荣获“中国移动‘和教育’杯”第十九届 **全国中小学电脑制作活动** *初中组* 计算机程序设计 一等奖。
+二〇一八年七月，本项目荣获[“中国移动‘和教育’杯”第十九届 **全国中小学电脑制作活动**](http://www.huodong2000.com.cn/) *初中组* 计算机程序设计 一等奖。
