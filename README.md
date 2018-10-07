@@ -33,7 +33,7 @@ using System.IO
 
 `NamespaceName` is used to name the current program.
 
-*The Complier will interpret the `NamespaceName` as the namespace name of the class(if there are multiple levels) and the name of the class.*
+*The Compiler will interpret the `NamespaceName` as the namespace name of the class(if there are multiple levels) and the name of the class.*
 ```
 namespace MyFirstCsp.Program
 ```
