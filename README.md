@@ -132,4 +132,4 @@ Statement is similar to Value. However, Statement only performs a "find" process
 
 @[Anti-Li](https://github.com/Anti-Li)
 
-In July 2008, the project won the "China Mobile 'AND Education' Cup" 19th **National Primary and Secondary School Computer Production Activities** *Junior High School* Computer Programming First Prize.
+In July 2018, in the 19th "China Mobile 'AND Education' Cup" **International School Student ICT Innovation Competition of China** held by the National Center for Educational Technology and other units, this project won the first prize of the computer programming of the *junior high* group.
